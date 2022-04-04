@@ -1,0 +1,139 @@
+body {
+    height: 100%;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+main {
+    width: 100%;
+    margin: 40px auto;
+    padding: 20px;
+    flex: 1 0 auto;
+    background-color: rgb(0, 0, 0);
+    color: #fff;
+    min-height: 700px;
+}
+
+.framed {
+    border: solid 1px #555;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+.float-left {
+    float: left;
+    margin: 0 20px 10px 0;
+}
+
+.main a {
+    color: #e7ddc3;
+}
+
+.main a:visited {
+    color: rgb(105, 105, 65);
+}
+
+footer {
+    display: flex;
+    background-color: #000000;
+    height: 120px;
+    border-top: 2px solid #ffffff;
+    color: #fff;
+    padding: 40px;
+}
+
+.column {
+    background-color: #fff;
+}
+
+
+input[type=text],
+input[type=number],
+textarea,
+select{
+    width:90%;
+    padding:5px;
+    box-sizing:border-box;
+    background-color:#E6E6E6;
+    border: solid 1px tan;
+    font-family:'Open Sans', sans-serif;
+    font-weight: 500;
+    margin: 5px;
+}
+input[type=submit] {
+    margin: 5px;
+    color:#fff;
+    background-color:red;
+    font-size: 1.2em;
+    font-family:'Roboto', sans-serif;
+    font-weight: 600;
+}
+input[type=submit]:hover {
+    cursor: pointer;
+}
+.formcontainer {
+    margin-top: 25px;
+    background-color: #1F1FAB;
+    max-width: 400px;
+    min-width: 280px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.formtitle{
+    margin: 0;
+    color:#fff;
+    font-size: 1.2em;
+    padding: 5px;
+}
+label {
+    padding: 2%;
+}
+.link-box {
+    display: flex;
+    flex-direction: column;
+    margin-top: 120px;
+    margin-left: 50px;
+} 
+
+.link-box a {
+    background-color: #0000F2;
+    color: white;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 6px;
+    margin: 5px;
+  }
+  
+  .link-box a:hover {
+    background-color: #ccc; /* Dark grey background on mouse-over */
+  }
+  
+  .link-box a.active {
+    background-color: #04AA6D; /* Add a green color to the "active/current" link */
+    color: white;
+  }
+
+  .edit-button {
+    background-color: red;
+    color: white;
+    padding: 6px 14px;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 6px;
+  }
+
+  .edit-button:hover {
+    background-color: #555;
+  }
+  
+  
+

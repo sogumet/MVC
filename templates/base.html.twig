@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Report{% endblock %}</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="">
+       
+    </head>
+    <header>
+            <nav class="navbar">
+                <a href="{{ url("home")}}">Hem</a>
+                <a href="{{ url("about")}}">About</a>
+                <a href="{{ url("report")}}">Report</a>
+            </nav>
+    </header>
+    <body>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        
+    </body>
+    <footer>
+        {% block footer %}
+        <p>Copyright &copy; NGC 2812 Inc</p>
+        
+        {% endblock %}
+    </footer>
+    {% block javascripts %}
+          <script src="js/text.js"></script>
+    {% endblock %}
+</html>
