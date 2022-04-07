@@ -1,0 +1,28 @@
+{# test.html.twig #}
+
+{% extends "base.html.twig"%}
+
+{% block content %}
+
+<div>
+    <h1>Your lucky number is {{ number }}</h1>
+    {{ dump(arr) }}
+    <img src={{ asset("img/deck/10-clubs.png")}} alt="">
+
+
+    <p>This is the hej {{ type }} lottery.</p>
+    <a href="{{ url("form-search")}}">Sök</a>
+    <a href="{{ url("form-login")}}">Login</a>
+    <a href="{{ url("form-session")}}">Session</a>
+    <a href="{{ url("dice-home")}}">Dice 🂱</a>
+    <a href="{{ url("dice-graphic-home")}}">Dice graphic</a>
+    <a href="{{ url("dice-hand-home")}}">Dice hand</a>
+
+</div>
+<h1 class="ess">🂱</h1>
+<h1 class="ess">🃄</h1>
+'⚁'
+'🂱'
+'U+1F0B1'
+
+{% endblock %}

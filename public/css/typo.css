@@ -9,6 +9,9 @@
     background: transparent;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
  }
+ .ess{
+    font-size: 7rem;
+ }
 
   /* td > a {
     text-decoration: none;  

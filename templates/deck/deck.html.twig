@@ -1,0 +1,31 @@
+{# test.html.twig #}
+
+{% extends "base.html.twig"%}
+
+{% block content %}
+
+<div class="container-left">
+<div class="suit" >
+    <h1>Deck</h1>
+        {% for  i in 39..51 %}      
+            <img src={{ data[i].image }}>
+        {% endfor %}
+        
+</div>
+<div class="suit">
+        {% for  i in 26..38 %}      
+            <img src={{ data[i].image }}>
+        {% endfor %}
+</div>
+<div class="suit">
+        {% for  i in 13..25 %}      
+            <img src={{ data[i].image }}>
+        {% endfor %}
+</div>
+<div class="suit">
+        {% for  i in 0..12 %}      
+            <img src={{ data[i].image }}>
+        {% endfor %}
+</div>
+</div>
+{% endblock %}

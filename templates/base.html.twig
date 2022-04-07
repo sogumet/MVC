@@ -3,8 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Report{% endblock %}</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="">
+        <link rel="icon" href="{{ asset("favicon.ico") }}">
+        <link rel="stylesheet" href="{{ asset("css/style.css") }}"/>
        
     </head>
     <header>
@@ -12,11 +12,15 @@
                 <a href="{{ url("home")}}">Hem</a>
                 <a href="{{ url("about")}}">About</a>
                 <a href="{{ url("report")}}">Report</a>
+                <a href="{{ url("test")}}">Test</a>
+                <a href="{{ url("card")}}">Card</a>
             </nav>
     </header>
     <body>
         <main>
             {% block content %}
+
+        <h1>Hej du!!</h1>
             {% endblock %}
         </main>
         
@@ -28,6 +32,6 @@
         {% endblock %}
     </footer>
     {% block javascripts %}
-          <script src="js/text.js"></script>
+          <script src="{{ asset("js/text.js")}}"></script>
     {% endblock %}
 </html>
