@@ -30,8 +30,11 @@ class CardController extends AbstractController
     /**
      * @Route("/card/shuffle", name="shuffle")
      */
-    public function shuffle(): Response
+    public function shuffledDeck(): Response
     {
-        return $this->render('deck/shuffle.html.twig');
+        $tempDeck = new \App\Deck\Deck();
+        $tempdeck = $tempDeck->shuffleDeck();
+        $data = $tempDeck->deck;
+        return $this->render('deck/shuffle.html.twig', ['data' => $data]);
     }
 }

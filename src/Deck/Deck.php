@@ -20,9 +20,11 @@ class Deck
                 $newCard->image = '/img/deck/' . $card . '-' . $suit . '.png';
                 $rank++;
                 $value++;
-
                 $this->deck[] = $newCard;
             }
         }
+    }
+    public function shuffleDeck() {
+        shuffle($this->deck);
     }
 }
