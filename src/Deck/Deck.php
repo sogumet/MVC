@@ -24,7 +24,20 @@ class Deck
             }
         }
     }
-    public function shuffleDeck() {
+    public function shuffleDeck()
+    {
         shuffle($this->deck);
+    }
+
+    public function drawCard()
+    {
+        $card = array_shift($this->deck);
+
+        return $card;
+    }
+
+    public function cardCount()
+    {
+        return count($this->deck);
     }
 }

@@ -1,0 +1,23 @@
+{# test.html.twig #}
+
+{% extends "base.html.twig"%}
+
+{% block content %}
+
+<div class="container-left">
+    <h1>Draw a card</h1>
+    <div class="card" >   
+        <img src={{ data.image }}>
+    </div>
+    <p>{{ cardleft}} card left in deck</p>
+    <div></div>
+    <a class="link-button" href="{{ url("draw")}}">Draw</a>
+    <ul>
+    <li><a href="{{ url("deck")}}">Deck</a></li>
+    <li><a href="{{ url("shuffle")}}">Shuffle</a></li>
+    <li><a href="{{ url("draw")}}">Draw</a></li>
+    </ul>
+</div>
+
+
+{% endblock %}

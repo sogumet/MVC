@@ -55,6 +55,14 @@ footer {
     background-color: #fff;
 }
 
+.button {
+    margin: 5px;
+    color:#fff;
+    background-color:red;
+    font-size: 1.2em;
+    font-family:'Roboto', sans-serif;
+    font-weight: 600;
+}
 
 input[type=text],
 input[type=number],
@@ -122,7 +130,7 @@ label {
     color: white;
   }
 
-  .edit-button {
+  .link-button {
     background-color: red;
     color: white;
     padding: 6px 14px;
@@ -131,7 +139,7 @@ label {
     border-radius: 6px;
   }
 
-  .edit-button:hover {
+  .link-button:hover {
     background-color: #555;
   }
   
