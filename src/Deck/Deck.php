@@ -39,5 +39,16 @@ class Deck
     public function cardCount()
     {
         return count($this->deck);
+    } 
+
+    public function drawCards($number)
+    {
+        for( $number; $number >= 0; $number--) {
+            $card = array_shift($this->deck);
+            $cards[] = $card;
+        }
+        
+        return $cards;
     }
+
 }

@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-
 class CardController extends AbstractController
 {
     /**
@@ -33,7 +32,8 @@ class CardController extends AbstractController
      */
     public function shuffledDeck(
         SessionInterface $session
-    ): Response {
+    ): Response
+    {
         $session->clear("deck");
         $tempDeck = new \App\Deck\Deck();
         $tempdeck = $tempDeck->shuffleDeck();
@@ -41,18 +41,36 @@ class CardController extends AbstractController
         return $this->render('deck/shuffle.html.twig', ['data' => $data]);
     }
 
-    /**
-    * @Route("/card/deck/draw", name="draw")
-    */
+     /**
+     * @Route("/card/deck/draw", name="draw")
+     */
     public function drawACard(
         SessionInterface $session
-    ): Response {
+    ): Response
+    {
         $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
         $tempdeck = $tempDeck->shuffleDeck();
         $card = $tempDeck->drawCard();
         $cardLeft = $tempDeck->cardCount();
         $session->set("deck", $tempDeck);
         return $this->render('deck/draw.html.twig', ['data' => $card,
+                                                    'cardleft' => $cardLeft]);
+    }
+
+     /**
+     * @Route("/card/deck/draw/{numCard}", name="draw-number")
+     */
+    public function drawSomeCards(
+        int $numCard, SessionInterface $session): Response
+    {
+        $deck = new \App\Dice\DiceGraphic();
+        $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
+        $tempdeck = $tempDeck->shuffleDeck();
+
+        $cards = $tempDeck->drawCards($numCard - 1);
+        $cardLeft = $tempDeck->cardCount();
+        $session->set("deck", $tempDeck);
+        return $this->render('deck/draw-cards.html.twig', ['data' => $cards,
                                                     'cardleft' => $cardLeft]);
     }
 }
