@@ -6,6 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 class CardController extends AbstractController
 {
     /**
@@ -13,7 +15,10 @@ class CardController extends AbstractController
      */
     public function card(): Response
     {
-        return $this->render('deck/card.html.twig');
+        return $this->render('deck/card.html.twig',
+        [
+        'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),
+        'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]);
     }
 
     /**
@@ -24,7 +29,10 @@ class CardController extends AbstractController
         $tempDeck = new \App\Deck\Deck();
         $data = $tempDeck->deck;
 
-        return $this->render('deck/deck.html.twig', ['data' => $data]);
+        return $this->render('deck/deck.html.twig', 
+        ['data' => $data,
+        'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),
+        'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]);
     }
 
     /**
@@ -38,7 +46,9 @@ class CardController extends AbstractController
         $tempDeck = new \App\Deck\Deck();
         $tempdeck = $tempDeck->shuffleDeck();
         $data = $tempDeck->deck;
-        return $this->render('deck/shuffle.html.twig', ['data' => $data]);
+        return $this->render('deck/shuffle.html.twig', ['data' => $data,
+        'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),
+        'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]);
     }
 
      /**
@@ -54,7 +64,9 @@ class CardController extends AbstractController
         $cardLeft = $tempDeck->cardCount();
         $session->set("deck", $tempDeck);
         return $this->render('deck/draw.html.twig', ['data' => $card,
-                                                    'cardleft' => $cardLeft]);
+                                                    'cardleft' => $cardLeft,
+                                                    'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),
+                                                    'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]);
     }
 
      /**
@@ -63,14 +75,38 @@ class CardController extends AbstractController
     public function drawSomeCards(
         int $numCard, SessionInterface $session): Response
     {
-        $deck = new \App\Dice\DiceGraphic();
         $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
         $tempdeck = $tempDeck->shuffleDeck();
-
         $cards = $tempDeck->drawCards($numCard - 1);
         $cardLeft = $tempDeck->cardCount();
         $session->set("deck", $tempDeck);
         return $this->render('deck/draw-cards.html.twig', ['data' => $cards,
-                                                    'cardleft' => $cardLeft]);
+                                                    'cardleft' => $cardLeft,
+                                                    'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]);
+    }
+
+     /**
+     * @Route("/card/deck/deal/{players}/{numCard}", name="deal-cards")
+     */
+    public function dealHands(
+        int $players, int $numCard, SessionInterface $session): Response
+    {
+        // $hands = $players;
+        $session->clear("deck");
+        $deck = $session->get("deck") ?? new \App\Deck\Deck();
+        $tempdeck = $deck->shuffleDeck();
+        for($players > 0; $players--;) {
+            $cards = $deck->drawCards($numCard - 1);
+            $hand = new \App\Deck\Hand();
+            $cardHand = $hand->addCards($cards);
+            $hands[] = $cardHand;
+        }
+        $cardLeft = $deck->cardCount();
+        $session->set("deck", $deck);
+
+        return $this->render('deck/players.html.twig', ['cards' => $numCard - 1,
+                                                    'cardleft' => $cardLeft,
+                                                    'hands' => $hands,
+                                                    'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),]);
     }
 }

@@ -29,7 +29,7 @@ class Deck
         shuffle($this->deck);
     }
 
-    public function drawCard()
+    public function drawCard(): object
     {
         $card = array_shift($this->deck);
 

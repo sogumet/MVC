@@ -1,15 +1,21 @@
-{# test.html.twig #}
+{# players.html.twig #}
 
 {% extends "base.html.twig"%}
 
 {% block content %}
 
 <div class="container-left">
-    <h1>Draw some cards</h1>
+    <h1>Deal</h1>
     <div class="card" > 
-        
-        {% for card in data %}      
-        <img src={{ card.image }}>
+        {% set player = 1 %}
+        {% for card in hands %}
+        <div>
+            <p>Player {{player}}</p>
+            {% for i in 0..(cards) %}   
+            <img src={{ card[i].image }}>
+            {% endfor %} 
+        </div>
+             {% set player = player + 1 %}
         {% endfor %}
         
     </div>
@@ -18,7 +24,7 @@
     <li><a href="{{ url("deck")}}">Deck</a></li>
     <li><a href="{{ url("shuffle")}}">Shuffle</a></li>
     <li><a href="{{ url("draw")}}">Draw</a></li>
-    <li><a href="{{ link_to_deal }}">Poker deal</a></li>
+    <li><a href="{{ link_to_draw }}">Draw 4 cards</a></li>
     </ul>
 </div>
 
