@@ -12,7 +12,7 @@
         <div>
             <p>Player {{player}}</p>
             {% for i in 0..(cards) %}   
-            <img src={{ card[i].image }}>
+            <img src={{ asset(card[i].image) }}>
             {% endfor %} 
         </div>
              {% set player = player + 1 %}
@@ -24,6 +24,7 @@
     <li><a href="{{ url("deck")}}">Deck</a></li>
     <li><a href="{{ url("shuffle")}}">Shuffle</a></li>
     <li><a href="{{ url("draw")}}">Draw</a></li>
+    <li><a href="{{ url("deck2")}}">Joker</a></li>
     <li><a href="{{ link_to_draw }}">Draw 4 cards</a></li>
     </ul>
 </div>

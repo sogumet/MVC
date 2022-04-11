@@ -7,13 +7,14 @@
 <div class="container-left">
     <h1>Draw a card</h1>
     <div class="card" >   
-        <img src={{ data.image }}>
+        <img src={{ asset(data.image) }}>
     </div>
     <p>{{ cardleft}} card left in deck</p>
     <a class="link-button" href="{{ url("draw")}}">Draw</a>
     <ul>
     <li><a href="{{ url("deck")}}">Deck</a></li>
     <li><a href="{{ url("shuffle")}}">Shuffle</a></li>
+    <li><a href="{{ url("deck2")}}">Joker</a></li>
     <li><a href="{{ link_to_draw }}">Draw 4 cards</a></li>
     <li><a href="{{ link_to_deal }}">Poker deal</a></li>
 </ul>

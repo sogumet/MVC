@@ -1,4 +1,4 @@
-{# deck.html.twig #}
+{# test.html.twig #}
 
 {% extends "base.html.twig"%}
 
@@ -7,8 +7,8 @@
 <div class="container-left">
 <div class="suit" >
     <h1>Deck</h1>
-        {% for  i in 39..51 %}      
-            <img src={{ asset(data[i].image) }}> 
+        {% for  i in 39..53 %}      
+            <img src={{ asset(data[i].image) }}>
         {% endfor %}
         
 </div>
@@ -30,7 +30,7 @@
 <ul>
     <li><a href="{{ url("shuffle")}}">Shuffle</a></li>
     <li><a href="{{ url("draw")}}">Draw</a></li>
-    <li><a href="{{ url("deck2")}}">Joker</a></li>
+    <li><a href="{{ url("deck")}}">Deck</a></li>
     <li><a href="{{ link_to_draw }}">Draw 4 cards</a></li>
     <li><a href="{{ link_to_deal }}">Poker deal</a></li>
 </ul>
