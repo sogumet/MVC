@@ -11,16 +11,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class JsonController extends AbstractController
 {
-     /**
-     * @Route("card/api/deck", name="deckjson")
-     */
+    /**
+    * @Route("card/api/deck", name="deckjson")
+    */
     public function deckJson(): Response
     {
         $tempDeck = new \App\Deck\Deck();
         $deck = $tempDeck->deck;
 
         return new JsonResponse($deck);
-    
     }
 
     /**
@@ -28,15 +27,12 @@ class JsonController extends AbstractController
      */
     public function shuffle(
         SessionInterface $session
-    ): Response
-    {
+    ): Response {
         $session->clear("deck");
         $tempDeck = new \App\Deck\Deck();
         $tempdeck = $tempDeck->shuffleDeck();
-        $deck = $tempDeck->deck;  
+        $deck = $tempDeck->deck;
 
         return new JsonResponse($deck);
     }
-
-
 }

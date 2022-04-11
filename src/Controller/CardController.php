@@ -144,5 +144,4 @@ class CardController extends AbstractController
             'link_to_draw' => $this->generateUrl('draw-number', ['numCard' => 4]),]
         );
     }
-
 }
