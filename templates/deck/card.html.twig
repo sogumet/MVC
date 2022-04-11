@@ -1,7 +1,7 @@
-{# test.html.twig #}
+{# card.html.twig #}
 
 {% extends "base.html.twig"%}
-
+{% block title %}Card | Landing page{% endblock %}
 {% block content %}
 
 <div>
@@ -14,7 +14,6 @@
     <li><a href="{{ link_to_deal }}">Poker deal</a></li>
     <li><a href="{{ url("deck2")}}">Joker</a></li>
     <li><a href="{{ url("deckjson")}}">DeckJson</a></li>
-    <li><a href="{{ url("jsondraw")}}">DeckJson</a></li>
 </ul>
     
 </div>
