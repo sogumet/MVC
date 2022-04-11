@@ -1,0 +1,29 @@
+{# test.html.twig #}
+
+{% extends "base.html.twig"%}
+
+{% block content %}
+
+<div>
+    <h1>JsonShuffle</h1>
+    <form method="post">
+        <fieldset>
+        <legend>JsonShuffle</legend>
+    
+        <p>
+            <input type="submit" name="shuffle" value="Roll">
+            
+        </p>
+    
+        {{ include('block/flash-message.html.twig') }}
+    
+        </fieldset>
+    </form>
+<ul>
+    <li><a href="{{ url("card")}}">Card</a></li>
+    
+</ul>
+    
+</div>
+
+{% endblock %}

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -44,7 +43,7 @@ class CardController extends AbstractController
      */
     public function deck2(): Response
     {
-        $tempDeck = new \App\Deck\Deck('J');
+        $tempDeck = new \App\Deck\Deck2();
         $data = $tempDeck->deck;
 
         return $this->render(
@@ -146,17 +145,4 @@ class CardController extends AbstractController
         );
     }
 
-    /**
-     * @Route("card/api/deck", name="deckjson")
-     */
-    public function deckJson(): Response
-    {
-        $tempDeck = new \App\Deck\Deck();
-        $deck = $tempDeck->deck;
-        $deckjson = new JsonResponse($deck);
-        return $this->render(
-            'deck/deckjson.html.twig',
-            ['deck' => $deckjson]
-        );
-    }
 }

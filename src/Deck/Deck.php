@@ -4,10 +4,10 @@ namespace App\Deck;
 
 class Deck
 {
-    public $suits = array("clubs", "diamonds", "spades", "hearts");
-    public $cardSuit = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
+    private $suits = array("clubs", "diamonds", "spades", "hearts");
+    private $cardSuit = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
 
-    public function __construct($j = 0)
+    public function __construct()
     {
         $rank = 1;
         foreach ($this->suits as $suit) {
@@ -22,20 +22,6 @@ class Deck
                 $value++;
                 $this->deck[] = $newCard;
             }
-        }
-        if ($j != 0) {
-            $joker = new Card();
-            $joker->suit = 'Joker';
-            $joker->value = 0;
-            $joker->rankingAll = 0;
-            $joker->image = 'img/deck/joker-black.png';
-            $this->deck[] = $joker;
-            $joker = new Card();
-            $joker->suit = 'Joker';
-            $joker->value = 0;
-            $joker->rankingAll = 0;
-            $joker->image = 'img/deck/joker-red.png';
-            $this->deck[] = $joker;
         }
     }
     public function shuffleDeck()
