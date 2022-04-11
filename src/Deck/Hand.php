@@ -14,4 +14,9 @@ class Hand
 
         return $hand;
     }
+    public function cardCount()
+    {
+        return count($this->hand);
+    }
+
 }
