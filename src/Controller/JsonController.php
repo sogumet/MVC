@@ -35,6 +35,4 @@ class JsonController extends AbstractController
 
         return new JsonResponse($deck);
     }
-
 }
-

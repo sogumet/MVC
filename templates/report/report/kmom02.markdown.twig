@@ -1,0 +1,37 @@
+
+kmom02
+------
+När det gäller objektorienterad programmering så innebär begreppet arv att en klass kan ärva en annan klass egenskaper. Det medför att
+när man skapar ett objekt av klassen som ärver så får man med sig alla attribut och metoder från huvudklassen per automatik och kan lägga
+till nya attribut eller metoder eller förändra de förra efter behov. I detta kursmomentet fick klassen Deck2 som innehåller 2 jokrar ärva
+“superklassen” Deck som innehöll allt som behövdes förutom jokrar.  
+  
+
+Med komposition  menas att en klass implementerar en annan klass och använder sig av den och dess egenskaper. Vid komposition ärvs ingenting
+men däremot kan en klass innehålla en annan klass eller dess objekt. Som när Deck använder sig av Card i denna övningen.  
+  
+
+Enligt PHP manualen är Interface är ett sätt att bestämma vilka metoder en klass måste innehålla utan att definiera hur de är implementerade.
+Mer än så kan jag nog inte säga om den saken.  
+
+Trait är ett sett att återanvända kod och på något vis göra arv mer flexibelt. Men vad det i praktiken innebär är jag inte kapabel att redogöra
+för.  
+  
+
+Klasserna som jag skapade i denna övningen är Card, Deck, Deck2 och Hand. Cardklassen innehåller ingenting annat än attributen value, ranking,
+suit och imagelink. Rankingattributet visar inte rätt värde men eftersom det inte används till något för tillfället så
+har jag valt att inte rätta till det. Det är väl mer någon form av “kanske bra att ha attribut” . Klassen har ingen konstruktor alla kortobjekten skapas i
+klassen Deck samtidigt som man skapar ett Deckobjekt. Det kändes som det naturligaste sättet att göra. Precis som i verkligheten skapar
+man en hel kortlek och sen kan korten användas  eller slarvas bort. Men man kan inte skapa/köpa bara ett kort utan det är hela leken som gäller.
+Deck2 är som tidigare nämnt en subklass till Deck och inehåller bara en konstruktor som skapar två jokrar som läggs till i Deck. Handobjektet
+är för tillfället inget mer än en tom array som man kan lägga kortobjekt i. Vilka metoder som kan vara lämliga i klassen får man nog fundera
+på när man vet vilket kortspel den skall användas till.  
+Jag har inte funderat så mycket på förbättringar har bara sett till att få det att fungera men det är klart att det finns massor att slipa på,
+t.ex så blir det problem när kortleken tar slut.  
+   
+
+Jag skulle önska att vi hade talat lite mer om Json. Json används stort sett i varenda kurs, men det nämns bara i förbifarten liksom.
+Här var det mycket som man inte fick klarhet i när det gäller hur Symfony Twig och klienter hanterar Json. Jag ledsnade tyvärr på att sitta och
+trassla med Json och Twig.  
+TIL för detta kmom är att mina kunskaper om Json kunde ha varit bättre.
+ 

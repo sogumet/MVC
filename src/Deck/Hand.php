@@ -18,5 +18,4 @@ class Hand
     {
         return count($this->hand);
     }
-
 }
