@@ -130,12 +130,11 @@ class CardController extends AbstractController
         for ($players > 0; $players--;) {
             $cards = $deck->drawCards($numCard - 1);
             $hand = new \App\Deck\Hand();
-            $cardHand = $hand->addCards($cards);
-            $hands[] = $cardHand;
+            $hand->addCards($cards);
+            $hands[] = $hand;
         }
         $cardLeft = $deck->cardCount();
         $session->set("deck", $deck);
-
         return $this->render(
             'deck/players.html.twig',
             ['cards' => $numCard - 1,
