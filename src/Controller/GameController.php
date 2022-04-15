@@ -38,32 +38,39 @@ class GameController extends AbstractController
         $save  = $request->request->get('save');
         $clear = $request->request->get('clear');
         $start = $request->request->get('start');
+        $game = New \App\Deck\Game($session);
 
         // $session->clear("deck", "hand");
         
 
         if($start) {
-            $deck = new \App\Deck\Deck();
-            $hand = new \App\Deck\Hand();
-            $deck = $session->set("deck21", $deck);
-            $hand = $session->set("hand21", $hand);
-            $deck = $session->get("deck21");
-            $deck->shuffleDeck();
+            // $game = New \App\Deck\Game($session);
+            // $session->set("game", $game);
+            // $game = $session->get("game");
+            $game->startGame();
+            // $deck = new \App\Deck\Deck();
+            // $hand = new \App\Deck\Hand();
+            // $session->set("deck21", $deck);
+            // $session->set("hand21", $hand);
+            // $deck = $session->get("deck21");
+            // $deck->shuffleDeck();
 
             return $this->render('deck/game.html.twig');
             
         }
 
         elseif($roll) {
-            $deck = $session->get("deck21");
-            $hand = $session->get("hand21");
-            $tempCard = $deck->drawCard();
-            $hand->addCard($tempCard);
-            $cards = $hand->cardCount() - 1;
-            $cardsleft = $deck->cardCount();
-            $session->set("deck21", $deck);
-            $session->set("hand21", $hand);
-            var_dump($cards);
+            // $game = $session->get("game");
+            $game->drawCard();
+            // $deck = $session->get("deck21");
+            // $hand = $session->get("hand21");
+            // $tempCard = $deck->drawCard();
+            // $hand->addCard($tempCard);
+            // $cards = $hand->cardCount() - 1;
+            // $cardsleft = $deck->cardCount();
+            // $session->set("deck21", $deck);
+            // $session->set("hand21", $hand);
+            // var_dump($cards);
             }
         elseif($clear) {
             $session->clear("deck", "hand");
@@ -73,9 +80,9 @@ class GameController extends AbstractController
 
         return $this->render(
             'deck/game.html.twig',
-            ['data' => $hand,
-            'cards' => $cards,
-            'cardsleft'=> $cardsleft,
+            ['data' => $game->hand,
+            'cards' => $game->cards,
+            'cardsleft'=> $game->cardsleft,
             'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
         );
     }

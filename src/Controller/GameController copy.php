@@ -37,37 +37,46 @@ class GameController extends AbstractController
         $roll  = $request->request->get('roll');
         $save  = $request->request->get('save');
         $clear = $request->request->get('clear');
+        $start = $request->request->get('start');
 
-        $sum = $session->get("sum") ?? 0;
-        $saved = $session->get("saved") ?? 0;
+        // $session->clear("deck", "hand");
+        
 
-        if ($roll) {
-            $value = random_int(1, 6);
-            $sum += $value;
-            if ($value === 1) {
-                $this->addFlash("error", "You rolled 1 and looses your points.");
-                $sum = 0;
-            } else {
-                $this->addFlash("info", "You rolled $value and adds to your current sum of points.");
-            }
-            $session->set("sum", $sum);
-        } elseif ($save) {
-            $this->addFlash("info", "You saved $sum points.");
-            $saved += $sum;
-            $sum = 0;
-            $session->set("saved", $saved);
-            $session->set("sum", 0);
-        } elseif ($clear) {
-            $this->addFlash("warning", "You cleared the game.");
-            $sum = 0;
-            $saved = 0;
-            $session->set("sum", 0);
-            $session->set("saved", 0);
+        if($start) {
+            $deck = new \App\Deck\Deck();
+            $hand = new \App\Deck\Hand();
+            $session->set("deck21", $deck);
+            $session->set("hand21", $hand);
+            $deck = $session->get("deck21");
+            $deck->shuffleDeck();
+
+            return $this->render('deck/game.html.twig');
+            
         }
 
-        $this->addFlash("info", "You have currently $sum points (not saved).");
-        $this->addFlash("info", "You have currently $saved saved points.");
+        elseif($roll) {
+            $deck = $session->get("deck21");
+            $hand = $session->get("hand21");
+            $tempCard = $deck->drawCard();
+            $hand->addCard($tempCard);
+            $cards = $hand->cardCount() - 1;
+            $cardsleft = $deck->cardCount();
+            $session->set("deck21", $deck);
+            $session->set("hand21", $hand);
+            var_dump($cards);
+            }
+        elseif($clear) {
+            $session->clear("deck", "hand");
+            return $this->render(
+                'deck/game.html.twig');
+        }
 
-        return $this->redirectToRoute('game');
+        return $this->render(
+            'deck/game.html.twig',
+            ['data' => $hand,
+            'cards' => $cards,
+            'cardsleft'=> $cardsleft,
+            'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
+        );
     }
 }
