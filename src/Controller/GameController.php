@@ -34,8 +34,8 @@ class GameController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $roll  = $request->request->get('roll');
-        $save  = $request->request->get('stay');
+        $roll = $request->request->get('roll');
+        $stay = $request->request->get('stay');
         $clear = $request->request->get('clear');
         $start = $request->request->get('start');
         $game = New \App\Deck\Game($session);
@@ -51,9 +51,13 @@ class GameController extends AbstractController
             $sum = $game->countSum();
             if ($sum > 21) {
                 $this->addFlash("info", "You lost");
-            }
+            }    
+        }
+        elseif($stay) {
+            $sum = $game->drawBank();
             
-            }
+        }
+
         elseif($clear) {
             $game->clearGame();
 
@@ -63,8 +67,10 @@ class GameController extends AbstractController
         return $this->render(
             'deck/game.html.twig',
             ['data' => $game->hand,
+            'bank' => $game->bank,
             'sum' => $sum,
             'cards' => $game->cards,
+            'bankcards' => $game->bankcards,
             'cardsleft'=> $game->cardsleft,
             'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
         );

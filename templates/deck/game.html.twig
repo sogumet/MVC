@@ -10,19 +10,28 @@
 
     <p>
         <input type="submit" name="roll" value="Roll">
-        <input type="submit" name="save" value="Save">
+        <input type="submit" name="stay" value="Stay">
         <input type="submit" name="clear" value="Clear">
         <input type="submit" name="start" value="Start">
     </p>
       
-    {% if data is defined %}
+    {# {% if data is defined %}
     {{dump(data)}} 
     {% for i in 0..(cards) %}
         <img src={{ asset(data.hand[i].image) }}>
     {% endfor %}
     <p>Cardsleft {{cardsleft}}</p>
     <p>CardsSum {{sum}}</p>
-        {% endif %}
+        {% endif %} #}
+    
+        {% if bank is defined %}
+        {{dump(bank)}} 
+        {% for i in 0..(bankcards) %}
+            <img src={{ asset(bank.hand[i].image) }}>
+        {% endfor %}
+        {# <p>Cardsleft {{cardsleft}}</p> #}
+        <p>CardsSum {{sum}}</p>
+            {% endif %}
     
     {{ include('block/flash-message.html.twig') }}
 
