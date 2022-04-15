@@ -37,18 +37,30 @@ class GameController extends AbstractController
         $roll  = $request->request->get('roll');
         $save  = $request->request->get('save');
         $clear = $request->request->get('clear');
+        $start = $request->request->get('start');
 
         // $session->clear("deck", "hand");
-        $deck = $session->get("deck21") ?? new \App\Deck\Deck();
-        $hand = $session->get("hand21") ?? new \App\Deck\Hand();
-        // $deck->shuffleDeck();
+        
 
-        if ($roll) {
-            // $deck = $session->get("deck21");
-            // $hand = $session->get("hand21");
+        if($start) {
+            $deck = new \App\Deck\Deck();
+            $hand = new \App\Deck\Hand();
+            $deck = $session->set("deck21", $deck);
+            $hand = $session->set("hand21", $hand);
+            $deck = $session->get("deck21");
+            $deck->shuffleDeck();
+
+            return $this->render('deck/game.html.twig');
+            
+        }
+
+        elseif($roll) {
+            $deck = $session->get("deck21");
+            $hand = $session->get("hand21");
             $tempCard = $deck->drawCard();
             $hand->addCard($tempCard);
             $cards = $hand->cardCount() - 1;
+            $cardsleft = $deck->cardCount();
             $session->set("deck21", $deck);
             $session->set("hand21", $hand);
             var_dump($cards);
@@ -63,6 +75,7 @@ class GameController extends AbstractController
             'deck/game.html.twig',
             ['data' => $hand,
             'cards' => $cards,
+            'cardsleft'=> $cardsleft,
             'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
         );
     }

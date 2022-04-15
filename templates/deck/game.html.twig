@@ -12,7 +12,7 @@
         <input type="submit" name="roll" value="Roll">
         <input type="submit" name="save" value="Save">
         <input type="submit" name="clear" value="Clear">
-        <input type="submit" name="info" value="Info">
+        <input type="submit" name="start" value="Start">
     </p>
       
     {% if data is defined %}
@@ -20,7 +20,9 @@
     {% for i in 0..(cards) %}
         <img src={{ asset(data.hand[i].image) }}>
     {% endfor %}
+    <p>Cardsleft {{cardsleft}}</p>
         {% endif %}
+    
     {{ include('block/flash-message.html.twig') }}
 
 
