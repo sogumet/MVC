@@ -49,15 +49,14 @@ class Game
 
     public function countSum() {
         $sum = 0;
-        $i = 0;
-
+        $ace = 0;
         foreach($this->hand as $card) {
             foreach($card as $value) {
                 $sum += $value->value;
+                if($value->ace) {
+                    $sum -= 13;
+                } 
             }
-            // 
-            // $sum = count($card);
-            $i ++;
         }
         
         return $sum;

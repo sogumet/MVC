@@ -35,7 +35,7 @@ class GameController extends AbstractController
         SessionInterface $session
     ): Response {
         $roll  = $request->request->get('roll');
-        $save  = $request->request->get('save');
+        $save  = $request->request->get('stay');
         $clear = $request->request->get('clear');
         $start = $request->request->get('start');
         $game = New \App\Deck\Game($session);
@@ -49,6 +49,10 @@ class GameController extends AbstractController
         elseif($roll) {
             $game->drawCard();
             $sum = $game->countSum();
+            if ($sum > 21) {
+                $this->addFlash("info", "You lost");
+            }
+            
             }
         elseif($clear) {
             $game->clearGame();
