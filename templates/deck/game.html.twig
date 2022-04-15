@@ -15,22 +15,27 @@
         <input type="submit" name="start" value="Start">
     </p>
       
-    {# {% if data is defined %}
+    {% if data is defined %}
     {{dump(data)}} 
     {% for i in 0..(cards) %}
+    {% if data.hand %}
         <img src={{ asset(data.hand[i].image) }}>
+    {% endif %}    
     {% endfor %}
+    
     <p>Cardsleft {{cardsleft}}</p>
     <p>CardsSum {{sum}}</p>
-        {% endif %} #}
+        {% endif %}
     
         {% if bank is defined %}
         {{dump(bank)}} 
         {% for i in 0..(bankcards) %}
+        {% if bank.hand %}
             <img src={{ asset(bank.hand[i].image) }}>
+            {% endif %}
         {% endfor %}
-        {# <p>Cardsleft {{cardsleft}}</p> #}
-        <p>CardsSum {{sum}}</p>
+        <p>Cardsleft {{cardsleft}}</p>
+        <p>CardsSum {{sumbank}}</p>
             {% endif %}
     
     {{ include('block/flash-message.html.twig') }}

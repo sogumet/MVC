@@ -12,6 +12,8 @@ class Game
     public $bankcards;
     public $cards;
     public $cardsleft;
+    public $sum;
+    public $sumbank;
 
     public function __construct($session)
     {
@@ -50,34 +52,40 @@ class Game
     }
 
     public function countSum() {
-        $sum = 0;
+        $this->sum = 0;
         $ace = 0;
         foreach($this->hand as $card) {
             foreach($card as $value) {
-                $sum += $value->value;
                 if($value->ace) {
-                    $sum -= 13;
-                } 
+                    $ace +=1;}
+                $this->sum += $value->value;
+                if($this->sum > 21 && $ace == 0) {
+                    $this->sum = $value->value;
+                }
+                elseif($this->sum > 21 && $ace != 0) {
+                    $this->sum -= 13 * $ace;
+                }
             }
         }  
-        return $sum;
     }
 
     public function drawBank() {
-        $sum = 0;
+        $this->sumbank = 0;
         
-        while($sum < 17) {
+        while($this->sumbank < 17) {
             $this->deck = $this->session->get("deck21");
             $this->bank = $this->session->get("bank");
+            $this->hand = $this->session->get("hand21");
             $tempCard = $this->deck->drawCard();
             $this->bank->addCard($tempCard);
-            $this->bankcards = $this->bank->cardCount() - 1;
-            $sum = $this->countSumBank();
+            $this->sumbank = $this->countSumBank();
             $this->session->set("deck21", $this->deck);
             $this->session->set("bank", $this->bank);
+            $this->session->set("hand21", $this->hand);
         }
-            
-        return $sum;
+        $this->bankcards = $this->bank->cardCount() - 1;
+        $this->cards = $this->hand->cardCount() - 1;
+        $this->cardsleft = $this->deck->cardCount();
     }
 
     public function countSumBank() {

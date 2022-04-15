@@ -54,7 +54,8 @@ class GameController extends AbstractController
             }    
         }
         elseif($stay) {
-            $sum = $game->drawBank();
+            $game->drawBank();
+            $sum = $game->countSum();
             
         }
 
@@ -68,7 +69,8 @@ class GameController extends AbstractController
             'deck/game.html.twig',
             ['data' => $game->hand,
             'bank' => $game->bank,
-            'sum' => $sum,
+            'sum' => $game->sum,
+            'sumbank' => $game->sumbank,
             'cards' => $game->cards,
             'bankcards' => $game->bankcards,
             'cardsleft'=> $game->cardsleft,
