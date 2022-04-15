@@ -41,4 +41,26 @@ class Game
         
     }
 
+    public function clearGame()
+
+    {
+        $this->session->clear("deck21", "hand21");
+    }
+
+    public function countSum() {
+        $sum = 0;
+        $i = 0;
+
+        foreach($this->hand as $card) {
+            foreach($card as $value) {
+                $sum += $value->value;
+            }
+            // 
+            // $sum = count($card);
+            $i ++;
+        }
+        
+        return $sum;
+    }
+
 }

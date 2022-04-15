@@ -40,47 +40,26 @@ class GameController extends AbstractController
         $start = $request->request->get('start');
         $game = New \App\Deck\Game($session);
 
-        // $session->clear("deck", "hand");
-        
-
         if($start) {
-            // $game = New \App\Deck\Game($session);
-            // $session->set("game", $game);
-            // $game = $session->get("game");
             $game->startGame();
-            // $deck = new \App\Deck\Deck();
-            // $hand = new \App\Deck\Hand();
-            // $session->set("deck21", $deck);
-            // $session->set("hand21", $hand);
-            // $deck = $session->get("deck21");
-            // $deck->shuffleDeck();
-
-            return $this->render('deck/game.html.twig');
             
+            return $this->render('deck/game.html.twig');  
         }
 
         elseif($roll) {
-            // $game = $session->get("game");
             $game->drawCard();
-            // $deck = $session->get("deck21");
-            // $hand = $session->get("hand21");
-            // $tempCard = $deck->drawCard();
-            // $hand->addCard($tempCard);
-            // $cards = $hand->cardCount() - 1;
-            // $cardsleft = $deck->cardCount();
-            // $session->set("deck21", $deck);
-            // $session->set("hand21", $hand);
-            // var_dump($cards);
+            $sum = $game->countSum();
             }
         elseif($clear) {
-            $session->clear("deck", "hand");
-            return $this->render(
-                'deck/game.html.twig');
+            $game->clearGame();
+
+            return $this->render('deck/game.html.twig');
         }
 
         return $this->render(
             'deck/game.html.twig',
             ['data' => $game->hand,
+            'sum' => $sum,
             'cards' => $game->cards,
             'cardsleft'=> $game->cardsleft,
             'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
