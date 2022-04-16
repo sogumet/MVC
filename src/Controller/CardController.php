@@ -62,7 +62,7 @@ class CardController extends AbstractController
     ): Response {
         $session->clear("deck");
         $tempDeck = new \App\Deck\Deck();
-        $tempdeck = $tempDeck->shuffleDeck();
+        $tempDeck->shuffleDeck();
         $data = $tempDeck->deck;
 
         return $this->render(
@@ -80,7 +80,7 @@ class CardController extends AbstractController
         SessionInterface $session
     ): Response {
         $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
-        $tempdeck = $tempDeck->shuffleDeck();
+        $tempDeck->shuffleDeck();
         $card = $tempDeck->drawCard();
         $cardLeft = $tempDeck->cardCount();
         $session->set("deck", $tempDeck);

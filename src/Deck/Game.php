@@ -60,7 +60,7 @@ class Game
                     $ace +=1;}
                 $this->sum += $value->value;
                 if($this->sum > 21 && $ace == 0) {
-                    $this->sum = $value->value;
+                    $this->sum += $value->value;
                 }
                 elseif($this->sum > 21 && $ace != 0) {
                     $this->sum -= 13 * $ace;
