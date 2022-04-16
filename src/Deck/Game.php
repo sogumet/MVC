@@ -52,7 +52,7 @@ class Game
         $this->session->clear("deck21", "hand21","bank");
     }
 
-    public function countSum() {
+    /* public function countSum() {
         $this->sum = 0;
         $ace = 0;
         foreach($this->hand as $card) {
@@ -65,7 +65,7 @@ class Game
                 }
             }
         }  
-    }
+    } */
 
     public function drawBank() {
         $this->sumbank = 0;
@@ -94,20 +94,22 @@ class Game
             foreach($card as $value) {
                 if ($value->ace) {
                     $ace += 1;
+                    var_dump($ace);
                 }
                 $sum += $value->value;
-                if($sum > 16 && $sum < 21) {
-                    return $sum;
-                }
                 if($sum > 21 && $ace == 0) {
+                    var_dump("ACE = 0 ", $sum);
                     return $sum;
                 }
-                elseif($sum > 21 && $ace != 0) {
-                    $sum -= $ace * 13;
-                    return $sum;
+                elseif($sum > 21 && $ace == 1) {
+                        $sum -= 13;
+                        var_dump("ACE = 1 ", $sum);
+                        $ace = 0;
                 }
+                
             }
-        }  
+        } 
+        var_dump("Return", $sum); 
         return $sum;
     }
 
