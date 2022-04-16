@@ -48,14 +48,14 @@ class GameController extends AbstractController
 
         elseif($roll) {
             $game->drawCard();
-            $sum = $game->countSum();
-            if ($sum > 21) {
+            // $sum = $game->countSum();
+            /* if ($sum > 21) {
                 $this->addFlash("info", "You lost");
-            }    
+            }     */
         }
         elseif($stay) {
             $game->drawBank();
-            $sum = $game->countSum();
+            // $sum = $game->countSum();
             
         }
 
