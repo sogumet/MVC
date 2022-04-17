@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GameController extends AbstractController
 {
-
     /**
      * @Route(
      *      "/game",
@@ -20,7 +19,9 @@ class GameController extends AbstractController
      */
     public function session(): Response
     {
-        return $this->render('deck/game.html.twig');
+        $js = "js";
+        return $this->render('deck/game.html.twig',
+    ['js' => $js]);
     }
 
     /**
@@ -34,37 +35,43 @@ class GameController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $roll = $request->request->get('roll');
+        $draw = $request->request->get('draw');
         $stay = $request->request->get('stay');
         $clear = $request->request->get('clear');
         $start = $request->request->get('start');
-        $game = New \App\Deck\Game($session);
+        $game = new \App\Deck\Game($session);
+        $js = 0;
 
-        if($start) {
+        if ($start) {
             $game->startGame();
             
-            return $this->render('deck/game.html.twig');  
-        }
 
-        elseif($roll) {
+            return $this->render('deck/game.html.twig',
+        ['js' => $js]);
+        } elseif ($draw) {
             $game->drawCard();
-            // $sum = $game->countSum();
-            /* if ($sum > 21) {
+            var_dump("Sum" ,$game->sum);
+            if($game->sum > 21) {
                 $this->addFlash("info", "You lost");
-            }     */
-        }
-        elseif($stay) {
+                $js = 1;
+            }  
+        } elseif ($stay) {
             $game->drawBank();
-            // $sum = $game->countSum();
             
-        }
-
-        elseif($clear) {
+            if($game->sumbank >= $game->sum && $game->sumbank < 22) {
+                $this->addFlash("info", $game->sumbankAsString());
+                $this->addFlash("info", "Bank wins");
+                $js = 1;
+            } if ($game->sumbank > 21 || $game->sumbank < $game->sum) { 
+                $this->addFlash("info", $game->sumbankAsString());
+                $this->addFlash("info", "You wins");
+                $js = 1;
+                }
+        } elseif ($clear) {
             $game->clearGame();
 
             return $this->render('deck/game.html.twig');
         }
-
         return $this->render(
             'deck/game.html.twig',
             ['data' => $game->hand,
@@ -73,8 +80,9 @@ class GameController extends AbstractController
             'sumbank' => $game->sumbank,
             'cards' => $game->cards,
             'bankcards' => $game->bankcards,
-            'cardsleft'=> $game->cardsleft,
-            'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
+            'cardsleft' => $game->cardsleft,
+            'js' => $js
+            ]
         );
     }
 }

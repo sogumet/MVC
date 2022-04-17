@@ -1,5 +1,5 @@
 'use strict';
-var string = "Detta är ett soloprojekt av Kent Sjöberg";
+var string = "Testar JavaScript";
 var str = string.split("");
 var el = document.getElementById('str');
 

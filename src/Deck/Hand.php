@@ -16,9 +16,9 @@ class Hand
     {
         return count($this->hand);
     }
-    
+
     public function addCard($card)
     {
-        $this->hand[] = $card;       
+        $this->hand[] = $card;
     }
 }

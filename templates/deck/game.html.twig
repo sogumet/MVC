@@ -2,46 +2,54 @@
 
 {% block title %}Game | Start{% endblock %}
 
-{% block content %}
 
+
+{% block content %}
+<div class="continerleft">
+    
+<h2>21</h2>
 <form method="post">
     <fieldset>
-    <legend>A dice game</legend>
-
-    <p>
-        <input type="submit" name="roll" value="Roll">
-        <input type="submit" name="stay" value="Stay">
-        <input type="submit" name="clear" value="Clear">
-        <input type="submit" name="start" value="Start">
-    </p>
-      
     {% if data is defined %}
-    {{dump(data)}} 
-    {% for i in 0..(cards) %}
-    {% if data.hand %}
-        <img src={{ asset(data.hand[i].image) }}>
-    {% endif %}    
-    {% endfor %}
+    {{ dump(js) }}
     
-    <p>Cardsleft {{cardsleft}}</p>
-    <p>CardsSum {{sum}}</p>
-        {% endif %}
-    
-        {% if bank is defined %}
-        {{dump(bank)}} 
-        {% for i in 0..(bankcards) %}
-        {% if bank.hand %}
-            <img src={{ asset(bank.hand[i].image) }}>
-            {% endif %}
+        {% for i in 0..(cards) %}
+            {% if data.hand %}
+                <img class="card21" src={{ asset(data.hand[i].image) }}>
+            {% endif %}    
         {% endfor %}
-        <p>Cardsleft {{cardsleft}}</p>
-        <p>CardsSum {{sumbank}}</p>
+        <p>{{sum}}</p>
+    
+    
+    
+        {% for i in 0..(bankcards) %}
+            {% if bank.hand %}
+                <img src={{ asset(bank.hand[i].image) }}>
+                
             {% endif %}
+            
+        {% endfor %}
+        
+        {% block javascripts %}
+        {% if js == 1 %}
+            <script type="text/javascript">
+                document.getElementById("draw").disabled = true;
+                document.getElementById("stay").disabled = true;
+            </script>
+        {% endif %}
+        {% endblock %}
+    {% endif %}
     
     {{ include('block/flash-message.html.twig') }}
-
+    <p>
+        <input id="draw" type="submit" name="draw" value="Draw">
+        <input id="stay" type="submit" name="stay" value="Stay">
+        <input id="clear" type="submit" name="clear" value="Clear">
+        <input type="submit" name="start" value="Start">
+    </p>
 
     </fieldset>
 </form>
 
+</div>
 {% endblock %}

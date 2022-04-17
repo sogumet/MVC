@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class GameController extends AbstractController
 {
-
     /**
      * @Route(
      *      "/game",
@@ -40,9 +39,9 @@ class GameController extends AbstractController
         $start = $request->request->get('start');
 
         // $session->clear("deck", "hand");
-        
 
-        if($start) {
+
+        if ($start) {
             $deck = new \App\Deck\Deck();
             $hand = new \App\Deck\Hand();
             $session->set("deck21", $deck);
@@ -51,10 +50,7 @@ class GameController extends AbstractController
             $deck->shuffleDeck();
 
             return $this->render('deck/game.html.twig');
-            
-        }
-
-        elseif($roll) {
+        } elseif ($roll) {
             $deck = $session->get("deck21");
             $hand = $session->get("hand21");
             $tempCard = $deck->drawCard();
@@ -64,18 +60,18 @@ class GameController extends AbstractController
             $session->set("deck21", $deck);
             $session->set("hand21", $hand);
             var_dump($cards);
-            }
-        elseif($clear) {
+        } elseif ($clear) {
             $session->clear("deck", "hand");
             return $this->render(
-                'deck/game.html.twig');
+                'deck/game.html.twig'
+            );
         }
 
         return $this->render(
             'deck/game.html.twig',
             ['data' => $hand,
             'cards' => $cards,
-            'cardsleft'=> $cardsleft,
+            'cardsleft' => $cardsleft,
             'link_to_deal' => $this->generateUrl('deal-cards', ['players' => 4, 'numCard' => 5])]
         );
     }
