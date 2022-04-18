@@ -1,0 +1,29 @@
+
+kmom03
+------
+Mina reflektioner från detta kursmoment. Ramverket symfoni är behändigt att använda. Lätta att skapa nya routes och att länka hit och dit.
+Om man jämför med tidigare ramverk som vi har använt så tycker jag att Symfoni helt klart bäst hitintills både vad det gäller användarvänlighet
+ och möjligheten att hitta information om hur det fungerar.  
+Själva twigformatet är jag inte helt kompis med ännu. Jag ägnade en hel massa tid
+  för att lösa hur jag skulle kunna implementera lite JavaScript för att disabla några knappar dynamiskt. Försökte hitta något sätta hämta
+   scriptet från main.js med gick bet på det. Det fick istället bli ett script rätt in i twigfilen styrt av en ifsats.  
+     
+
+Jag satt på jobbet och tänkte på hur jag skulle lösa poängräkningen i 21. Det var väl egentligen bara hur man skulle hantera essens värde
+ 1 alternativt 14 som var knepigt. Men jag kom i alla fall på något av typ psuedokod som jag krafsade ner på papper och använde när jag kom
+  hem som grund till funktionen för poängräkning. Så mitt svar om flödesdiagram och psuedokod kan var till stöd vid programmering är helt klart
+   ja.  
+
+Själva uppgiften i sig har jag löst genom att använda klasserna som jag skapade i förra kursmomentet. Tror inte jag har ändrat något i dem,
+ inget större i alla fall. Utöver de klasserna så har jag skapat klassen Game som innehåller det mesta av spellogiken, Deck och Handobjekten.  
+I stora drag så skapas objekten och läggs i sessionen när man trycker på start. När man trycker på draw så dras ett kortobjekt från
+ deckobjektet och läggs i spelarens handobjekt och summan kollas. Detta pågår tills spelaren är nöjd eller blir “tjock”. När man trycker på
+  stay så får bankhanden sina kort tills summan blir större än 16 eller över 21. 
+Om summan överstiger 21 kollas i handen om det finns något eller några ess. Jag har konstruerat den funktionen så att de fungerar för 1 eller 2
+ ess. Sannolikheten för 3 ess är så liten och det blir så krångligt att verifiera koden så jag tyckte att det kunde räcka att det fungerade med
+  2 ess.  
+    
+  
+Jag har försökt att hålla spelkoden borta från controllern, det enda som kontrolleras där är vem som vann så att rätt data kan renderas. 
+
+Denna vecka har jag lärt mig lite mer om klasser och ramverket Symfony.

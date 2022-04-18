@@ -4,9 +4,30 @@ namespace App\Deck;
 
 class Card
 {
-    public string $suit;       // The suit of the card
-    public int $value;    // The ranking of card in suit
-    // public int $ace;       // To see if card is ace
-    public string $image;      // The image for this card
-    public int $rankingAll; // The ranking of card in deck
+    private string $suit;       // The suit of the card
+    private int $value;    // The ranking of card in suit
+    private string $image;      // The image for this card
+
+    public function setSuit(string $aSuit): void
+    {
+        $this->suit = $aSuit;
+    }
+    public function setValue(int $aValue): void
+    {
+        $this->value = $aValue;
+    }
+    public function setImage(string $aImage): void
+    {
+        $this->image = $aImage;
+    }
+
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function getimage(): string
+    {
+        return $this->image;
+    }
 }

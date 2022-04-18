@@ -15,10 +15,9 @@ class Deck
             $value = 2;
             foreach ($this->cardSuit as $card) {
                 $newCard = new Card();
-                $newCard->suit = $suit;
-                $newCard->value = $value;
-                $newCard->rankingAll = $rank;
-                $newCard->image = 'img/deck/' . $card . '-' . $suit . '.png';
+                $newCard->setSuit($suit);
+                $newCard->setValue($value);
+                $newCard->setImage('img/deck/' . $card . '-' . $suit . '.png');
                 // ;
                 // if ($value == 14) {
                 //     $newCard->ace = true;

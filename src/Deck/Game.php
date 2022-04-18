@@ -76,10 +76,11 @@ class Game
         $ace = 0;
         foreach ($bank as $card) {
             foreach ($card as $value) {
-                if ($value->value == 14) {
+                $tempValue = $value->getValue();
+                if ($tempValue == 14) {
                     $ace += 1;
                 }
-                $sum += $value->value;
+                $sum += $tempValue;
                 if ($sum > 21 && $ace == 0) {
                     return $sum;
                 }

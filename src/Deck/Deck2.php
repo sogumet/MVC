@@ -9,16 +9,14 @@ class Deck2 extends Deck
         parent::__construct();
 
         $joker = new Card();
-        $joker->suit = 'Joker';
-        $joker->value = 0;
-        $joker->rankingAll = 0;
-        $joker->image = 'img/deck/joker-black.png';
+        $joker->setSuit('Joker');
+        $joker->setValue(0);
+        $joker->setImage('img/deck/joker-black.png');
         $this->deck[] = $joker;
         $joker = new Card();
-        $joker->suit = 'Joker';
-        $joker->value = 0;
-        $joker->rankingAll = 0;
-        $joker->image = 'img/deck/joker-red.png';
+        $joker->setSuit('Joker');
+        $joker->setValue(0);
+        $joker->setImage('img/deck/joker-red.png');
         $this->deck[] = $joker;
     }
 }
