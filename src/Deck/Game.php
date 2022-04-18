@@ -3,6 +3,8 @@
 namespace App\Deck;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Deck\Deck;
+use App\Deck\Hand;
 
 class Game
 {
@@ -14,6 +16,7 @@ class Game
     public int $cardsleft = 0;
     public int $sum = 0;
     public int $sumbank = 0;
+    public $session;
 
     public function __construct($session)
     {
@@ -23,7 +26,7 @@ class Game
         $this->session = $session;
     }
 
-    public function startGame()
+    public function startGame(): void
     {
         $this->session->clear();
         $this->session->set("deck21", $this->deck);
@@ -31,10 +34,9 @@ class Game
         $this->session->set("bank", $this->bank);
         $this->deck = $this->session->get("deck21");
         $this->deck->shuffleDeck();
-        
     }
 
-    public function drawCard()
+    public function playerDrawCard(): void
     {
         $this->deck = $this->session->get("deck21");
         $this->hand = $this->session->get("hand21");
@@ -47,12 +49,7 @@ class Game
         $this->session->set("hand21", $this->hand);
     }
 
-    public function clearGame()
-    {
-        $this->session->clear("deck21", "hand21", "bank");
-    }
-
-    public function drawBank()
+    public function drawBank(): void
     {
         $this->sumbank = 0;
 
@@ -73,27 +70,28 @@ class Game
         $this->sum = $this->countSumBank($this->hand);
     }
 
-    public function countSumBank($bank)
+    public function countSumBank(object $bank): int
     {
         $sum = 0;
         $ace = 0;
         foreach ($bank as $card) {
             foreach ($card as $value) {
-                if ($value->ace) {
+                if ($value->value == 14) {
                     $ace += 1;
                 }
                 $sum += $value->value;
                 if ($sum > 21 && $ace == 0) {
                     return $sum;
-                } if ($sum > 21 && $ace == 1) {
+                }
+                if ($sum > 21 && $ace == 1) {
                     $sum -= 13;
                     $ace = 0;
-                } elseif ($sum > 21 && $ace == 2 ) {
+                } elseif ($sum > 21 && $ace == 2) {
                     $sum -= 13;
                     $ace = 1;
                 }
             }
-        return $sum;
+            return $sum;
         }
     }
 

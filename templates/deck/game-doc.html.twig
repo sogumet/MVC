@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Game | Start{% endblock %}
+
+
+
+{% block content %}
+<div class="continerleft">
+    
+<h2>Game 21 Documents</h2>
+
+<img class="flowchart" src={{ asset("img/game21_flowchart.svg")}} alt="Flowchart">
+
+<H3>Psuedocode for player drawcard function</H3>
+
+<p>Get the deck from session</p>
+<p>Get the hand from session</p>
+<p>Call the function drawCard in deck class to set card in variable</p>
+<p>Calling the function addCard in hand class with card variable as parameter to add card in hand</p>
+<p>Calling function countSum in bank with hand as parameter to calculate card sum</p>
+<p>Setting hand and deck in session</p>
+
+<H3>Psuedocode for countSum function</H3>
+
+<p>Geting hand as parameter</p>
+<p>Set variables sum = 0 and ace = 0</p>
+<p>For each card(value) in hand</p>
+<p>IF value == ace THEN add 1 to ace </p>
+<p>Add value to sum</p>
+<p>IF sum > 21 AND ace == 0 THEN return sum</p>
+<p>IF sum > 21 AND ace == 1 THEN reduce sum with 13, set ace = 0 and return sum </p>
+<p>ELSEIF sum > 21 AND ace == 2 THEN reduce sum with 13, set ace = 1 and return sum</p>
+
+<h3>Classes in Game 21</h3>
+<h4>GAME</h4>
+<p>Class with constructor creating a gameobject with a deck and two hands object as parameters, 
+    the session is also a parameter. The class holds the most of the game logic functions.</p>
+
+<h4>DECK</h4>
+<p>Holds a constructor that create the cards in the deck. Also functions for shuffling deck, 
+    draw a card from deck and counting remaining cards in deck. 
+</p>
+<h4>CARD</h4>
+<p>Only for the card attributes.</p>
+<h4>HAND</h4>
+<p>Contains an array to hold the cards and functions for adding cards to hand and counting cards in hand.</p>
+
+
+<li><a href="{{ url("game")}}">Game</a></li>
+{% endblock %}

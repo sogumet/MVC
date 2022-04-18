@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Deck\Deck;
 
 class JsonController extends AbstractController
 {
@@ -16,8 +17,7 @@ class JsonController extends AbstractController
     */
     public function deckJson(): Response
     {
-        $tempDeck = new \App\Deck\Deck();
-        $deck = $tempDeck->deck;
+        $deck = new Deck();
 
         return new JsonResponse($deck);
     }
@@ -28,10 +28,9 @@ class JsonController extends AbstractController
     public function shuffle(
         SessionInterface $session
     ): Response {
-        $session->clear("deck");
-        $tempDeck = new \App\Deck\Deck();
-        $tempdeck = $tempDeck->shuffleDeck();
-        $deck = $tempDeck->deck;
+        $session->clear();
+        $deck = new Deck();
+        $deck->shuffleDeck();
 
         return new JsonResponse($deck);
     }

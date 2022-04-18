@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Session{% endblock %}
+
+{% block content %}
+<div class="continerleft">
+<h1>Spela 21</h1>
+<form method="post">
+    <p>Spelets idé är att med två eller flera kort försöka uppnå det sammanlagda värdet 21,
+        eller komma så nära som möjligt utan att överskrida 21. Essen är värda valfritt 1 eller 14,
+        kungarna 13, damerna 12, knektarna 11. Nummerkorten har samma värden som valören.
+        Du spelar emot banken och får ni samma poäng så vinner banken.</p>
+    <p>
+        <input type="submit" name="start" value="Start">
+    </p>
+    {{ include('block/flash-message.html.twig') }}
+</form>
+
+<a href="{{ url("game-doc")}}">Game Documents</a>
+</div>
+{% endblock %}

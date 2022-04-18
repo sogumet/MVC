@@ -7,6 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Deck\Deck;
+use App\Deck\Deck2;
+use App\Deck\Hand;
 
 class CardController extends AbstractController
 {
@@ -27,7 +30,7 @@ class CardController extends AbstractController
      */
     public function deck(): Response
     {
-        $tempDeck = new \App\Deck\Deck();
+        $tempDeck = new Deck();
         $data = $tempDeck->deck;
 
         return $this->render(
@@ -43,7 +46,7 @@ class CardController extends AbstractController
      */
     public function deck2(): Response
     {
-        $tempDeck = new \App\Deck\Deck2();
+        $tempDeck = new Deck2();
         $data = $tempDeck->deck;
 
         return $this->render(
@@ -60,8 +63,8 @@ class CardController extends AbstractController
     public function shuffledDeck(
         SessionInterface $session
     ): Response {
-        $session->clear("deck");
-        $tempDeck = new \App\Deck\Deck();
+        $session->clear();
+        $tempDeck = new Deck();
         $tempDeck->shuffleDeck();
         $data = $tempDeck->deck;
 
@@ -79,7 +82,7 @@ class CardController extends AbstractController
     public function drawACard(
         SessionInterface $session
     ): Response {
-        $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
+        $tempDeck = $session->get("deck") ?? new Deck();
         $tempDeck->shuffleDeck();
         $card = $tempDeck->drawCard();
         $cardLeft = $tempDeck->cardCount();
@@ -101,8 +104,8 @@ class CardController extends AbstractController
         int $numCard,
         SessionInterface $session
     ): Response {
-        $tempDeck = $session->get("deck") ?? new \App\Deck\Deck();
-        $tempdeck = $tempDeck->shuffleDeck();
+        $tempDeck = $session->get("deck") ?? new Deck();
+        $tempDeck->shuffleDeck();
         $cards = $tempDeck->drawCards($numCard - 1);
         $cardLeft = $tempDeck->cardCount();
         $session->set("deck", $tempDeck);
@@ -124,12 +127,12 @@ class CardController extends AbstractController
         SessionInterface $session
     ): Response {
         // $hands = $players;
-        $session->clear("deck");
-        $deck = $session->get("deck") ?? new \App\Deck\Deck();
-        $tempdeck = $deck->shuffleDeck();
+        $session->clear();
+        $deck = $session->get("deck") ?? new Deck();
+        $deck->shuffleDeck();
         for ($players > 0; $players--;) {
             $cards = $deck->drawCards($numCard - 1);
-            $hand = new \App\Deck\Hand();
+            $hand = new Hand();
             $hand->addCards($cards);
             $hands[] = $hand;
         }

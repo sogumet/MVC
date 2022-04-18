@@ -4,8 +4,9 @@ namespace App\Deck;
 
 class Deck
 {
-    private $suits = array("clubs", "diamonds", "spades", "hearts");
-    private $cardSuit = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
+    private array $suits = array("clubs", "diamonds", "spades", "hearts");
+    private array $cardSuit = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
+    public array $deck;
 
     public function __construct()
     {
@@ -18,12 +19,12 @@ class Deck
                 $newCard->value = $value;
                 $newCard->rankingAll = $rank;
                 $newCard->image = 'img/deck/' . $card . '-' . $suit . '.png';
-                ;
-                if ($value == 14) {
-                    $newCard->ace = true;
-                } else {
-                    $newCard->ace = false;
-                }
+                // ;
+                // if ($value == 14) {
+                //     $newCard->ace = true;
+                // } else {
+                //     $newCard->ace = false;
+                // }
                 $rank++;
                 $value++;
                 $this->deck[] = $newCard;
@@ -31,7 +32,7 @@ class Deck
         }
     }
 
-    public function shuffleDeck()
+    public function shuffleDeck(): void
     {
         shuffle($this->deck);
     }
@@ -43,12 +44,12 @@ class Deck
         return $card;
     }
 
-    public function cardCount()
+    public function cardCount(): int
     {
         return count($this->deck);
     }
 
-    public function drawCards($number)
+    public function drawCards(int $number): array
     {
         for ($number; $number >= 0; $number--) {
             $card = array_shift($this->deck);

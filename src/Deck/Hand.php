@@ -4,9 +4,9 @@ namespace App\Deck;
 
 class Hand
 {
-    public $hand = [];
+    public array $hand = [];
 
-    public function addCards($cards)
+    public function addCards($cards): void
     {
         foreach ($cards as $value) {
             $this->hand[] = $value;
@@ -17,7 +17,7 @@ class Hand
         return count($this->hand);
     }
 
-    public function addCard($card)
+    public function addCard(object $card): void
     {
         $this->hand[] = $card;
     }

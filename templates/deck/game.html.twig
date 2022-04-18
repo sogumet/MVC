@@ -11,7 +11,6 @@
 <form method="post">
     <fieldset>
     {% if data is defined %}
-    {{ dump(js) }}
     
         {% for i in 0..(cards) %}
             {% if data.hand %}
@@ -20,18 +19,14 @@
         {% endfor %}
         <p>{{sum}}</p>
     
-    
-    
         {% for i in 0..(bankcards) %}
             {% if bank.hand %}
-                <img src={{ asset(bank.hand[i].image) }}>
-                
-            {% endif %}
-            
+                <img src={{ asset(bank.hand[i].image) }}>                
+            {% endif %}     
         {% endfor %}
         
         {% block javascripts %}
-        {% if js == 1 %}
+        {% if jscrpt == 1 %}
             <script type="text/javascript">
                 document.getElementById("draw").disabled = true;
                 document.getElementById("stay").disabled = true;
@@ -45,7 +40,6 @@
         <input id="draw" type="submit" name="draw" value="Draw">
         <input id="stay" type="submit" name="stay" value="Stay">
         <input id="clear" type="submit" name="clear" value="Clear">
-        <input type="submit" name="start" value="Start">
     </p>
 
     </fieldset>
