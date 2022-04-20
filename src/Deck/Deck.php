@@ -18,12 +18,6 @@ class Deck
                 $newCard->setSuit($suit);
                 $newCard->setValue($value);
                 $newCard->setImage('img/deck/' . $card . '-' . $suit . '.png');
-                // ;
-                // if ($value == 14) {
-                //     $newCard->ace = true;
-                // } else {
-                //     $newCard->ace = false;
-                // }
                 $rank++;
                 $value++;
                 $this->deck[] = $newCard;

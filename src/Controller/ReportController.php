@@ -53,12 +53,13 @@ class ReportController extends AbstractController
         $number = random_int(0, 100);
         $arr[] = "Testing";
         $arr[] = "Snolep";
+      
 
         return $this->render('report/test.html.twig', [
             'number' => $number,
             'type' => "MVC",
             'arr' => $arr
-        ]);
+        ]); 
     }
 
     /**

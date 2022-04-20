@@ -6,7 +6,7 @@ class Hand
 {
     public array $hand = [];
 
-    public function addCards(object $cards): void
+    public function addCards(array $cards): void
     {
         foreach ($cards as $value) {
             $this->hand[] = $value;
