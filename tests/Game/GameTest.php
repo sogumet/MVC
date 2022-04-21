@@ -1,26 +1,33 @@
 <?php
 
-namespace Mos\Guess;
+namespace App\Deck;
 
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage;
 
 /**
  * Test cases for class Guess.
  */
-class GuessCreateObjectTest extends TestCase
+class GameTest extends TestCase
 {
     /**
      * Construct object and verify that the object has the expected
-     * properties, use no arguments.
+     * properties.
      */
-    public function testCreateObjectNoArguments()
+    public function testCreateGameObject()
     {
-        $guess = new Guess();
-        $this->assertInstanceOf("\Mos\Guess\Guess", $guess);
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
+        $hand = new Hand();
+        $this->assertInstanceOf("\App\Deck\Hand", $hand);
+        $this->assertInstanceOf("Symfony\Component\HttpFoundation\Session\Session", $game->session);
+        
 
-        $res = $guess->tries();
+        /* $res = $guess->tries();
         $exp = 6;
-        $this->assertEquals($exp, $res);
+        $this->assertEquals($exp, $res); */
     }
 
 
@@ -29,19 +36,14 @@ class GuessCreateObjectTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use only first argument.
      */
-    public function testCreateObjectFirstArgument()
+   /*  public function testStartGameFunction()
     {
-        $guess = new Guess(42);
-        $this->assertInstanceOf("\Mos\Guess\Guess", $guess);
-
-        $res = $guess->tries();
-        $exp = 6;
-        $this->assertEquals($exp, $res);
-
-        $res = $guess->number();
-        $exp = 42;
-        $this->assertEquals($exp, $res);
-    }
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
+        $hand = new Hand();
+        $this->assertInstanceOf("\App\Deck\Hand", $hand);
+    } */
 
 
 
@@ -49,7 +51,7 @@ class GuessCreateObjectTest extends TestCase
      * Construct object and verify that the object has the expected
      * properties, use both arguments.
      */
-    public function testCreateObjectBothArguments()
+    /* public function testCreateObjectBothArguments()
     {
         $guess = new Guess(42, 7);
         $this->assertInstanceOf("\Mos\Guess\Guess", $guess);
@@ -62,12 +64,12 @@ class GuessCreateObjectTest extends TestCase
         $exp = 42;
         $this->assertEquals($exp, $res);
     }
-
+ */
       /**
      * Construct object and verify that the object has the expected
      * properties, use both arguments.
      */
-    public function testCreateReturnString()
+    /* public function testCreateReturnString()
     {
 
         $guess = new Guess();
@@ -89,13 +91,13 @@ class GuessCreateObjectTest extends TestCase
         $exp = "correct!!!";
         $this->assertEquals($exp, $res);
 
-    }
+    } */
 
     /**
      * Construct object and verify that the object has the expected
      * properties, use only first argument.
      */
-    public function testReturnOutOfGuess()
+   /*  public function testReturnOutOfGuess()
     {
         $guess = new Guess(42, 1);
         $this->assertInstanceOf("\Mos\Guess\Guess", $guess);
@@ -104,13 +106,13 @@ class GuessCreateObjectTest extends TestCase
         $res = $guess->makeGuess(4);
         $exp = "no guesses left.";
         $this->assertEquals($exp, $res);
-    }
+    } */
 
     /**
      * Construct object and verify that the object has the expected
      * properties, use only first argument.
      */
-    public function testExeptions()
+    /* public function testExeptions()
     {
         
         $this->expectException(GuessException::class);
@@ -119,7 +121,7 @@ class GuessCreateObjectTest extends TestCase
 
         $guess = new Guess();
         $guess->makeGuess(-10);
-    }
+    } */
        
         
         
