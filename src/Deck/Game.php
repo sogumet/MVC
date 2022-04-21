@@ -101,6 +101,11 @@ class Game
         return "{$this->sumbank}";
     }
 
+    /**
+     * Sum as string.
+     *
+     * @return string
+     */
     public function sumAsString(): string
     {
         return "{$this->sum}";
