@@ -148,6 +148,20 @@ class GameTest extends TestCase
     }
 
     /**
+     * Verifying the string.
+     */
+    public function testSumAsString()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
+        $game->sum = 11;
+        $res = $game->sumAsString();
+        $exp = "11";
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
      * Construct object and verify that the object has the expected
      * properties, use both arguments.
      */
