@@ -51,6 +51,7 @@ class GameTest extends TestCase
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
         $game->startGame();
         $game->playerDrawCard();
         $exp = $game->tempCard->getValue();
@@ -67,6 +68,7 @@ class GameTest extends TestCase
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
         $game->session->clear();
         $game->session->set("deck21", $game->deck);
         $game->session->set("bank", $game->bank);
@@ -84,6 +86,7 @@ class GameTest extends TestCase
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
         $tempCard = $game->deck->deck[11]; //cardvalue 13
         $game->bank->addCard($tempCard);
         $tempCard = $game->deck->deck[11]; //cardvalue 13
@@ -100,6 +103,7 @@ class GameTest extends TestCase
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
         $tempCard = $game->deck->deck[11]; //cardvalue 13
         $game->bank->addCard($tempCard);
         $tempCard = $game->deck->deck[12]; //cardvalue 14
@@ -111,12 +115,13 @@ class GameTest extends TestCase
 
     
     /**
-     * Verifying bankhand cardsum > 21 with 2 ace.
+     * Verifying bankhand cardsum > 21 with 2 aces.
      */
     public function testCountSumBank3()
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
         $tempCard = $game->deck->deck[3]; //cardvalue 5
         $game->bank->addCard($tempCard);
         $tempCard = $game->deck->deck[12]; //cardvalue 14
@@ -128,6 +133,19 @@ class GameTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
+     /**
+     * Verifying the string.
+     */
+    public function testSumBankAsString()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
+        $game->sumbank = 3;
+        $res = $game->sumBankAsString();
+        $exp = "3";
+        $this->assertEquals($exp, $res);
+    }
 
     /**
      * Construct object and verify that the object has the expected

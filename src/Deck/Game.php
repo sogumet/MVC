@@ -97,7 +97,7 @@ class Game
         }
     }
 
-    public function sumbankAsString(): string
+    public function sumBankAsString(): string
     {
         return "{$this->sumbank}";
     }
