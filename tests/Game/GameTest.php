@@ -45,10 +45,9 @@ class GameTest extends TestCase
     }
 
     /**
-     * Construct objects, getting objects from session
-     * an verify that the object has the expected properties.
+     * Construct objects, getting and verifying cardvalue.
      */
-    public function testplayerDrawCard()
+    public function testPlayerDrawCard()
     {
         $session = new Session(new MockFileSessionStorage());
         $game = new Game($session);
@@ -59,6 +58,75 @@ class GameTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
+
+
+    /**
+     * Construct objects, getting and verifying the sum of bankhand cards.
+     */
+    public function testDrawBank()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $game->session->clear();
+        $game->session->set("deck21", $game->deck);
+        $game->session->set("bank", $game->bank);
+        $game->session->set("hand21", $game->hand);
+        $game->drawBank();
+        $res = $game->sumbank;
+        $exp = 20; // 2 + 3 + 4 + 5 + 6 from an unshuffled deck        
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
+     * Verifying bankhand cardsum > 21 no aces.
+     */
+    public function testCountSumBank1()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $tempCard = $game->deck->deck[11]; //cardvalue 13
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[11]; //cardvalue 13
+        $game->bank->addCard($tempCard);
+        $res = $game->countSumBank($game->bank);
+        $exp = 26;
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
+     * Verifying bankhand cardsum > 21 with 1 ace.
+     */
+    public function testCountSumBank2()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $tempCard = $game->deck->deck[11]; //cardvalue 13
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $res = $game->countSumBank($game->bank);
+        $exp = 14;
+        $this->assertEquals($exp, $res);
+    }
+
+    
+    /**
+     * Verifying bankhand cardsum > 21 with 2 ace.
+     */
+    public function testCountSumBank3()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $tempCard = $game->deck->deck[3]; //cardvalue 5
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $res = $game->countSumBank($game->bank);
+        $exp = 20;
+        $this->assertEquals($exp, $res);
+    }
 
 
     /**

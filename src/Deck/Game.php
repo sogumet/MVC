@@ -8,7 +8,7 @@ use App\Deck\Hand;
 
 class Game
 {
-    private object $deck;
+    public object $deck;
     public object $hand;
     public object $bank;
     public int $bankcards = 0;
