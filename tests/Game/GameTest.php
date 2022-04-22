@@ -25,8 +25,6 @@ class GameTest extends TestCase
         $this->assertInstanceOf("Symfony\Component\HttpFoundation\Session\Session", $game->session);
     }
 
-
-
     /**
      * Construct objects, getting objects from session
      * an verify that the object has the expected properties.
@@ -44,6 +42,21 @@ class GameTest extends TestCase
         $bank = $game->session->get("bank");
         $this->assertInstanceOf("\App\Deck\Hand", $bank);
        
+    }
+
+    /**
+     * Construct objects, getting objects from session
+     * an verify that the object has the expected properties.
+     */
+    public function testplayerDrawCard()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $game->startGame();
+        $game->playerDrawCard();
+        $exp = $game->tempCard->getValue();
+        $res = $game->countSumBank($game->hand);
+        $this->assertEquals($exp, $res);
     }
 
 

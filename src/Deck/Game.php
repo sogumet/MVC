@@ -16,9 +16,10 @@ class Game
     public int $cardsleft = 0;
     public int $sum = 0;
     public int $sumbank = 0;
+    public object $tempCard;
     public $session;
 
-    public function __construct($session)
+    public function __construct($session,)
     {
         $this->deck = new Deck();
         $this->hand = new Hand();
@@ -40,8 +41,8 @@ class Game
     {
         $this->deck = $this->session->get("deck21");
         $this->hand = $this->session->get("hand21");
-        $tempCard = $this->deck->drawCard();
-        $this->hand->addCard($tempCard);
+        $this->tempCard = $this->deck->drawCard();
+        $this->hand->addCard($this->tempCard);
         $this->sum = $this->countSumBank($this->hand);
         $this->cards = $this->hand->cardCount() - 1;
         $this->cardsleft = $this->deck->cardCount();
@@ -57,8 +58,8 @@ class Game
             $this->deck = $this->session->get("deck21");
             $this->bank = $this->session->get("bank");
             $this->hand = $this->session->get("hand21");
-            $tempCard = $this->deck->drawCard();
-            $this->bank->addCard($tempCard);
+            $this->tempCard = $this->deck->drawCard();
+            $this->bank->addCard($this->tempCard);
             $this->sumbank = $this->countSumBank($this->bank);
             $this->session->set("deck21", $this->deck);
             $this->session->set("bank", $this->bank);
