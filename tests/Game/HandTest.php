@@ -17,9 +17,16 @@ class HandTest extends TestCase
      */
     public function testCreateHandObject()
     {
-        // $session = new Session(new MockFileSessionStorage());
-        // $game = new Game($session);
-        // $this->assertInstanceOf("\App\Deck\Game", $game);
+        $hand = new Hand();
+        $this->assertInstanceOf("\App\Deck\Hand", $hand);
+        
+    }
+
+    /**
+     * Create object and testing Hand addCard function
+     */
+    public function testAddCards()
+    {
         $hand = new Hand();
         $this->assertInstanceOf("\App\Deck\Hand", $hand);
         $deck = new Deck();
@@ -28,10 +35,11 @@ class HandTest extends TestCase
         $hand->addCards($cards);
         $exp = $cards[0];
         $res = $hand->hand[0];
-        var_dump($res);
-        // var_dump($res);
-        $this->assertEquals($exp, $res);
-       
+        $this->assertEquals($exp, $res);   
     }
+
+
+
+
 
 }

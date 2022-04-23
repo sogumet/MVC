@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1650735861">
-  <project timestamp="1650735861">
+<coverage generated="1650736341">
+  <project timestamp="1650736341">
     <file name="C:\Users\HP\dbwebb-kurser\mvc\me\report\src\Controller\CardController.php">
       <class name="App\Controller\CardController" namespace="global">
         <metrics complexity="8" methods="7" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="53" coveredstatements="0" elements="60" coveredelements="0"/>
