@@ -23,7 +23,7 @@ class HandTest extends TestCase
     }
 
     /**
-     * Create object and testing Hand addCard function
+     * Create object and testing addCard function
      */
     public function testAddCards()
     {
@@ -34,6 +34,34 @@ class HandTest extends TestCase
         $cards =  $deck->drawCards(0);
         $hand->addCards($cards);
         $exp = $cards[0];
+        $res = $hand->hand[0];
+        $this->assertEquals($exp, $res);   
+    }
+
+    /**
+     * Create object and testing cardCount function
+     */
+    public function testCardCount() {
+        $hand = new Hand();
+        $this->assertInstanceOf("\App\Deck\Hand", $hand);
+        $deck = new Deck();
+        $this->assertInstanceOf("\App\Deck\Deck", $deck);
+        $cards =  $deck->drawCards(10);
+        $hand->addCards($cards);
+        $res = $hand->cardCount();
+        $exp = 11;
+        $this->assertEquals($exp, $res);   
+    }
+
+    public function testAddCard()
+    {
+        $hand = new Hand();
+        $this->assertInstanceOf("\App\Deck\Hand", $hand);
+        $deck = new Deck();
+        $this->assertInstanceOf("\App\Deck\Deck", $deck);
+        $card =  $deck->drawCards(0);
+        $hand->addCard($card[0]);
+        $exp = $card[0];
         $res = $hand->hand[0];
         $this->assertEquals($exp, $res);   
     }
