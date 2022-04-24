@@ -41,7 +41,6 @@ class GameTest extends TestCase
         $this->assertInstanceOf("\App\Deck\Hand", $hand);
         $bank = $game->session->get("bank");
         $this->assertInstanceOf("\App\Deck\Hand", $bank);
-       
     }
 
     /**
@@ -75,7 +74,7 @@ class GameTest extends TestCase
         $game->session->set("hand21", $game->hand);
         $game->drawBank();
         $res = $game->sumbank;
-        $exp = 20; // 2 + 3 + 4 + 5 + 6 from an unshuffled deck        
+        $exp = 20; // 2 + 3 + 4 + 5 + 6 from an unshuffled deck
         $this->assertEquals($exp, $res);
     }
 
@@ -113,7 +112,7 @@ class GameTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-    
+
     /**
      * Verifying bankhand cardsum > 21 with 2 aces.
      */
@@ -133,9 +132,9 @@ class GameTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
-     /**
-     * Verifying the string.
-     */
+    /**
+    * Verifying the string.
+    */
     public function testSumBankAsString()
     {
         $session = new Session(new MockFileSessionStorage());
@@ -160,5 +159,4 @@ class GameTest extends TestCase
         $exp = "11";
         $this->assertEquals($exp, $res);
     }
-
 }

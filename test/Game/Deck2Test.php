@@ -18,10 +18,10 @@ class Deck2Test extends TestCase
     public function testCreateDeck2Object()
     {
         $deck = new Deck2();
-        $this->assertInstanceOf("\App\Deck\Deck2", $deck); 
+        $this->assertInstanceOf("\App\Deck\Deck2", $deck);
     }
 
-    
+
 
     /**
      * Create object and testing size of deck2
@@ -34,5 +34,4 @@ class Deck2Test extends TestCase
         $exp = 54;
         $this->assertEquals($exp, $res);
     }
-
 }

@@ -51,5 +51,4 @@ class Deck
 
         return $cards;
     }
-
 }

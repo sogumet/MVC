@@ -18,7 +18,7 @@ class DeckTest extends TestCase
     public function testCreateDeckObject()
     {
         $deck = new Deck();
-        $this->assertInstanceOf("\App\Deck\Deck", $deck); 
+        $this->assertInstanceOf("\App\Deck\Deck", $deck);
     }
 
     /**
@@ -59,5 +59,4 @@ class DeckTest extends TestCase
         $exp = $deck1->deck;
         $this->assertSamesize($exp, $res);
     }
-
 }

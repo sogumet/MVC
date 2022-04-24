@@ -306,10 +306,10 @@ Search.appendIndex(
             "summary": "",
             "url": "classes/App-Deck-Game.html#method_countSumBank"
         },                {
-            "fqsen": "\\App\\Deck\\Game\u003A\u003AsumbankAsString\u0028\u0029",
-            "name": "sumbankAsString",
+            "fqsen": "\\App\\Deck\\Game\u003A\u003AsumBankAsString\u0028\u0029",
+            "name": "sumBankAsString",
             "summary": "",
-            "url": "classes/App-Deck-Game.html#method_sumbankAsString"
+            "url": "classes/App-Deck-Game.html#method_sumBankAsString"
         },                {
             "fqsen": "\\App\\Deck\\Game\u003A\u003AsumAsString\u0028\u0029",
             "name": "sumAsString",
@@ -355,6 +355,11 @@ Search.appendIndex(
             "name": "sumbank",
             "summary": "",
             "url": "classes/App-Deck-Game.html#property_sumbank"
+        },                {
+            "fqsen": "\\App\\Deck\\Game\u003A\u003A\u0024tempCard",
+            "name": "tempCard",
+            "summary": "",
+            "url": "classes/App-Deck-Game.html#property_tempCard"
         },                {
             "fqsen": "\\App\\Deck\\Game\u003A\u003A\u0024session",
             "name": "session",

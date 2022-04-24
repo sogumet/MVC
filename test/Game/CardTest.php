@@ -19,7 +19,6 @@ class CardTest extends TestCase
     {
         $card = new Card();
         $this->assertInstanceOf("\App\Deck\Card", $card);
-        
     }
 
     /**

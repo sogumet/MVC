@@ -19,7 +19,7 @@ class Game
     public object $tempCard;
     public $session;
 
-    public function __construct($session,)
+    public function __construct($session)
     {
         $this->deck = new Deck();
         $this->hand = new Hand();
