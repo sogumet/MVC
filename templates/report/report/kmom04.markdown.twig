@@ -1,0 +1,27 @@
+
+kmom04
+------
+Tycker att det är både roligt och givande att skriva testkod. Det ger en ytterligare insikt  i hur det man kodat hänger
+ihop och fungerar. Man ser hur man kanske borde ha kodat om man fick chans att göra om. Tyvärr så finns inte tiden att
+göra några större ingrepp eller förändringar i koden.  
+
+Utan att ha någon större insikt eller erfarenhet så tycker jag att PHPUnit är bra att arbeta med. Lätt att skriva tester och
+en begriplig manual.  
+  
+
+Min kod är väl någorlunda testbar, men jag är övertygad om att om man redan från början har klart för sig att koden
+skall testas så har man mycket större möjlighet att skriva bättre kod. Man bör nog skriva testerna efterhand också och inte försöka testa
+allt efteråt. Det bli så mycket svårare att rätta till då.  
+
+Jag har inte skrivit om någon kod men har lyckats uppnå 100%  kodtäckning ändå, men åtminstone ett av assertions är väl
+av typen “inte så meningsfullt”. I klassen Deck finns funktionen shuffledeck() den gör inget annat än blandar Cardobjekten.
+Hur testar man det? Jag kunde inte hitta något test som jag tyckte passade. Tänkte att det kanske kunde finnas
+“assertNotEqual” så att det skulle gå att jämföra en blandad med en oblandad kortlek. Nu fick det bli assertSamesize()
+av dom båda arrayerna. Kanske inte så meningsfullt... Men i stort så tycker jag väl att det har gått att skriva
+någorlunda vettiga tester. Sen är jag fullt medveten borde göras ytterligare massor med assertions om det skall
+göras anspråk på att vara en någorlunda täckande testsuit.  
+  
+
+Vad det gäller snygg och ren kod och testbarhet så tror jag att allt hänger ihop. Är koden välstrukturerad så är det
+enkelt att skriva meningsfulla tester och om man redan från början har i åtanke att koden skall testas så är sannolikheten
+för att koden blir välstrukturerad så mycket större. Detta får också gälla som min TIL för detta kursmoment.

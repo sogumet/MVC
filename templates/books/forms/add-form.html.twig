@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Library | {% endblock %}
+
+{% block content %}
+
+<form method="post">
+    <fieldset>
+    <legend>Add a book</legend>
+
+    <p>
+        <input type="text" name="title" value="Title">
+        <input type="value" name="isbn" value="ISBN">
+        <input type="text" name="author" value="Author">
+        <input type="text" name="image" value="Image">
+        <input type="submit" name="add" value="Add">
+    </p>
+    </fieldset>
+</form>
+
+{{ include('block/flash-message.html.twig') }}
+
+<li><a href="{{ url("library")}}">Library</a></li>
+<li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+
+{% endblock %}
