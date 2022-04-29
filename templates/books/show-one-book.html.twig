@@ -1,0 +1,22 @@
+{# deck.html.twig #}
+
+{% extends "base.html.twig"%}
+{% block title %}Library | Book{% endblock %}
+{% block content %}
+
+<div class="container-left">
+    <h1>{{book.title}}</h1>
+    
+                 <p>{{book.id}}</p>
+                 <p>{{book.isbn}}</p>
+                 <p>{{book.author}}</p>
+                 <img class="book-img" src={{ asset(book.picture) }}>
+                 <p>{{book.description}}</p>
+                 <a class="link-button" href="{{ path('update_book', {id: book.id})}}">Update</a>
+                 <a class="link-button" href="{{ path('delete_book', {id: book.id})}}">Delete</a>
+
+    <li><a href="{{ url("library")}}">Library</a></li>
+    <li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+</div>
+
+{% endblock %}

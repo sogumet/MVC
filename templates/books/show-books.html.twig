@@ -5,15 +5,29 @@
 {% block content %}
 
 <div class="container-left">
-<div class="suit" >
     <h1>Books</h1>
-    {% for book in data %}      
-        <p>{{book.title}}</p> 
-        <p>{{book.isbn}}</p> 
-        <p>{{book.author}}</p> 
-        <p>{{book.picture}}</p> 
-        
-    {% endfor %}
+      <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>ISBN</th>
+            <th>Author</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in data %}   
+            <tr>
+                <td><a href="{{ path('book_by_id', {id: book.id})}}">{{book.id}}</a></td>
+                <td>{{book.title}}</a></td>
+                <td>{{book.isbn}}</td>
+                <td>{{book.author}}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>  
+
+    {{ include('block/flash-message.html.twig') }}    
 
     <li><a href="{{ url("library")}}">Library</a></li>
     <li><a href="{{ url("books_show_all")}}">Show all books</a></li>

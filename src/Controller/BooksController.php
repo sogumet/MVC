@@ -85,42 +85,68 @@ class BooksController extends AbstractController
     }
 
     /**
-     * @Route("/library/show/{isbn}", name="books_by_isbn")
+     * @Route("/library/book/{id}", name="book_by_id")
      */
-    public function showBookByIsbn(
+    public function showBookById(
         BooksRepository $booksRepository,
-        int $isbn
+        int $id
     ): Response {
         $book = $booksRepository
-            ->findOneBy(['isbn' => $isbn]);
+            ->findOneBy(['id' => $id]);
 
-        return $this->json($book);
+            return $this->render('books/show-one-book.html.twig', ['book' => $book]);
     }
 
     /**
-     * @Route("/library/delete/{isbn}", name="books_delete_by_id")
+     * @Route(
+     *      "/library/update/{id}",
+     *      name="update_book",
+     *      methods={"GET","HEAD"}
+     * )
      */
-    public function deleteBookByIsbn(
+    public function updateBook(
+        BooksRepository $booksRepository,
+        int $id
+    ): Response {
+        $book = $booksRepository
+            ->findOneBy(['id' => $id]);
+
+            return $this->render('books/forms/update-form.html.twig', ['book' => $book]);
+    }
+    /**
+     * @Route("/library/update/{id}",
+     *  name="update_book_process"),
+     * methods={"POST"}
+     */
+    public function UpdateBookProcess(
         ManagerRegistry $doctrine,
-        int $isbn
+        Request $request,
     ): Response {
         $entityManager = $doctrine->getManager();
-        $book = $entityManager->getRepository(Books::class)->findOneBy(['isbn' => $isbn]);
+        $id = $request->request->get('id');
+        $title = $request->request->get('title');
+        $isbn = $request->request->get('isbn');
+        $author = $request->request->get('author');
+        $image = $request->request->get('image');
+        $description = $request->request->get('description');
+        $update = $request->request->get('update');
+        
 
-        if (!$book) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$isbn
-            );
+        if ($update) {
+            $book = $entityManager->getRepository(Books::class)->find($id);
+            $book->setTitle($title);
+            $book->setIsbn($isbn);
+            $book->setAuthor($author);
+            $book->setPicture($image);
+            $book->setDescription($description);
+
+            $entityManager->flush();
+
+            return $this->redirectToRoute('books_show_all');
+
         }
-        $entityManager->remove($book);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('books_show_all');
+        return $this->redirectToRoute('add_book');
     }
-
-    /**
-     * @Route("/library/update/{id}/{value}", name="product_update")
-     */
     public function updateProduct(
         ManagerRegistry $doctrine,
         int $id,
@@ -140,4 +166,26 @@ class BooksController extends AbstractController
 
         return $this->redirectToRoute('library_show_all');
     }
+    /**
+     * @Route("/library/delete/{id}", name="delete_book")
+     */
+    public function deleteBook(
+        ManagerRegistry $doctrine,
+        int $id
+    ): Response {
+        $entityManager = $doctrine->getManager();
+        $book = $entityManager->getRepository(Books::class)->findOneBy(['id' => $id]);
+
+        if (!$book) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+        $entityManager->remove($book);
+        $entityManager->flush();
+        $this->addFlash("info", 'Deleted a book with title '.$book->getTitle());
+        return $this->redirectToRoute('books_show_all');
+    }
+
+   
 }

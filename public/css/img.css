@@ -10,3 +10,7 @@
     background-color: rgb(200, 211, 211);
     padding: 20px;
 }
+
+.book-img {
+    max-width: 200px;
+}

@@ -3,7 +3,7 @@
 {% block title %}Library | {% endblock %}
 
 {% block content %}
-
+<div class="container-left">
 <form method="post">
     <fieldset>
     <legend>Add a book</legend>
@@ -13,6 +13,7 @@
         <input type="value" name="isbn" value="ISBN">
         <input type="text" name="author" value="Author">
         <input type="text" name="image" value="Image">
+        <input type="text" name="description" value="Description">
         <input type="submit" name="add" value="Add">
     </p>
     </fieldset>
@@ -22,5 +23,5 @@
 
 <li><a href="{{ url("library")}}">Library</a></li>
 <li><a href="{{ url("books_show_all")}}">Show all books</a></li>
-
+</div>
 {% endblock %}
