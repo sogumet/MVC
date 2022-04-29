@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block title %}User | add {% endblock %}
+
+{% block content %}
+<div class="container-left">
+<form method="post">
+    <fieldset>
+    <legend>Add a user</legend>
+
+    <p>
+        <input type="text" name="name" value="Name">
+        <input type="text" name="email" value="Email">
+        <input type="text" name="password" value="Password">
+        <input type="text" name="akronym" value="Akronym">
+        <input type="submit" name="add" value="Add">
+    </p>
+    </fieldset>
+</form>
+
+{{ include('block/flash-message.html.twig') }}
+
+<li><a href="{{ url("library")}}">Library</a></li>
+<li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+</div>
+{% endblock %}
