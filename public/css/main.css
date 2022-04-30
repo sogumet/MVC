@@ -130,12 +130,12 @@ label {
   }
 
   .link-button {
-    background-color: red;
-    color: white;
-    padding: 6px 14px;
-    text-decoration: none;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 6px;
+    margin: 5px;
+    color:#fff;
+    background-color:red;
+    font-size: 1.2em;
+    font-family:'Roboto', sans-serif;
+    font-weight: 600;
   }
 
   .link-button:hover {

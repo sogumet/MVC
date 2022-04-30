@@ -31,7 +31,7 @@ class BooksController extends AbstractController
      */
     public function addBook(): Response
     {
-        return $this->render('books/forms/add-form.html.twig');
+        return $this->render('books/form/add-form.html.twig');
     }
     /**
      * @Route("/library/create",
@@ -111,7 +111,7 @@ class BooksController extends AbstractController
         $book = $booksRepository
             ->findOneBy(['id' => $id]);
 
-            return $this->render('books/forms/update-form.html.twig', ['book' => $book]);
+            return $this->render('books/form/update-form.html.twig', ['book' => $book]);
     }
     /**
      * @Route("/library/update/{id}",
