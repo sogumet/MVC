@@ -6,9 +6,11 @@
 
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello {{ user.name }}!</h1>
+    {# {{dump(user)}} #}
 
     <ul>
-        <li><a href="{{ url("add_user")}}">Add a user</a></li>
+        {# <li><a href="{{ url("user")}}">Add a user</a></li> #}
     </ul>
 </div>
 {% endblock %}
