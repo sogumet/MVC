@@ -48,6 +48,7 @@ class BooksController extends AbstractController
         $author = $request->request->get('author');
         $image = $request->request->get('image');
         $add  = $request->request->get('add');
+        $description  = $request->request->get('description');
         
 
         if ($add) {
@@ -56,6 +57,7 @@ class BooksController extends AbstractController
             $book->setIsbn($isbn);
             $book->setAuthor($author);
             $book->setPicture($image);
+            $book->setDescript($description);
 
             // tell Doctrine you want to (eventually) save the Product
             // (no queries yet)
@@ -128,7 +130,7 @@ class BooksController extends AbstractController
         $isbn = $request->request->get('isbn');
         $author = $request->request->get('author');
         $image = $request->request->get('image');
-        $description = $request->request->get('description');
+        $descript = $request->request->get('description');
         $update = $request->request->get('update');
         
 
@@ -138,7 +140,7 @@ class BooksController extends AbstractController
             $book->setIsbn($isbn);
             $book->setAuthor($author);
             $book->setPicture($image);
-            $book->setDescription($description);
+            $book->setDescript($descript);
 
             $entityManager->flush();
 

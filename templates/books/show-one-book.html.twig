@@ -7,16 +7,19 @@
 <div class="container-left">
     <h1>{{book.title}}</h1>
     
-                 <p>{{book.id}}</p>
-                 <p>{{book.isbn}}</p>
-                 <p>{{book.author}}</p>
+                 <p>ISBN: {{book.isbn}}</p>
+                 <p>Author: {{book.author}}</p>
                  <img class="book-img" src={{ asset(book.picture) }}>
-                 <p>{{book.description}}</p>
+
+                 <p>{{book.descript}}</p>
                  <a class="link-button" href="{{ path('update_book', {id: book.id})}}">Update</a>
                  <a class="link-button" href="{{ path('delete_book', {id: book.id})}}">Delete</a>
 
+<div class="links">
     <li><a href="{{ url("library")}}">Library</a></li>
     <li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+</div>
+    
 </div>
 
 {% endblock %}

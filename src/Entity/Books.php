@@ -28,6 +28,9 @@ class Books
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $description;
 
+    #[ORM\Column(type: 'string', length: 700, nullable: true)]
+    private $descript;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class Books
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getDescript(): ?string
+    {
+        return $this->descript;
+    }
+
+    public function setDescript(?string $descript): self
+    {
+        $this->descript = $descript;
 
         return $this;
     }

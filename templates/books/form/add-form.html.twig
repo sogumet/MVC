@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container-left">
+    <div class="formcontainer">
 <form method="post">
     <fieldset>
     <legend>Add a book</legend>
@@ -21,7 +22,8 @@
 
 {{ include('block/flash-message.html.twig') }}
 
-<li><a href="{{ url("library")}}">Library</a></li>
-<li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+</div>
+    <li><a href="{{ url("library")}}">Library</a></li>
+    <li><a href="{{ url("books_show_all")}}">Show all books</a></li>
 </div>
 {% endblock %}

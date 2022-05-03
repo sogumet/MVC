@@ -5,12 +5,15 @@
 {% block content %}
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-    <h1>Hello {{ user.name }}!</h1>
+    {# <h1>Hello {{ controller_name }}! ✅</h1> #}
+    <h1>Name: {{ user.name }}</h1>
+    <h1>Email: {{ user.email }}</h1>
+    <h1>Role: {{ user.roles[0] }}</h1>
+    <h1>Akronym: {{ user.akronym }}</h1>
     {# {{dump(user)}} #}
 
     <ul>
-        {# <li><a href="{{ url("user")}}">Add a user</a></li> #}
+        <a href="{{ path('update_user', {name: user.name})}}">Update user</a>
     </ul>
 </div>
 {% endblock %}
