@@ -36,7 +36,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -46,22 +46,22 @@ class RegistrationController extends AbstractController
 
     /**
      * @Route(
-     *      "/register/update/{name}",
+     *      "/register/update/{email}",
      *      name="update_user",
      *      methods={"GET","HEAD"}
      * )
      */
     public function updateUser(
         UserRepository $userRepository,
-        string $name
+        string $email
     ): Response {
         $user = $userRepository
-            ->findOneBy(['name' => $name]);
+            ->findOneBy(['email' => $email]);
 
             return $this->render('registration/role-form.html.twig', ['user' => $user]);
     }
     /**
-     * @Route("/register/update/{name}",
+     * @Route("/register/update/{email}",
      *  name="update_user_process"),
      * methods={"POST"}
      */
@@ -70,21 +70,25 @@ class RegistrationController extends AbstractController
         Request $request,
     ): Response {
         $entityManager = $doctrine->getManager();
+        $email = $request->request->get('email');
         $name = $request->request->get('name');
-        $role = $request->request->get('role');
+        $akronym = $request->request->get('akronym');
         $update = $request->request->get('update');
         
 
         if ($update) {
-            $user = $entityManager->getRepository(User::class)->findOneBy(['name' => $name]);
-            var_dump($role);
-            var_dump($user);
-            $roles[] = $role;
-            $user->setRoles($roles);
+            $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
+            // var_dump($role);
+            // var_dump($user);
+            // $roles[0] = $role;
+            // $user->setRoles($roles);
+            $user->setName($name);
+            $user->setEmail($email);
+            $user->setAkronym($akronym);
 
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_register');
+            return $this->redirectToRoute('user', ['email' => $email]);
 
         }
         return $this->redirectToRoute('app_register');
