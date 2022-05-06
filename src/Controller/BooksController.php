@@ -177,14 +177,12 @@ class BooksController extends AbstractController
         Request $request,
     ): Response {
         $entityManager = $doctrine->getManager();
-
         $delete = $request->request->get('delete');
 
 
         if ($delete) {
             $id = $request->request->get('id');
             $book = $entityManager->getRepository(Books::class)->find($id);
-
             $entityManager->remove($book);
             $entityManager->flush();
 
