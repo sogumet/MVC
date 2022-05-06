@@ -26,15 +26,15 @@ class UserController extends AbstractController
         string $email
     ): Response {
         $user = $userRepository->findOneBy(['email' => $email]);
-       
+
         if ($user !== $this->getUser()) {
             throw $this->createAccessDeniedException();
         }
-        
-            return $this->render('user/index.html.twig', 
+
+        return $this->render(
+            'user/index.html.twig',
             ['user' => $user,
-            'controller_name' => 'UserController', ]);
+            'controller_name' => 'UserController', ]
+        );
     }
-
-
 }

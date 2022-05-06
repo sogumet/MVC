@@ -9,7 +9,6 @@
     <p>Email: {{ user.email }}</p>
     <p>Role: {{ user.roles[0] }}</p>
     <p>Akronym: {{ user.akronym }}</p>
-    {{dump(user)}}
 
     <ul>
         <a href="{{ path('update_user', {email: user.email})}}">Update user</a>

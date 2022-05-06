@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Library | {% endblock %}
+
+{% block content %}
+<div class="container-left">
+    <div class="formcontainer">
+<form method="post">
+    <fieldset>
+    <legend>Delete a book</legend>
+        <p>Do you want to delete {{book.title}} from the database?</p>
+    <p>
+        <input type="value" hidden name="id" value={{book.id}}>
+        <input type="submit" name="delete" value="Delete">
+    </p>
+    </fieldset>
+</form>
+
+{{ include('block/flash-message.html.twig') }}
+
+</div>
+    <li><a href="{{ url("library")}}">Library</a></li>
+    <li><a href="{{ url("books_show_all")}}">Show all books</a></li>
+</div>
+{% endblock %}

@@ -6,14 +6,12 @@
 
 <div class="container-left">
     <h1>Deal</h1>
-    {{ dump(hands) }}
     <div class="card" > 
         {% set player = 1 %}
         {% for hand in hands %}
        
         <div>
             <p>Player {{player}}</p>
-             {{ dump(hand) }}
             {% for i in 0..(cards) %} 
             <img src={{ asset(hand.hand[i].image) }}>
             

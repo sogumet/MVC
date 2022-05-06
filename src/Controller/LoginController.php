@@ -30,13 +30,11 @@ class LoginController extends AbstractController
      */
     public function direct(
         UserRepository $userRepository,
-    ): Response
-    {
+    ): Response {
         $user = $this->getUser();
         $email = $user->getEmail();
         var_dump($email);
         return $this->redirectToRoute('user', ['email' => $email]);
         // {{ path('book_by_id', {id: book.id})}}
     }
-
 }

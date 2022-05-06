@@ -17,8 +17,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -26,7 +29,7 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -58,14 +61,14 @@ class RegistrationController extends AbstractController
         $user = $userRepository
             ->findOneBy(['email' => $email]);
 
-            return $this->render('registration/role-form.html.twig', ['user' => $user]);
+        return $this->render('registration/role-form.html.twig', ['user' => $user]);
     }
     /**
      * @Route("/register/update/{email}",
      *  name="update_user_process"),
      * methods={"POST"}
      */
-    public function UpdateUserProcess(
+    public function updateUserProcess(
         ManagerRegistry $doctrine,
         Request $request,
     ): Response {
@@ -74,7 +77,7 @@ class RegistrationController extends AbstractController
         $name = $request->request->get('name');
         $akronym = $request->request->get('akronym');
         $update = $request->request->get('update');
-        
+
 
         if ($update) {
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
@@ -89,7 +92,6 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('user', ['email' => $email]);
-
         }
         return $this->redirectToRoute('app_register');
     }

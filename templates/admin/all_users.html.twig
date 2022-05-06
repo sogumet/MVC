@@ -6,8 +6,28 @@
 <div class="container-left">
 <h1>Admin</h1>
     
-    <ul>
-        {# <li><a href="{{ url("all_users")}}">All users</a></li> #}
-    </ul>
+<div class="container-left">
+<h3>Users</h3>
+  <table class="styled-table">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Akronym</th>
+        <th>Role</th>
+    </tr>
+</thead>
+<tbody>
+    {% for user in users %}   
+        <tr>
+            <td>{{user.name}}</td>
+            <td><a href="{{ path('admin_edit', {email: user.email})}}">{{user.email}}</a></td>
+            <td>{{user.akronym}}</td>
+            <td>{{user.roles[0]}}</td>
+        </tr>
+        {% endfor %}
+</tbody>
+</table>
+{{ include('block/flash-message.html.twig') }}
 </div>
 {% endblock %}
