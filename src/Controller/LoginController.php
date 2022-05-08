@@ -31,6 +31,7 @@ class LoginController extends AbstractController
         UserRepository $userRepository,
     ): Response {
         $user = $this->getUser();
+        /** @scrutinizer ignore-call */
         $email = $user->getEmail();
         return $this->redirectToRoute('user', ['email' => $email]);
     }

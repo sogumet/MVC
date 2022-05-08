@@ -95,6 +95,7 @@ class Game
             }
             return $sum;
         }
+        return $sum;
     }
 
     public function sumBankAsString(): string

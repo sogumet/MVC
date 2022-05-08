@@ -78,8 +78,7 @@ class AdminController extends AbstractController
 
         if ($update) {
             $user = $entityManager->getRepository(User::class)->findOneBy(['email' => $email]);
-            // var_dump($role);
-            // var_dump($user);
+            $roles = array();
             $roles[0] = $role;
             $user->setRoles($roles);
             $user->setName($name);
