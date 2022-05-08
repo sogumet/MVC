@@ -54,7 +54,7 @@
     ingår i den siffran som jag inte har skrivit några tester till.
 </p>
 <figure class="left">
-    <p><img src={{ asset("img/scrutinizer.jpg")}} alt="Table"> 
+    <p><img src={{ asset("img/issues2.jpg")}} alt="Table"> 
     <figcaption><i>Innan kodförbättring</i></figcaption></img>
     </p>
 </figure>
@@ -64,6 +64,7 @@ till antalet och härrör sig från 8 olika filer. Dom olika "Issues Severity" �
 Overall rating sätts till 9.89 av 10 och får väl anses okey.
 </p>
 <h2>Förbättringar</h2>
+<p>
 Vad det gäller PhpMetricsrapportens så är det väl endast "Violation, Probably bugged" som jag möligtvis hade kunnat
 få bort från BooksController klassen men då måste jag skriva test för Controller och det har jag inte satt mig
 in i hur man gör.
@@ -74,7 +75,26 @@ det blir bara kosmetika). <br>
 Men när det gäller Issuesdelen  så tänkte jag försöka få bort det mesta. Anledningen till att jag väljer det är
 att jag egentligen inte kan hitta så mycket annat att ge mig på. Jag tror inte dessa förändringar kommer påverka
 kvaliteten i någon större grad, till och med kanske inte alls.
-<p></p>
+</p>
+<h2>Diskussion</h2>
+<p>Som väntat hade inte mina förändringar någon större påverkan på min kod. Alla issues försvann i 
+    Scrutinizer, det ser ju trevligt ut. Det blev däremot en ny varning i PhpMetrics av typ "Probably bugged"
+i CardController där jag hade definierat en variabel för att göra Scrutinizer glad. Eftersom PhpMetrics gör en:
+"Calculation is based on number of operators, operands, cyclomatic complexity" så passerades kanske precis något
+gränsvärde så att en ny varning triggades. <br>
+Jag tror att det kan vara alldeles utmärkt sätt att använda sig av både PhpMetrics och Scrutinizer för att se till
+att koden håller sig till gängse standard. Största fördelen måste vara att det helt säkert dyker upp felaktigheter
+och fällor som man aldrig hade upptäckt själv. En av nackdelarna kan kanske vara att det är svårt att bedömma vad som
+är riktigt viktigt och inte. Är till exempel "Violations" av typ "Stable Abstractions Principle" något som är allvarligt?
+Hur mycket energi skall man lägga ner på att se till att klasserna inte bryter mot det?
+En sak är i alla fall helt säker är att om man skall jobba på det här viset så så måste man ha det klart för sig från
+första början. Att efteråt försöka fixa till en massa kod och klasser som hänger ihop blir jobbigt och inte heller ett 
+särskilt effektivt sätt att arbeta heller.
+</p>
+    <p><img src={{ asset("img/issues.jpg")}} alt="Table"> 
+    <figcaption><i>Efter kodförbättring</i></figcaption></img>
+    </p>
+</figure>
 </div>
 
 
