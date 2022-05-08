@@ -63,16 +63,12 @@ class ReportController extends AbstractController
     }
 
     /**
-     * @Route("/testmin/{min}/{max}")
+     * @Route("/report/metrics", name="metrics")
      */
-    /* public function number3(int $min, int $max): Response
+    public function metrics(): Response
     {
-        $this->number = random_int($min, $max);
 
+        return $this->render('report/metrics.html.twig');
+    }
 
-        return $this->render('test.html.twig', ['type' => 'Welcome to the lucky number API',
-        'min number' => $min,
-        'max number' => $max,
-        'number' => $this->number]);
-    } */
 }

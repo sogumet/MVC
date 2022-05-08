@@ -1,6 +1,7 @@
 .left {
     float: left;
     margin-right: 20px;
+    margin-left: 0;
 }
 
 .card21 {

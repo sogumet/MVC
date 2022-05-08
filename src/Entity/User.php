@@ -37,10 +37,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    /**
+     * @see UserInterface
+     */
+
     public function getEmail(): ?string
     {
         return $this->email;
     }
+
+    /**
+     * @see UserInterface
+     */
 
     public function setEmail(string $email): self
     {

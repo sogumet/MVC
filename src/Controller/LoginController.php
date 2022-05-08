@@ -22,7 +22,6 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
-        return $this->redirectToRoute('add_book');
     }
 
     /**
@@ -33,8 +32,6 @@ class LoginController extends AbstractController
     ): Response {
         $user = $this->getUser();
         $email = $user->getEmail();
-        var_dump($email);
         return $this->redirectToRoute('user', ['email' => $email]);
-        // {{ path('book_by_id', {id: book.id})}}
     }
 }

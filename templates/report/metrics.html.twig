@@ -1,0 +1,81 @@
+{# templates/about.html.twig #}
+
+{% extends "base.html.twig"%}
+
+{% block content %}
+
+<div class="report">
+<h1>Metrics</h1>
+<h2>Introduktion</h2>
+<p><i>Coverage</i>  är ett procentuellt mått på hur mycket kod som täcks när man kör ett kodtestingsprogram. 
+    Desto bättre teckning testen har dessto större chans att koden inte innehåller några buggar. Klassen Game
+    har en coverage på 100% och det visar att det finns tester som täcker hela koden d.v.s chansen för buggar
+    har reducerats betydligt i den klassen.
+    
+</p>
+<p><i>Complexity</i>
+     är helt enkelt ett mått på hur kompliserad en kod är. Om den är lätt att förstå eller inte.
+    Det kan bero på om det är väldigt mycket kod eller onödigt tillkrånglad kod. Klassen Game har 
+    complexity 17 och det säger väl inte så mycket mer än att det är den relativt mest complexa klassen
+    i min kod. Annars känns talet inte så högt.
+</p>
+<p><i>Cohesion</i>
+     mäter hur väl en klass är specialiserad för sin uppgift. Om en klass har hög cohesion
+    så är den väl konstruerad. Om den däremot har ett lågt värde och kanske är lite spretig i vad den gör 
+    och kanske skulle delas upp i mindre delar. Det verkar dessvärre som att vare sig Scrutinizer eller
+    Phpmetrics mäter cohesion för min kod.
+</p>
+<p><i>Coupling</i>
+     är ett mått på hur olika klasser är kopplade till varandra. Klasser med liten Coupling
+    är lätta att förändra utan att det stör någon annan klass. Om man däremot vill ändra något i en klass som
+    har hög coupling så är chansen stor att det blir problem med någon annan klass.
+    Klassen UserRepository har 4 AC d.v.s klasser som påverkas av den och 6 EC som är ett mått på hur många 
+    andra klasser som påverkar densamma.
+</p>
+<h2>Phpmetrics</h2>
+
+<p>Coverage nämns inte i PhpMetricsrapporten.<br>
+    Complexity: "Average relative System complexity" har måttet 59.7. Complexity spänner från 2 till 361.<br>
+    Cohesion: Totala antalet kodrader 1339 varav 964 inehåller logik. Medeltalet för inteligent inehåll är
+    25.<br>
+    Coupling: "Average afferent coupling" mäts till 0.96 och "Average efferent coupling" till 3.68.
+    Jag kan inte se att jag kan göra så mycket mer med dom värdena än att konstatera dom. <br>
+    I den grafiska representationen av Maintainability / complexity så är den största cirkeln röd och det
+    ser ju inte så trevligt ut. Tittar man närmarare så är "Cyclomatisk Complexity" 11 och det känns ok.
+    "Maintainability Index" sätts till 52 och det kanske man hade önskat att det vore lite bättre. 
+    Men jag misstänker att det krävs större ingrepp i koden för att förändra det.<br>
+    Violations finns det 4 stycken: 1 "Class Violation" av typen "Probably bugged" och 3 stycken
+    "Package Violations" av typen "Stable Abstractions Principle". 
+</p>
+<h2>Scrutinizer</h2>
+<p>Complexity: Har som högsta värde 17 och minst 2. Finns inte mycket mer och säga om det än att klasserna är
+    relativt små och okomplicerade. <br>
+    Coverage: Mäts till 18 procent och låter inte så bra men är väl lite missvisande då en massa klasser
+    ingår i den siffran som jag inte har skrivit några tester till.
+</p>
+<figure class="left">
+    <p><img src={{ asset("img/scrutinizer.jpg")}} alt="Table"> 
+    <figcaption><i>Innan kodförbättring</i></figcaption></img>
+    </p>
+</figure>
+<p>Tittar man på issues så är dom 11
+till antalet och härrör sig från 8 olika filer. Dom olika "Issues Severity" är 1 st. "Critical", 
+4 st "Major" och 6 st. "Minor". <br>  
+Overall rating sätts till 9.89 av 10 och får väl anses okey.
+</p>
+<h2>Förbättringar</h2>
+Vad det gäller PhpMetricsrapportens så är det väl endast "Violation, Probably bugged" som jag möligtvis hade kunnat
+få bort från BooksController klassen men då måste jag skriva test för Controller och det har jag inte satt mig
+in i hur man gör.
+I Scrutinizerrapporten finns det några saker som jag tänkte att jag skulle kunna fixa till. Jag väljer
+att inte skriva några mera tester för att förbättra "Coverage" för dom klasser som jag har skapat själv förutom
+controllerclasserna har redan 100 procent Coverage. (Jag skulle kunna utesluta lite mera i .srutinizer.yml men
+det blir bara kosmetika). <br>
+Men när det gäller Issuesdelen  så tänkte jag försöka få bort det mesta. Anledningen till att jag väljer det är
+att jag egentligen inte kan hitta så mycket annat att ge mig på. Jag tror inte dessa förändringar kommer påverka
+kvaliteten i någon större grad, till och med kanske inte alls.
+<p></p>
+</div>
+
+
+ {% endblock %}
