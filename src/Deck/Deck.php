@@ -44,6 +44,7 @@ class Deck
 
     public function drawCards(int $number): array
     {
+        $cards = array();
         for ($number; $number >= 0; $number--) {
             $card = array_shift($this->deck);
             $cards[] = $card;

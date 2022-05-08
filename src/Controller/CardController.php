@@ -130,6 +130,7 @@ class CardController extends AbstractController
         $session->clear();
         $deck = $session->get("deck") ?? new Deck();
         $deck->shuffleDeck();
+        $hands = array();
         for ($players > 0; $players--;) {
             $cards = $deck->drawCards($numCard - 1);
             $hand = new Hand();

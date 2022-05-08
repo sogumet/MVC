@@ -50,6 +50,7 @@ class ReportController extends AbstractController
      */
     public function number(): Response
     {
+        $arr = array();
         $number = random_int(0, 100);
         $arr[] = "Testing";
         $arr[] = "Snolep";

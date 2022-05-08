@@ -28,7 +28,6 @@ class LoginController extends AbstractController
      * @Route("/login/direct", name="login_direct")
      */
     public function direct(
-        UserRepository $userRepository,
     ): Response {
         $user = $this->getUser();
         /** @scrutinizer ignore-call */
