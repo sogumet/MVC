@@ -30,4 +30,9 @@ class Card
     {
         return $this->image;
     }
+
+    public function getSuit(): string
+    {
+        return $this->suit;
+    }
 }
