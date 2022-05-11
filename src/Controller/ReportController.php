@@ -54,12 +54,34 @@ class ReportController extends AbstractController
         $number = random_int(0, 100);
         $arr[] = "Testing";
         $arr[] = "Snolep";
+        $bit1 = 1;
+        $bit2 = 1;
+        $bit3 = 1;
+        $bit4 = 1;
+        $bit5 = 1;
+        $shift1 = 8;
+        $shift2 = 7;
+        $shift3 = 6;
+        $shift4 = 5;
+        $shift5 = 4;
+        $bit1 = $bit1 << $shift1;
+        $bit2 = $bit2 << $shift2;
+        $bit3 = $bit3 << $shift3;
+        $bit4 = $bit4 << $shift4;
+        $bit5 = $bit5 << $shift5;
+        $bit = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
+        $lsb = $bit & (-1 * $bit);
+        $bit = $bit / $lsb;
+
+        // $bit = $bit % 15;
 
 
         return $this->render('report/test.html.twig', [
             'number' => $number,
             'type' => "MVC",
-            'arr' => $arr
+            'arr' => $arr,
+            'bit' => $bit,
+            'shift' => $shift1
         ]);
     }
 
