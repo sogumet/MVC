@@ -100,13 +100,31 @@ class PokerHand
 
     public function checkStraight(): bool
     {
+        $arr = $this->valueArray();
+        $arr = $arr[0];
+        $bit1 = 1;
+        $bit2 = 1;
+        $bit3 = 1;
+        $bit4 = 1;
+        $bit5 = 1;
+        $bit1 = $bit1 << $arr[0];
+        $bit2 = $bit2 << $arr[1];
+        $bit3 = $bit3 << $arr[2];
+        $bit4 = $bit4 << $arr[3];
+        $bit5 = $bit5 << $arr[4];
+        $bit = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
+        $lsb = $bit & (-1 * $bit);
+        $res = $bit / $lsb;
+        return ($res == 31 or $bit == 16444);
+    }
+
+    public function checkRoyalStraight(): bool
+    {
         $numb = $this->shifting();
         $lsb = $numb & (-1 * $numb);
         $numb = $numb / $lsb;
         $res = ($numb == 11111);
-
         return $res;
-
     }
 
 }

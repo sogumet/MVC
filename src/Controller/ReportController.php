@@ -72,7 +72,7 @@ class ReportController extends AbstractController
         $bit = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
         $lsb = $bit & (-1 * $bit);
         $bit = $bit / $lsb;
-
+        $dec = bindec('100000000111100');
         // $bit = $bit % 15;
 
 
@@ -81,7 +81,8 @@ class ReportController extends AbstractController
             'type' => "MVC",
             'arr' => $arr,
             'bit' => $bit,
-            'shift' => $shift1
+            'shift' => $shift1,
+            'dec' => $dec,
         ]);
     }
 
