@@ -29,7 +29,8 @@ class PokerController extends AbstractController
         $values = $hand->valueArray();
         $arr1 = $hand->shiftNumberArray();
         $res = $hand->getModulus();
-        $straight = $hand->checkStraight();
+        // $straight = $hand->checkStraight();
+        $points = $poker->getPoints();
         
         return $this->render('poker/poker.html.twig', [
         'hand' => $hand,
@@ -37,7 +38,8 @@ class PokerController extends AbstractController
         'values' => $values,
         'arr1' => $arr1,
         'res' => $res,
-        'straight' => $straight,
+        'points' => $points,
+        // 'straight' => $straight,
     ]);
     }
 
