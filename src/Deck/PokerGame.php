@@ -13,6 +13,7 @@ class PokerGame
     public object $hand;
     private $session;
     private $card;
+    private $cardInHand;
 
     public function __construct($session)
     {
@@ -46,7 +47,7 @@ class PokerGame
         return $this->card;
     }
 
-    public function saveCard($hand): void
+    public function saveCard($hand): bool
     {
         {
             $this->card = $this->session->get("card");
@@ -54,22 +55,27 @@ class PokerGame
                 case 1;
                     $this->hand1 = $this->session->get("hand1");
                     $this->hand1->addCard($this->card);
+                    return $this->checkIfFullHand($this->hand1);
                     break;
                 case 2;
-                $this->hand2 = $this->session->get("hand2");
-                 $this->hand2->addCard($this->card);
+                    $this->hand2 = $this->session->get("hand2");
+                    $this->hand2->addCard($this->card);
+                    return $this->checkIfFullHand($this->hand2);
                     break;
                 case 3;
                     $this->hand3 = $this->session->get("hand3");
                     $this->hand3->addCard($this->card);
+                    return $this->checkIfFullHand($this->hand3);
                     break;
                 case 4;
                     $this->hand4 = $this->session->get("hand4");
                     $this->hand4->addCard($this->card);
+                    return $this->checkIfFullHand($this->hand4);
                     break;
                 case 5;
                     $this->hand5 = $this->session->get("hand5");
                     $this->hand5->addCard($this->card);
+                    return $this->checkIfFullHand($this->hand5);
                     break;
             }
         }
@@ -81,6 +87,13 @@ class PokerGame
             $cardLeft = $this->deck->cardCount();
         return $cardLeft;
     }
+
+    public function checkIfFullHand($hand): bool
+    {
+            $amount = $hand->cardCount();
+        return $amount == 5;
+    }
+
 
     private function checkFlushOrStraight(): int
     {

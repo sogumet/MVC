@@ -11,6 +11,7 @@ use App\Deck\PokerGame;
 
 class PokerController extends AbstractController
 {
+    
     /**
      * @Route(
      *      "/poker/test",
@@ -107,6 +108,11 @@ class PokerController extends AbstractController
             $hand3 = $request->request->get('hand3');
             $hand4 = $request->request->get('hand4');
             $hand5 = $request->request->get('hand5');
+            $flag1 = $session->get("flag1") ? true : false;
+            $flag2 = $session->get("flag2") ? true : false;
+            $flag3 = false;
+            $flag4 = false;
+            $flag5 = false;
             $game = new PokerGame($session);
             $back = "img/deck/back.jpg";
             $cardLeft ='';
@@ -122,24 +128,49 @@ class PokerController extends AbstractController
                     'hand3' => $session->get("hand3"),
                     'hand4' => $session->get("hand4"),
                     'hand5' => $session->get("hand5"),
+                    'flag1' => $flag1,
+                    'flag2' => $flag2,
+                    'flag3' => $flag3,
+                    'flag4' => $flag4,
+                    'flag5' => $flag5,
                     'cardLeft' => $cardLeft,
                     ]
                 );
             }
             if ($hand1) {
-                $game->saveCard(1);
+                if($game->saveCard(1))
+                {
+                    $session->set("flag1", true);
+                    $flag1 = true;
+                }
             }
             if ($hand2) {
-                $game->saveCard(2);
+                if($game->saveCard(2))
+                {
+                    $session->set("flag2", true);
+                    $flag2 = true;
+                }
             }
             if ($hand3) {
-                $game->saveCard(3);
+                if($game->saveCard(3))
+                {
+                    $session->set("flag3", true);
+                    $flag3 = true;
+                }
             }
             if ($hand4) {
-                $game->saveCard(4);
+                if($game->saveCard(4))
+                {
+                    $session->set("flag4", true);
+                    $flag4 = true;
+                }
             }
             if ($hand5) {
-                $game->saveCard(5);
+                if($game->saveCard(5))
+                {
+                    $session->set("flag5", true);
+                    $flag5 = true;
+                }
             }
             return $this->render(
                 'poker/poker-game.html.twig',
@@ -149,6 +180,11 @@ class PokerController extends AbstractController
                 'hand3' => $session->get("hand3"),
                 'hand4' => $session->get("hand4"),
                 'hand5' => $session->get("hand5"),
+                'flag1' => $flag1,
+                'flag2' => $flag2,
+                'flag3' => $flag3,
+                'flag4' => $flag4,
+                'flag5' => $flag5,
                 'cardLeft' => $cardLeft,
                 ]
             );
