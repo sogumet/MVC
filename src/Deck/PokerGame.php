@@ -10,34 +10,76 @@ class PokerGame
 {
 
     private object $deck;
-    private object $hand;
+    public object $hand;
     private $session;
     private $card;
 
     public function __construct($session)
     {
         $this->deck = new Deck();
-        $this->hand = new PokerHand();
+        $this->hand1 = new PokerHand();
+        $this->hand2 = new PokerHand();
+        $this->hand3 = new PokerHand();
+        $this->hand4 = new PokerHand();
+        $this->hand5 = new PokerHand();
         $this->session = $session;
     }
 
     public function startGame(): void
     {
         $this->session->clear();
-        $this->session->set("hand", $this->hand);
-        $this->deck->shuffleDeck();
+        $this->session->set("hand1", $this->hand1);
+        $this->session->set("hand2", $this->hand2);
+        $this->session->set("hand3", $this->hand3);
+        $this->session->set("hand4", $this->hand4);
+        $this->session->set("hand5", $this->hand5);
         $this->session->set("deck", $this->deck);
+        $this->deck->shuffleDeck();
     }
 
-    public function createHand(): object 
+    public function dealCard(): object
+    {
+        
+        $this->deck = $this->session->get("deck");
+        $this->card = $this->deck->drawCard();
+        $this->session->set("card", $this->card);
+        return $this->card;
+    }
+
+    public function saveCard($hand): void
+    {
+        {
+            $this->card = $this->session->get("card");
+            switch($hand) {
+                case 1;
+                    $this->hand1 = $this->session->get("hand1");
+                    $this->hand1->addCard($this->card);
+                    break;
+                case 2;
+                $this->hand2 = $this->session->get("hand2");
+                 $this->hand2->addCard($this->card);
+                    break;
+                case 3;
+                    $this->hand3 = $this->session->get("hand3");
+                    $this->hand3->addCard($this->card);
+                    break;
+                case 4;
+                    $this->hand4 = $this->session->get("hand4");
+                    $this->hand4->addCard($this->card);
+                    break;
+                case 5;
+                    $this->hand5 = $this->session->get("hand5");
+                    $this->hand5->addCard($this->card);
+                    break;
+            }
+        }
+    }
+
+    public function getCardIndeck(): int 
     {
         $this->deck = $this->session->get("deck");
-        for($i = 0; $i < 5; $i++) {
-            $this->card = $this->deck->drawCard();
-            $this->hand->addCard($this->card);
-    }
-        return $this->hand;
-
+            $cardLeft = $this->deck->cardCount();
+        return $cardLeft;
     }
 
     private function checkFlushOrStraight(): int

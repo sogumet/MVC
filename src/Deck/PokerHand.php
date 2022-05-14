@@ -18,7 +18,7 @@ class PokerHand
 
     public function getHand(): array
     {
-        $this->hand;
+        return $this->hand;
     }
 
     public function checkIfFlush(): bool
