@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Session{% endblock %}
+
+{% block content %}
+<div class="continerleft">
+<h1>Spela poker</h1>
+<form method="post">
+    <p>Här startar pokerpatiens</p>
+    <p>
+        <input type="submit" name="start" value="Start">
+    </p>
+
+ 
+
+
+    {{ include('block/flash-message.html.twig') }}
+</form>
+
+<a href="{{ url("game-doc")}}">Game Documents</a>
+</div>
+{% endblock %}

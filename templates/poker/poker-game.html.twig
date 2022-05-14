@@ -1,0 +1,84 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Session{% endblock %}
+
+{% block content %}
+<div class="containerleft">
+<h1>Pokerpatiens</h1>
+<form method="post">
+    
+<div>
+    {% if card is defined %}
+        <img src={{ asset(card.image) }}>
+        {% else %}
+        <img src={{ asset("img/deck/back.jpg") }}>
+        {% endif %}
+</div>
+        
+    <p>
+        <input type="submit" name="draw" value="Draw">
+    </p>
+
+        <div>
+            {% if hand1 is defined %}
+            {% for card in hand1.hand %}
+            <img src={{ asset(hand1.hand[loop.index0].image) }}>
+            {% endfor %}
+            {% endif %}
+            </div>
+
+    
+    <p>
+        <input type="submit" name="hand1" value="Save">
+    </p>
+
+    <div>
+        {% if hand2 is defined %}
+        {% for card in hand2.hand %}
+        <img src={{ asset(hand2.hand[loop.index0].image) }}>
+        {% endfor %}
+        {% endif %}
+        </div>
+    <p>
+        <input type="submit" name="hand2" value="Save">
+    </p>
+
+    <div>
+        {% if hand3 is defined %}
+        {% for card in hand3.hand %}
+        <img src={{ asset(hand3.hand[loop.index0].image) }}>
+        {% endfor %}
+        {% endif %}
+        </div>
+    <p>
+        <input type="submit" name="hand3" value="Save">
+    </p>
+    <div>
+        {% if hand4 is defined %}
+        {% for card in hand4.hand %}
+        <img src={{ asset(hand4.hand[loop.index0].image) }}>
+        {% endfor %}
+        {% endif %}
+        </div>
+    <p>
+        <input type="submit" name="hand4" value="Save">
+    </p>
+    <div>
+        {% if hand5 is defined %}
+        {% for card in hand5.hand %}
+        <img src={{ asset(hand5.hand[loop.index0].image) }}>
+        {% endfor %}
+        {% endif %}
+        </div>
+    <p>
+        <input type="submit" name="hand5" value="Save">
+    </p>
+
+    
+
+    {{ include('block/flash-message.html.twig') }}
+</form>
+
+<a href="{{ url("game-doc")}}">Game Documents</a>
+</div>
+{% endblock %}
