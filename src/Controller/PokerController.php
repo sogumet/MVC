@@ -102,6 +102,7 @@ class PokerController extends AbstractController
             Request $request,
             SessionInterface $session
         ): Response {
+            $reset = $request->request->get('reset');
             $draw = $request->request->get('draw');
             $hand1 = $request->request->get('hand1');
             $hand2 = $request->request->get('hand2');
@@ -110,16 +111,16 @@ class PokerController extends AbstractController
             $hand5 = $request->request->get('hand5');
             $flag1 = $session->get("flag1") ? true : false;
             $flag2 = $session->get("flag2") ? true : false;
-            $flag3 = false;
-            $flag4 = false;
-            $flag5 = false;
+            $flag3 = $session->get("flag3") ? true : false;
+            $flag4 = $session->get("flag4") ? true : false;
+            $flag5 = $session->get("flag5") ? true : false;
             $game = new PokerGame($session);
             $back = "img/deck/back.jpg";
-            $cardLeft ='';
              
             if ($draw) {
                 $card = $game->dealCard();
                 $cardLeft = $game->getCardInDeck();
+                $session->set("cardLeft", $cardLeft);
                 return $this->render(
                     'poker/poker-game.html.twig',
                     ['card' => $card,
@@ -133,15 +134,22 @@ class PokerController extends AbstractController
                     'flag3' => $flag3,
                     'flag4' => $flag4,
                     'flag5' => $flag5,
-                    'cardLeft' => $cardLeft,
                     ]
                 );
+            }
+            if ($reset) {
+                $game->startGame();
+                return $this->redirectToRoute('pokerplay');
             }
             if ($hand1) {
                 if($game->saveCard(1))
                 {
                     $session->set("flag1", true);
                     $flag1 = true;
+                    $hand = $session->get("hand1");
+                    $points = $game->getPoints($hand);
+                    $session->set("point1", $points);
+                    $game->checkIfAllFullHand("full");
                 }
             }
             if ($hand2) {
@@ -149,6 +157,10 @@ class PokerController extends AbstractController
                 {
                     $session->set("flag2", true);
                     $flag2 = true;
+                    $hand = $session->get("hand2");
+                    $points = $game->getPoints($hand);
+                    $session->set("point2", $points);
+                    $game->checkIfAllFullHand("full");
                 }
             }
             if ($hand3) {
@@ -156,6 +168,10 @@ class PokerController extends AbstractController
                 {
                     $session->set("flag3", true);
                     $flag3 = true;
+                    $hand = $session->get("hand3");
+                    $points = $game->getPoints($hand);
+                    $session->set("point3", $points);
+                    $fullHand = $game->checkIfAllFullHand("full");
                 }
             }
             if ($hand4) {
@@ -163,6 +179,10 @@ class PokerController extends AbstractController
                 {
                     $session->set("flag4", true);
                     $flag4 = true;
+                    $hand = $session->get("hand4");
+                    $points = $game->getPoints($hand);
+                    $session->set("point4", $points);
+                    $fullHand = $game->checkIfAllFullHand("full");
                 }
             }
             if ($hand5) {
@@ -170,6 +190,10 @@ class PokerController extends AbstractController
                 {
                     $session->set("flag5", true);
                     $flag5 = true;
+                    $hand = $session->get("hand5");
+                    $points = $game->getPoints($hand);
+                    $session->set("point5", $points);
+                    $fullHand = $game->checkIfAllFullHand("full");
                 }
             }
             return $this->render(
@@ -185,7 +209,6 @@ class PokerController extends AbstractController
                 'flag3' => $flag3,
                 'flag4' => $flag4,
                 'flag5' => $flag5,
-                'cardLeft' => $cardLeft,
                 ]
             );
 

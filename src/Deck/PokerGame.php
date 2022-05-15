@@ -11,9 +11,9 @@ class PokerGame
 
     private object $deck;
     public object $hand;
-    private $session;
-    private $card;
-    private $cardInHand;
+    private object $session;
+    private object $card;
+    private array $fullHands = [];
 
     public function __construct($session)
     {
@@ -35,6 +35,7 @@ class PokerGame
         $this->session->set("hand4", $this->hand4);
         $this->session->set("hand5", $this->hand5);
         $this->session->set("deck", $this->deck);
+        $this->session->set("fullHands", $this->fullHands);
         $this->deck->shuffleDeck();
     }
 
@@ -94,19 +95,29 @@ class PokerGame
         return $amount == 5;
     }
 
-
-    private function checkFlushOrStraight(): int
+    public function checkIfAllFullHand($hand): void
     {
-        if ($this->hand->getModulus() ==  5) {
-            if($this->hand->checkStraight() and $this->hand->checkIfFlush())
+        $this->fullHands = $this->session->get("fullHands");
+        $this->fullHands[] = $hand;
+        $this->session->set("fullHands", $this->fullHands);
+        if(count($this->fullHands) == 5) {
+            $this->getTotalScore();
+            $this->session->set("allFull", true);
+        }
+    }
+    
+    private function checkFlushOrStraight($hand): int
+    {
+        if ($hand->getModulus() ==  5) {
+            if($hand->checkStraight() and $hand->checkIfFlush())
             {
-                return 20;
+                return 15;
             }
-            elseif($this->hand->checkStraight()) 
+            elseif($hand->checkStraight()) 
             {
                 return 4;    
             }
-            elseif($this->hand->checkIfFlush()) 
+            elseif($hand->checkIfFlush()) 
             {
                 return 5;    
             }
@@ -114,16 +125,19 @@ class PokerGame
         return 0;
     }
     
-    public function getPoints(): int
+    public function getPoints($hand): int
     {
-        $res = $this->checkFlushOrStraight();
+        $res = $this->checkFlushOrStraight($hand);
         if($res != 0) {
             return $res;
         }
 
-        $res = $this->hand->getModulus();
+        $res = $hand->getModulus();
         {
             switch($res) {
+                case 1;
+                    return 10;
+                    break;
                 case 6;
                     return 1;
                     break;
@@ -134,10 +148,18 @@ class PokerGame
                     return 3;
                     break;
                 case 10;
-                    return 10;
+                    return 8;
                     break;
             }
         }
         return 0;
+    }
+
+    public function getTotalScore(): void
+    {
+        $score = $this->session->get('point1') + $this->session->get('point2')
+        + $this->session->get('point3') + $this->session->get('point4') +
+        $this->session->get('point5');
+        $this->session->set('score', $score);
     }
 }
