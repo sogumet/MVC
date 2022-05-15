@@ -12,37 +12,38 @@
         <img src={{ asset(card.image) }}>
         {% else %}
         <img src={{ asset("img/deck/back.jpg") }}>
-        
-        {% endif %}
-        
+        {% endif %}       
 </div>
-        
+{% if fullHand is defined %}
+<p>Fullhands {{fullHand}}</p>
+<p>Card lefts in deck = {{app.session.get('cardLeft')}}</p>
+{% endif %}
     <p>
         <input id="draw" type="submit" name="draw" value="Draw">
     </p>
 
         <div>
             {% if hand1 is defined %}
-            {{ dump(flag1) }}
             {% for card in hand1.hand %}
             <img src={{ asset(hand1.hand[loop.index0].image) }}>
             {% endfor %}
+             <p>{{app.session.get('point1')}}</p>
             {% endif %}
             </div>
     <p>
-        <input id="flag1" type="submit" name="hand1" value="Save">
+        <input id="save1" type="submit" name="hand1" value="Save">
     </p>
 
     <div>
         {% if hand2 is defined %}
-        {{ dump(flag2) }}
         {% for card in hand2.hand %}
         <img src={{ asset(hand2.hand[loop.index0].image) }}>
         {% endfor %}
+        <p>{{app.session.get('point2')}}</p>
         {% endif %}
         </div>
     <p>
-        <input id="flag2" type="submit" name="hand2" value="Save">
+        <input id="save2" type="submit" name="hand2" value="Save">
     </p>
 
     <div>
@@ -50,62 +51,70 @@
         {% for card in hand3.hand %}
         <img src={{ asset(hand3.hand[loop.index0].image) }}>
         {% endfor %}
+        <p>{{app.session.get('point3')}}</p>
         {% endif %}
         </div>
     <p>
-        <input id="flag3" type="submit" name="hand3" value="Save">
+        <input id="save3" type="submit" name="hand3" value="Save">
     </p>
     <div>
         {% if hand4 is defined %}
         {% for card in hand4.hand %}
         <img src={{ asset(hand4.hand[loop.index0].image) }}>
         {% endfor %}
+        <p>{{app.session.get('point4')}}</p>
         {% endif %}
         </div>
     <p>
-        <input id="flag4" type="submit" name="hand4" value="Save">
+        <input id="save4" type="submit" name="hand4" value="Save">
     </p>
     <div>
         {% if hand5 is defined %}
         {% for card in hand5.hand %}
         <img src={{ asset(hand5.hand[loop.index0].image) }}>
         {% endfor %}
+        <p>{{app.session.get('point5')}}</p>
         {% endif %}
         </div>
     <p>
-        <input id="flag5" type="submit" name="hand5" value="Save">
+        <input id="save5" type="submit" name="hand5" value="Save">
     </p>
-
+    <p>
+        <input id="reset" type="submit" name="reset" value="Reset">
+    </p>
+    {% if app.session.get('allFull') == true %}
+    <p>Total score = {{app.session.get('score')}}</p>
+    {% endif %} 
     {% block javascripts %}
         {% if hand1 is defined %}
-            {% if card is defined %}
+            {% if card is defined or app.session.get('allFull') == true %}
                 <script type="text/javascript">
                     document.getElementById("draw").disabled = true;
                 </script>
             {% endif %}
             {% if flag1 == true or card is not defined %}
                 <script type="text/javascript">
-                    document.getElementById("flag1").disabled = true;
+                    document.getElementById("save1").disabled = true;
                 </script>
             {% endif %}    
             {% if flag2 == true or card is not defined %}
                 <script type="text/javascript">
-                    document.getElementById("flag2").disabled = true;
+                    document.getElementById("save2").disabled = true;
                 </script>
             {% endif %}    
             {% if flag3 == true or card is not defined %}
                 <script type="text/javascript">
-                    document.getElementById("flag3").disabled = true;
+                    document.getElementById("save3").disabled = true;
                 </script>
             {% endif %}    
             {% if flag4 == true or card is not defined %}
                 <script type="text/javascript">
-                    document.getElementById("flag4").disabled = true;
+                    document.getElementById("save4").disabled = true;
                 </script>
             {% endif %}    
             {% if flag5 == true or card is not defined %}
                 <script type="text/javascript">
-                    document.getElementById("flag5").disabled = true;
+                    document.getElementById("save5").disabled = true;
                 </script>
             {% endif %}    
         {% endif %}
