@@ -4,27 +4,19 @@
         <meta charset="UTF-8">
         <title>{% block title %}Report{% endblock %}</title>
         <link rel="icon" href="{{ asset("favicon.ico") }}">
-        <link rel="stylesheet" href="{{ asset("css/style.css") }}"/>
+        <link rel="stylesheet" href="{{ asset("css/style1.css") }}"/>
        
     </head>
     <header>
             <nav class="navbar">
-                <a href="{{ url("home")}}">Hem</a>
-                <a href="{{ url("about")}}">About</a>
                 <a href="{{ url("report")}}">Report</a>
-                <a href="{{ url("test")}}">Test</a>
-                <a href="{{ url("card")}}">Card</a>
-                <a href="{{ url("game")}}">Game</a>
-                <a href="{{ url("library")}}">Library</a>
-                <a href="{{ url("app_register")}}">Register</a>
-                <a href="{{ url("login")}}">Login</a>
-                <a href="{{ url("metrics")}}">Metrics</a>
-                <a href="{{ url("admin")}}">Admin</a>
-                <a href="{{ url("project")}}">Project</a>
+                <a href="{{ url("project")}}">Hem</a>
+                <a href="{{ url("poker")}}">Poker</a>
+                <a href="{{ url("project_about")}}">About</a>
+                <a href="{{ url("reset")}}">Reset</a>
             </nav>
     </header>
     <body>
-        <main>
 
             {% block content %}
 

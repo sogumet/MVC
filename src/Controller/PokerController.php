@@ -7,6 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Entity\Score;
+use App\Repository\ScoreRepository;
+
+use Doctrine\Persistence\ManagerRegistry;
 use App\Deck\PokerGame;
 
 class PokerController extends AbstractController
@@ -100,7 +104,9 @@ class PokerController extends AbstractController
          */
         public function sessionProcess(
             Request $request,
-            SessionInterface $session
+            SessionInterface $session,
+            ManagerRegistry $doctrine,
+            ScoreRepository $scoreRepository,
         ): Response {
             $reset = $request->request->get('reset');
             $draw = $request->request->get('draw');
@@ -109,6 +115,7 @@ class PokerController extends AbstractController
             $hand3 = $request->request->get('hand3');
             $hand4 = $request->request->get('hand4');
             $hand5 = $request->request->get('hand5');
+            $test = $request->request->get('test');
             $flag1 = $session->get("flag1") ? true : false;
             $flag2 = $session->get("flag2") ? true : false;
             $flag3 = $session->get("flag3") ? true : false;
@@ -196,6 +203,51 @@ class PokerController extends AbstractController
                     $fullHand = $game->checkIfAllFullHand("full");
                 }
             }
+            if ($test) {
+                $game->test();
+                $session->set("flag1", true);
+                    $flag1 = true;
+                    $hand = $session->get("hand1");
+                    $points = $game->getPoints($hand);
+                    $session->set("point1", $points);
+                    $session->set("flag2", true);
+                    $flag2 = true;
+                    $hand = $session->get("hand2");
+                    $points = $game->getPoints($hand);
+                    $session->set("point2", $points);
+                    $session->set("flag3", true);
+                    $flag3 = true;
+                    $hand = $session->get("hand3");
+                    $points = $game->getPoints($hand);
+                    $session->set("point3", $points);
+                    $session->set("flag4", true);
+                    $flag4 = true;
+                    $hand = $session->get("hand4");
+                    $points = $game->getPoints($hand);
+                    $session->set("point4", $points);
+                    $session->set("flag5", true);
+                    $flag5 = true;
+                    $hand = $session->get("hand5");
+                    $points = $game->getPoints($hand);
+                    $session->set("point5", $points);
+                    for($i = 0; $i < 5; $i++) {
+                        $fullHand = $game->checkIfAllFullHand("full");
+                
+                    }
+                            $entityManager = $doctrine->getManager();
+                            $score = new Score();
+                            $value = $session->get("score");
+                            $score->setScore($value);
+                            $entityManager->persist($score);                    
+                            $entityManager->flush();
+                            $highScore = $scoreRepository->findHighScore();
+                            $session->set('highScore', $highScore);
+                    
+                        } 
+                    
+                   
+                    
+
             return $this->render(
                 'poker/poker-game.html.twig',
                 [
@@ -214,4 +266,6 @@ class PokerController extends AbstractController
 
             return $this->redirectToRoute('pokerplay');
         }
-}
+
+    }
+

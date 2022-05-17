@@ -3,9 +3,11 @@
 namespace App\Deck;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use App\Deck\Deck;
 use App\Deck\PokerHand;
-
+use App\Repository\ScoreRepository;
+use Doctrine\Persistence\ManagerRegistry;
 class PokerGame
 {
 
@@ -82,6 +84,16 @@ class PokerGame
         }
     }
 
+    public function test(): void
+    {
+        for($i = 0; $i < 5; $i++)
+        {
+            for($k = 1; $k < 6; $k++) {
+                $card = $this->dealCard();
+                $this->saveCard($k);            }
+        }
+    }
+
     public function getCardIndeck(): int 
     {
         $this->deck = $this->session->get("deck");
@@ -95,7 +107,7 @@ class PokerGame
         return $amount == 5;
     }
 
-    public function checkIfAllFullHand($hand): void
+    public function checkIfAllFullHand($hand)
     {
         $this->fullHands = $this->session->get("fullHands");
         $this->fullHands[] = $hand;
@@ -161,5 +173,25 @@ class PokerGame
         + $this->session->get('point3') + $this->session->get('point4') +
         $this->session->get('point5');
         $this->session->set('score', $score);
+    
+    }
+
+    public function saveScore(
+        ManagerRegistry $doctrine
+    ): Response {
+        $entityManager = $doctrine->getManager();
+
+        $score = new Score();
+        $value = $this->session->get('score');
+        $score->setScore($value);
+
+        // tell Doctrine you want to (eventually) save the Product
+        // (no queries yet)
+        $entityManager->persist($score);
+
+        // actually executes the queries (i.e. the INSERT query)
+        $entityManager->flush();
+
+        return $this->redirectToRoute('pokerplay');
     }
 }

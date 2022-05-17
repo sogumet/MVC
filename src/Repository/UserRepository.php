@@ -64,6 +64,26 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function resetUser(): void
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'DROP TABLE IF EXISTS user';
+        $stmt = $conn->prepare($sql);
+        $stmt->executeQuery();
+        $string = file_get_contents("../public/sql/resetUser.sql");
+        $res = explode(";", $string);
+        foreach($res as $value) {
+            $sql = $value . ";";
+            $stmt = $conn->prepare($sql);
+            $stmt->executeQuery();
+        }
+    }
+
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
