@@ -1,9 +1,10 @@
-{% extends "base.html.twig" %}
+{% extends "base1.html.twig" %}
 
 {% block title %}Session{% endblock %}
 
 {% block content %}
-<div class="containerleft">
+<main>
+    <div class="containerleft">
 <h1>Pokerpatiens</h1>
 <form method="post">
     
@@ -14,12 +15,12 @@
         <img src={{ asset("img/deck/back.jpg") }}>
         {% endif %}       
 </div>
-{% if fullHand is defined %}
-<p>Fullhands {{fullHand}}</p>
 <p>Card lefts in deck = {{app.session.get('cardLeft')}}</p>
-{% endif %}
     <p>
         <input id="draw" type="submit" name="draw" value="Draw">
+    </p>
+    <p>
+        <input id="test" type="submit" name="test" value="Test">
     </p>
 
         <div>
@@ -84,6 +85,7 @@
     </p>
     {% if app.session.get('allFull') == true %}
     <p>Total score = {{app.session.get('score')}}</p>
+    <p>Highscore = {{app.session.get('highScore')}}</p>
     {% endif %} 
     {% block javascripts %}
         {% if hand1 is defined %}
@@ -119,11 +121,10 @@
             {% endif %}    
         {% endif %}
     {% endblock %}
-    
 
     {{ include('block/flash-message.html.twig') }}
 </form>
-
-<a href="{{ url("game-doc")}}">Game Documents</a>
 </div>
+</main>
+
 {% endblock %}

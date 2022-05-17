@@ -75,6 +75,19 @@ class ReportController extends AbstractController
         $dec = bindec('100000000111100');
         // $bit = $bit % 15;
 
+        
+
+    $handle = fopen("../public/sql/resetBooks.sql", "r");
+    if ($handle) {
+    while (($line = fgets($handle)) !== false) {
+        // echo($line);
+    }
+
+    fclose($handle);
+    $string = file_get_contents("../public/sql/resetUser.sql");
+    $res = explode(";", $string);
+}
+
 
         return $this->render('report/test.html.twig', [
             'number' => $number,
@@ -83,6 +96,7 @@ class ReportController extends AbstractController
             'bit' => $bit,
             'shift' => $shift1,
             'dec' => $dec,
+            'res' => $res,
         ]);
     }
 

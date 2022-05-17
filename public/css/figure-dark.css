@@ -1,0 +1,28 @@
+figure {
+    margin-left: 0;
+}
+
+.head-img {
+    border-bottom: solid 2px #cab685;
+}
+
+.framed {
+    border: solid 1px #555;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+}
+
+.restricted {
+    max-width: 220px;
+}
+
+.half-round {
+    border-radius: 10%;
+}
+
+.round {
+    border-radius: 100%;
+}
+
+.bw {
+    filter: none;
+}

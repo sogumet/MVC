@@ -1,0 +1,30 @@
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #403d36;
+    border-top: solid 2px #cab685;
+    padding: 1em 3em;
+    min-height: 60px;
+    align-items: center;
+}
+    
+i {
+    font-size: 1.5rem;
+    color: #cab685;  
+}
+
+a {
+    text-decoration: none;
+    color: #cab685;
+    font-family: 'Old Standard TT', serif;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.copy {
+    color: #cab685;
+}
+
+.hr-thin {
+    display: none;
+}

@@ -46,6 +46,27 @@ class BooksRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+    /**
+     * @throws ORMException
+     * @throws OptimisticLockException
+     */
+    public function resetBooks(): void
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = 'DROP TABLE IF EXISTS books';
+        $stmt = $conn->prepare($sql);
+        $stmt->executeQuery();
+        $handle = fopen("../public/sql/resetBooks.sql", "r");
+        if ($handle) {
+            while (($line = fgets($handle)) !== false) {
+            $sql = $line;
+            $stmt = $conn->prepare($sql);
+            $stmt->executeQuery();
+            }
+        }
+    }
+
 
     // /**
     //  * @return Books[] Returns an array of Books objects

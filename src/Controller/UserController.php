@@ -37,4 +37,17 @@ class UserController extends AbstractController
             'controller_name' => 'UserController', ]
         );
     }
+
+    /**
+     * @Route(
+     *      "/reset",
+     *      name="reset_book",
+     *      methods={"GET","HEAD"}
+     * )
+     */
+    public function reset(
+        UserRepository $userRepository){
+        $userRepository->resetUser();
+        return $this->redirectToRoute('books_show_all');
+    }
 }
