@@ -19,10 +19,6 @@
     <p>
         <input id="draw" type="submit" name="draw" value="Draw">
     </p>
-    <p>
-        <input id="test" type="submit" name="test" value="Test">
-    </p>
-
         <div>
             {% if hand1 is defined %}
             {% for card in hand1.hand %}
@@ -85,8 +81,8 @@
     </p>
     {% if app.session.get('allFull') == true %}
     <p>Total score = {{app.session.get('score')}}</p>
-    <p>Highscore = {{app.session.get('highScore')}}</p>
     {% endif %} 
+    <p>Highscore = {{app.session.get('highScore')}}</p>
     {% block javascripts %}
         {% if hand1 is defined %}
             {% if card is defined or app.session.get('allFull') == true %}

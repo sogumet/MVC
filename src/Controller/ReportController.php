@@ -5,6 +5,9 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Deck\Deck;
+use App\Deck\PokerGame;
 
 class ReportController extends AbstractController
 {
@@ -48,7 +51,7 @@ class ReportController extends AbstractController
     /**
      * @Route("/test", name="test")
      */
-    public function number(): Response
+    public function number(SessionInterface $session): Response
     {
         $arr = array();
         $number = random_int(0, 100);
@@ -74,6 +77,22 @@ class ReportController extends AbstractController
         $bit = $bit / $lsb;
         $dec = bindec('100000000111100');
         // $bit = $bit % 15;
+        $deck = new Deck();
+        $card = $deck->getCard(12, 'clubs');
+        $card1 = $deck->getCard(7, 'hearts');
+        $pokerGame = new PokerGame($session);
+        $pokerGame->startGame();
+        $deck = $session->get("deck");
+        $hand1 = $session->get("hand1");
+        $hand[] = $deck->getCard(2, "hearts");
+        $hand[] = $deck->getCard(3, "hearts");
+        $hand[] = $deck->getCard(4, "hearts");
+        $hand[] = $deck->getCard(5, "hearts");
+        $hand[] = $deck->getCard(6, "hearts");
+        for($i = 0; $i < 5; $i++) {
+            $hand1->addCard($hand[$i]);
+        }
+
 
         
 
@@ -97,6 +116,9 @@ class ReportController extends AbstractController
             'shift' => $shift1,
             'dec' => $dec,
             'res' => $res,
+            'card' => $card,
+            'card1' => $card1,
+            'hand1' => $hand1
         ]);
     }
 
