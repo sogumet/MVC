@@ -57,7 +57,6 @@ class PokerHand
             }
         }
         $result = [$arr1, $arr2, $arr3, $arr4];
-
         return $result;
     }
 
@@ -118,13 +117,13 @@ class PokerHand
         return ($res == 31 or $bit == 16444);
     }
 
-    public function checkRoyalStraight(): bool
+    /* public function checkRoyalStraight(): bool
     {
         $numb = $this->shifting();
         $lsb = $numb & (-1 * $numb);
         $numb = $numb / $lsb;
         $res = ($numb == 11111);
         return $res;
-    }
+    } */
 
 }

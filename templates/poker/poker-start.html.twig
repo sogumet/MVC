@@ -3,7 +3,8 @@
 {% block title %}Session{% endblock %}
 
 {% block content %}
-<div class="containerleft">
+<main>
+    <div class="containerleft">
 <h1>Spela poker</h1>
 <form method="post">
     <p>Här startar pokerpatiens</p>
@@ -16,7 +17,8 @@
 
     {{ include('block/flash-message.html.twig') }}
 </form>
+</main>
 
-<a href="{{ url("game-doc")}}">Game Documents</a>
+
 </div>
 {% endblock %}

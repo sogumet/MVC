@@ -13,7 +13,7 @@ class PokerGame
 
     private object $deck;
     public object $hand;
-    private object $session;
+    public object $session;
     private object $card;
     private array $fullHands = [];
 
@@ -90,7 +90,9 @@ class PokerGame
         {
             for($k = 1; $k < 6; $k++) {
                 $card = $this->dealCard();
-                $this->saveCard($k);            }
+                $this->saveCard($k);
+                $this->checkIfAllFullHand("hand");
+             }
         }
     }
 
@@ -118,7 +120,7 @@ class PokerGame
         }
     }
     
-    private function checkFlushOrStraight($hand): int
+    public function checkFlushOrStraight($hand): int
     {
         if ($hand->getModulus() ==  5) {
             if($hand->checkStraight() and $hand->checkIfFlush())
