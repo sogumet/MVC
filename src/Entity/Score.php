@@ -32,5 +32,4 @@ class Score
 
         return $this;
     }
-
 }

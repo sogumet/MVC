@@ -93,6 +93,7 @@ class Game
     /**
     * Counting the sum value of the players hands.
     * @param object
+    * @SuppressWarnings(PHPMD.CyclomaticComplexity)
     */
     public function countSumBank(object $bank): int
     {

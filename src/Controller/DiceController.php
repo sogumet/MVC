@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use App\Dice\Dice;
+use App\Dice\DiceGraphic;
+use App\Dice\DiceHand;
 
 class DiceController extends AbstractController
 {
@@ -17,7 +20,7 @@ class DiceController extends AbstractController
      */
     public function home(): Response
     {
-        $die = new \App\Dice\Dice();
+        $die = new Dice();
         $data = [
             'title' => 'Dice',
             'die_value' => $die->roll(),
@@ -32,7 +35,7 @@ class DiceController extends AbstractController
      */
     public function roll(int $numRolls): Response
     {
-        $die = new \App\Dice\Dice();
+        $die = new Dice();
 
         $rolls = [];
         for ($i = 1; $i <= $numRolls; $i++) {
@@ -53,7 +56,7 @@ class DiceController extends AbstractController
     */
     public function homeGraphic(): Response
     {
-        $die = new \App\Dice\DiceGraphic();
+        $die = new DiceGraphic();
         $data = [
             'title' => 'Dice with graphic representation',
             'die_value' => $die->roll(),
@@ -68,7 +71,7 @@ class DiceController extends AbstractController
      */
     public function rollGraphic(int $numRolls): Response
     {
-        $die = new \App\Dice\DiceGraphic();
+        $die = new DiceGraphic();
 
         $rolls = [];
         for ($i = 1; $i <= $numRolls; $i++) {
@@ -107,7 +110,7 @@ class DiceController extends AbstractController
         Request $request,
         SessionInterface $session
     ): Response {
-        $hand = $session->get("dicehand") ?? new \App\Dice\DiceHand();
+        $hand = $session->get("dicehand") ?? new DiceHand();
 
         $roll  = $request->request->get('roll');
         $add  = $request->request->get('add');
@@ -117,9 +120,9 @@ class DiceController extends AbstractController
             $hand->roll();
         } elseif ($add) {
             //$hand->add(new \App\Dice\Dice());
-            $hand->add(new \App\Dice\DiceGraphic());
+            $hand->add(new DiceGraphic());
         } elseif ($clear) {
-            $hand = new \App\Dice\DiceHand();
+            $hand = new DiceHand();
         }
 
         $session->set("dicehand", $hand);

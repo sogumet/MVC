@@ -46,7 +46,8 @@ class UserController extends AbstractController
      * )
      */
     public function reset(
-        UserRepository $userRepository){
+        UserRepository $userRepository
+    ) {
         $userRepository->resetUser();
         return $this->redirectToRoute('books_show_all');
     }

@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Deck\Deck;
 use App\Deck\PokerGame;
 
+/**
+ * @SuppressWarnings(PHPMD)
+ */
+
 class ReportController extends AbstractController
 {
     /**
@@ -89,23 +93,9 @@ class ReportController extends AbstractController
         $hand[] = $deck->getCard(4, "hearts");
         $hand[] = $deck->getCard(5, "hearts");
         $hand[] = $deck->getCard(6, "hearts");
-        for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $hand1->addCard($hand[$i]);
         }
-
-
-        
-
-    $handle = fopen("../public/sql/resetBooks.sql", "r");
-    if ($handle) {
-    while (($line = fgets($handle)) !== false) {
-        // echo($line);
-    }
-
-    fclose($handle);
-    $string = file_get_contents("../public/sql/resetUser.sql");
-    $res = explode(";", $string);
-}
 
 
         return $this->render('report/test.html.twig', [
@@ -115,7 +105,6 @@ class ReportController extends AbstractController
             'bit' => $bit,
             'shift' => $shift1,
             'dec' => $dec,
-            'res' => $res,
             'card' => $card,
             'card1' => $card1,
             'hand1' => $hand1
@@ -130,5 +119,4 @@ class ReportController extends AbstractController
 
         return $this->render('report/metrics.html.twig');
     }
-
 }

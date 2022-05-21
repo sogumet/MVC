@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the PokerGame and the Game.
  * Contaning the CardClass

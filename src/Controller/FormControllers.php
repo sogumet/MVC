@@ -97,9 +97,9 @@ class FormControllers extends AbstractController
             if ($value === 1) {
                 $this->addFlash("error", "You rolled 1 and looses your points.");
                 $sum = 0;
-            } else {
-                $this->addFlash("info", "You rolled $value and adds to your current sum of points.");
             }
+                $this->addFlash("info", "You rolled $value and adds to your current sum of points.");
+
             $session->set("sum", $sum);
         } elseif ($save) {
             $this->addFlash("info", "You saved $sum points.");
