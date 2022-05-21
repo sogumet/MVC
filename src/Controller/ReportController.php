@@ -66,22 +66,22 @@ class ReportController extends AbstractController
         $bit3 = 1;
         $bit4 = 1;
         $bit5 = 1;
-        $shift1 = 8;
-        $shift2 = 7;
-        $shift3 = 6;
-        $shift4 = 5;
-        $shift5 = 4;
+        $shift1 = 23;
+        $shift2 = 28;
+        $shift3 = 29;
+        $shift4 = 30;
+        $shift5 = 31;
         $bit1 = $bit1 << $shift1;
         $bit2 = $bit2 << $shift2;
         $bit3 = $bit3 << $shift3;
         $bit4 = $bit4 << $shift4;
         $bit5 = $bit5 << $shift5;
         $bit = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
-        $lsb = $bit & (-1 * $bit);
-        $bit = $bit / $lsb;
-        $dec = bindec('100000000111100');
-        // $bit = $bit % 15;
-        $deck = new Deck();
+        // $lsb = $bit & (-1 * $bit);
+        // $bit = $bit / $lsb;
+        $dec = bindec('11110001000000000000000000000000');
+        $modulus = $bit % 15;
+       /*  $deck = new Deck();
         $card = $deck->getCard(12, 'clubs');
         $card1 = $deck->getCard(7, 'hearts');
         $pokerGame = new PokerGame($session);
@@ -95,7 +95,7 @@ class ReportController extends AbstractController
         $hand[] = $deck->getCard(6, "hearts");
         for ($i = 0; $i < 5; $i++) {
             $hand1->addCard($hand[$i]);
-        }
+        } */
 
 
         return $this->render('report/test.html.twig', [
@@ -105,9 +105,7 @@ class ReportController extends AbstractController
             'bit' => $bit,
             'shift' => $shift1,
             'dec' => $dec,
-            'card' => $card,
-            'card1' => $card1,
-            'hand1' => $hand1
+            'modulus' => $modulus,
         ]);
     }
 

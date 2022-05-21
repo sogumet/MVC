@@ -6,7 +6,6 @@
     <div class="containerleft">
 <h1>Pokerpatiens</h1>
 <form method="post">
-    
 <div>
     {% if card is defined %}
         <img src={{ asset(card.image) }}>
@@ -20,11 +19,14 @@
     </p>
         <div>
             {% if hand1 is defined %}
-            {% for card in hand1.hand %}
-            <img src={{ asset(hand1.hand[loop.index0].image) }}>
-            {% endfor %}
-             <p>{{app.session.get('point1')}}</p>
-            {% endif %}
+                {% for card in hand1.hand %}              
+                    <img src={{ asset(hand1.hand[loop.index0].image) }}>
+                {% endfor %}
+                <p>{{app.session.get('point1')}}</p>
+                {% else %}
+                <h3>Hand 1</h3> 
+                {% endif %}
+
             </div>
     <p>
         <input id="save1" type="submit" name="hand1" value="Save">
@@ -36,6 +38,8 @@
         <img src={{ asset(hand2.hand[loop.index0].image) }}>
         {% endfor %}
         <p>{{app.session.get('point2')}}</p>
+        {% else %}
+                <h3>Hand 2</h3> 
         {% endif %}
         </div>
     <p>
@@ -48,6 +52,8 @@
         <img src={{ asset(hand3.hand[loop.index0].image) }}>
         {% endfor %}
         <p>{{app.session.get('point3')}}</p>
+        {% else %}
+                <h3>Hand 3</h3> 
         {% endif %}
         </div>
     <p>
@@ -59,6 +65,8 @@
         <img src={{ asset(hand4.hand[loop.index0].image) }}>
         {% endfor %}
         <p>{{app.session.get('point4')}}</p>
+        {% else %}
+                <h3>Hand 4</h3> 
         {% endif %}
         </div>
     <p>
@@ -70,6 +78,8 @@
         <img src={{ asset(hand5.hand[loop.index0].image) }}>
         {% endfor %}
         <p>{{app.session.get('point5')}}</p>
+        {% else %}
+                <h3>Hand 5</h3> 
         {% endif %}
         </div>
     <p>
@@ -83,7 +93,6 @@
     {% endif %} 
     <p>Highscore = {{app.session.get('highScore')}}</p>
     {% block javascripts %}
-        {% if hand1 is defined %}
             {% if card is defined or app.session.get('allFull') == true %}
                 <script type="text/javascript">
                     document.getElementById("draw").disabled = true;
@@ -114,7 +123,6 @@
                     document.getElementById("save5").disabled = true;
                 </script>
             {% endif %}    
-        {% endif %}
     {% endblock %}
 
     {{ include('block/flash-message.html.twig') }}

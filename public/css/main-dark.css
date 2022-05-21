@@ -70,3 +70,8 @@ hr.style-seven::before {
     border-width: 0 0 2px;
     border-radius: 20px;
 }
+
+input[type=submit] {
+    font-size: 0.8em;
+    padding: 4px 10px;
+}
