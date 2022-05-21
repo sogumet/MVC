@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the Game.
+ * Contaning the Game Class.
+ *
+ * (c) Sogum <sogum@live.com>
+ *
+ */
 namespace App\Deck;
 
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -19,6 +26,9 @@ class Game
     public object $tempCard;
     public $session;
 
+    /**
+    * Deck class constructor.
+    */
     public function __construct($session)
     {
         $this->deck = new Deck();
@@ -27,6 +37,9 @@ class Game
         $this->session = $session;
     }
 
+    /**
+    * Starts the game.
+    */
     public function startGame(): void
     {
         $this->session->clear();
@@ -37,6 +50,9 @@ class Game
         $this->deck->shuffleDeck();
     }
 
+    /**
+    * Getting a card from deck for player and saves it in the session.
+    */
     public function playerDrawCard(): void
     {
         $this->deck = $this->session->get("deck21");
@@ -50,6 +66,9 @@ class Game
         $this->session->set("hand21", $this->hand);
     }
 
+    /**
+    * Getting cards for bank player .
+    */
     public function drawBank(): void
     {
         $this->sumbank = 0;
@@ -71,6 +90,10 @@ class Game
         $this->sum = $this->countSumBank($this->hand);
     }
 
+    /**
+    * Counting the sum value of the players hands.
+    * @param object
+    */
     public function countSumBank(object $bank): int
     {
         $sum = 0;
@@ -98,6 +121,10 @@ class Game
         return $sum;
     }
 
+    /**
+     * Sum as string.
+     * @param string
+     */
     public function sumBankAsString(): string
     {
         return "{$this->sumbank}";
@@ -105,8 +132,6 @@ class Game
 
     /**
      * Sum as string.
-     *
-     * @return string
      */
     public function sumAsString(): string
     {

@@ -1,26 +1,46 @@
 <?php
 
+/*
+ * This file is part of the PokerGame.
+ * Contaning the PokerHand class.
+ *
+ * (c) Sogum <sogum@live.com>
+ *
+ */
 namespace App\Deck;
 
 class PokerHand
 {
     private array $hand = [];
 
+    /**
+     * Counting cards in hand object
+     */
     public function cardCount(): int
     {
         return count($this->hand);
     }
 
+    /**
+     * Adding a card object to hand object
+     * @param object
+     */
     public function addCard(object $card): void
     {
         $this->hand[] = $card;
     }
 
+    /**
+     * Getter for the hand object
+     */
     public function getHand(): array
     {
         return $this->hand;
     }
 
+    /**
+     * Checking if hand object is a flush
+     */
     public function checkIfFlush(): bool
     {
         $tmp = array();
@@ -32,7 +52,11 @@ class PokerHand
         return $flush;
     }
 
-    public function valueArray() 
+    /**
+     * Splitting up cards in hand to arrays, cards with same
+     * value is placed in different arrays
+     */
+    public function valueArray(): array
     {
         $value;
         $tmp = array();
@@ -60,7 +84,13 @@ class PokerHand
         return $result;
     }
 
-    public function shiftNumberArray() {
+    /**
+     * Preparing the valueArray for bitwise operation.
+     * All cardvalues in same arrays after
+     * multiplay operation.
+     */
+    public function shiftNumberArray(): array
+    {
         $resultArr = [];
         $arr = $this->valueArray();
         for($i = 0; $i < 4; $i++){
@@ -72,7 +102,13 @@ class PokerHand
         return $resultArr;
     }
 
-    public function shifting() {
+    /**
+     * All values in arr bit shifted
+     * and Or Operated. All hand vill
+     * be returned as one number. 
+     */
+    public function shifting(): int
+    {
         $arr = $this->shiftNumberArray();
         $bit1 = 1;
         $bit2 = 1;
@@ -87,16 +123,23 @@ class PokerHand
         $bit5 = $bit5 << $arr[4];
         $res = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
         
-        // $res = $bit % 15;
         return $res;
     }
 
-    public function getModulus() {
+    /**
+     * Modulus opration on the result from the
+     * shifting() function.
+     */
+    public function getModulus(): int
+    {
         $numb = $this->shifting();
         $res = $numb % 15;
         return $res;
     } 
 
+    /**
+     * Checking if the hand object is a straight
+     */
     public function checkStraight(): bool
     {
         $arr = $this->valueArray();

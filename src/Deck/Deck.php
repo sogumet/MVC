@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * This file is part of the PokerGame and the Game.
+ * Contaning the Deck Class
+ * (c) Sogum <sogum@live.com>
+ *
+ */
+
 namespace App\Deck;
 
 class Deck
@@ -8,6 +15,9 @@ class Deck
     private array $cardSuit = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14');
     public array $deck;
 
+    /**
+    * Deck class constructor.
+    */
     public function __construct()
     {
         $rank = 1;
@@ -25,11 +35,17 @@ class Deck
         }
     }
 
+    /**
+    * Shuffles the deck object.
+    */
     public function shuffleDeck(): void
     {
         shuffle($this->deck);
     }
 
+    /**
+    * Getting a card object from the deck object.
+    */
     public function drawCard(): object
     {
         $card = array_shift($this->deck);
@@ -37,11 +53,18 @@ class Deck
         return $card;
     }
 
+    /**
+    * Counting remaining cards in deck object.
+    */
     public function cardCount(): int
     {
         return count($this->deck);
     }
 
+    /**
+    * Getting a number of cards from the deck object.
+    * @param int
+    */
     public function drawCards(int $number): array
     {
         $cards = array();
@@ -53,6 +76,11 @@ class Deck
         return $cards;
     }
 
+    /**
+    * Getting a specific card from the deck object.
+    * @param int
+    * @param string
+    */
     public function getCard(int $value, string $suit): object
     {
         $card = array_filter($this->deck,

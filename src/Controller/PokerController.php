@@ -16,37 +16,6 @@ use App\Deck\PokerGame;
 class PokerController extends AbstractController
 {
     
-    /**
-     * @Route(
-     *      "/poker/test",
-     *      name="poker_test"
-     * )
-     */
-    public function testgame(
-        SessionInterface $session
-    ): Response
-    {
-        $poker = New PokerGame($session);
-        $poker->startGame();
-        $hand = $poker->dealCard();
-        // var_dump($hand);
-        $arr = $hand->checkIfFlush();
-        $values = $hand->valueArray();
-        $arr1 = $hand->shiftNumberArray();
-        $res = $hand->getModulus();
-        // $straight = $hand->checkStraight();
-        $points = $poker->getPoints();
-        
-        return $this->render('poker/poker.html.twig', [
-        'hand' => $hand,
-        'arr' => $arr,
-        'values' => $values,
-        'arr1' => $arr1,
-        'res' => $res,
-        'points' => $points,
-        // 'straight' => $straight,
-    ]);
-    }
         /**
          * @Route(
          *      "/poker",
@@ -68,7 +37,8 @@ class PokerController extends AbstractController
     */
     public function startProcess(
         Request $request,
-        SessionInterface $session
+        SessionInterface $session,
+        ScoreRepository $scoreRepository
     ): Response {
         $start = $request->request->get('start');
         $game = new PokerGame($session);
@@ -77,6 +47,9 @@ class PokerController extends AbstractController
 
         if ($start) {
             $game->startGame();
+            $highScore = $scoreRepository->findHighScore();
+            $session->set('highScore', $highScore);
+            $session->set('cardLeft', 52);
             return $this->redirectToRoute('pokerplay');
         }
         
@@ -90,7 +63,7 @@ class PokerController extends AbstractController
      */
     public function session(): Response
     {
-        
+            
         return $this->render(
             'poker/poker-game.html.twig',
         );
@@ -115,14 +88,7 @@ class PokerController extends AbstractController
             $hand3 = $request->request->get('hand3');
             $hand4 = $request->request->get('hand4');
             $hand5 = $request->request->get('hand5');
-            $test = $request->request->get('test');
-            $flag1 = $session->get("flag1") ? true : false;
-            $flag2 = $session->get("flag2") ? true : false;
-            $flag3 = $session->get("flag3") ? true : false;
-            $flag4 = $session->get("flag4") ? true : false;
-            $flag5 = $session->get("flag5") ? true : false;
             $game = new PokerGame($session);
-            $back = "img/deck/back.jpg";
              
             if ($draw) {
                 $card = $game->dealCard();
@@ -136,71 +102,44 @@ class PokerController extends AbstractController
                     'hand3' => $session->get("hand3"),
                     'hand4' => $session->get("hand4"),
                     'hand5' => $session->get("hand5"),
-                    'flag1' => $flag1,
-                    'flag2' => $flag2,
-                    'flag3' => $flag3,
-                    'flag4' => $flag4,
-                    'flag5' => $flag5,
                     ]
                 );
             }
             if ($reset) {
                 $game->startGame();
+                $highScore = $scoreRepository->findHighScore();
+                $session->set('highScore', $highScore);
+                $session->set('cardLeft', 52);
                 return $this->redirectToRoute('pokerplay');
             }
             if ($hand1) {
                 if($game->saveCard(1))
                 {
-                    $session->set("flag1", true);
-                    $flag1 = true;
-                    $hand = $session->get("hand1");
-                    $points = $game->getPoints($hand);
-                    $session->set("point1", $points);
-                    $game->checkIfAllFullHand("full");
+                    $game->fullHandProcess(1);
                 }
             }
             if ($hand2) {
                 if($game->saveCard(2))
                 {
-                    $session->set("flag2", true);
-                    $flag2 = true;
-                    $hand = $session->get("hand2");
-                    $points = $game->getPoints($hand);
-                    $session->set("point2", $points);
-                    $game->checkIfAllFullHand("full");
+                    $game->fullHandProcess(2);
                 }
             }
             if ($hand3) {
                 if($game->saveCard(3))
                 {
-                    $session->set("flag3", true);
-                    $flag3 = true;
-                    $hand = $session->get("hand3");
-                    $points = $game->getPoints($hand);
-                    $session->set("point3", $points);
-                    $fullHand = $game->checkIfAllFullHand("full");
+                    $game->fullHandProcess(3);
                 }
             }
             if ($hand4) {
                 if($game->saveCard(4))
                 {
-                    $session->set("flag4", true);
-                    $flag4 = true;
-                    $hand = $session->get("hand4");
-                    $points = $game->getPoints($hand);
-                    $session->set("point4", $points);
-                    $fullHand = $game->checkIfAllFullHand("full");
+                    $game->fullHandProcess(4);
                 }
             }
             if ($hand5) {
                 if($game->saveCard(5))
                 {
-                    $session->set("flag5", true);
-                    $flag5 = true;
-                    $hand = $session->get("hand5");
-                    $points = $game->getPoints($hand);
-                    $session->set("point5", $points);
-                    $fullHand = $game->checkIfAllFullHand("full");
+                    $game->fullHandProcess(5);
                 }
             }
             if ($session->get('allFull')) {
@@ -222,11 +161,6 @@ class PokerController extends AbstractController
                 'hand3' => $session->get("hand3"),
                 'hand4' => $session->get("hand4"),
                 'hand5' => $session->get("hand5"),
-                'flag1' => $flag1,
-                'flag2' => $flag2,
-                'flag3' => $flag3,
-                'flag4' => $flag4,
-                'flag5' => $flag5,
                 ]
             );
 
