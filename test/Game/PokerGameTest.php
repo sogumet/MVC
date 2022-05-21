@@ -454,5 +454,32 @@ class PokerGameTest extends TestCase
         $this->assertEquals($exp, $res);
     }
 
+    /**
+     * Constructing a straightFlush hand and checking return value).
+     */
+    public function testFullHandProcess()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $pokerGame = new PokerGame($session);
+        $this->assertInstanceOf("\App\Deck\PokerGame", $pokerGame);
+        $pokerGame->startGame();
+        $pokerGame->fullHandProcess(1);
+        $res = $session->get('flag1');
+        $exp = true;
+        $this->assertEquals($exp, $res);
+        $pokerGame->fullHandProcess(2);
+        $res = $session->get('flag2');
+        $this->assertEquals($exp, $res);
+        $pokerGame->fullHandProcess(3);
+        $res = $session->get('flag3');
+        $this->assertEquals($exp, $res);
+        $pokerGame->fullHandProcess(4);
+        $res = $session->get('flag4');
+        $this->assertEquals($exp, $res);
+        $pokerGame->fullHandProcess(5);
+        $res = $session->get('flag5');
+        $this->assertEquals($exp, $res);
+    }
+
 
 }

@@ -1,5 +1,4 @@
 {% extends "base1.html.twig" %}
-
 {% block title %}Session{% endblock %}
 
 {% block content %}
@@ -90,27 +89,27 @@
                     document.getElementById("draw").disabled = true;
                 </script>
             {% endif %}
-            {% if flag1 == true or card is not defined %}
+            {% if app.session.get('flag1') == true or card is not defined %}
                 <script type="text/javascript">
                     document.getElementById("save1").disabled = true;
                 </script>
             {% endif %}    
-            {% if flag2 == true or card is not defined %}
+            {% if app.session.get('flag2') == true or card is not defined %}
                 <script type="text/javascript">
                     document.getElementById("save2").disabled = true;
                 </script>
             {% endif %}    
-            {% if flag3 == true or card is not defined %}
+            {% if app.session.get('flag3') == true or card is not defined %}
                 <script type="text/javascript">
                     document.getElementById("save3").disabled = true;
                 </script>
             {% endif %}    
-            {% if flag4 == true or card is not defined %}
+            {% if app.session.get('flag4') == true or card is not defined %}
                 <script type="text/javascript">
                     document.getElementById("save4").disabled = true;
                 </script>
             {% endif %}    
-            {% if flag5 == true or card is not defined %}
+            {% if app.session.get('flag5') == true or card is not defined %}
                 <script type="text/javascript">
                     document.getElementById("save5").disabled = true;
                 </script>

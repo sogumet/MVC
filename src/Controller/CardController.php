@@ -99,6 +99,8 @@ class CardController extends AbstractController
 
     /**
     * @Route("/card/deck/draw/{numCard}", name="draw-number")
+    * Deal x number of cards.
+    * @param int
     */
     public function drawSomeCards(
         int $numCard,
@@ -120,6 +122,9 @@ class CardController extends AbstractController
 
     /**
     * @Route("/card/deck/deal/{players}/{numCard}", name="deal-cards")
+    * Deal x number of card to x numbers of players.
+    * @param int 
+    * @param int
     */
     public function dealHands(
         int $players,
