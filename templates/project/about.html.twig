@@ -4,14 +4,17 @@
 {% block content %}
 
 <main>
-<div>
-<h1>About</h1>
+    
+<div class="containerleft">
+    <h1>About</h1>
 <p>Detta är about sidan</p>
-</div>
-<a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/metrics/"}}" >Metrics</a>
-<a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/api"}}" >DocBlock</a>
-<a href="{{"https://scrutinizer-ci.com/"}}" >Scrutinzer</a>
+<p><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/metrics/"}}" >Metrics</a></p>
+<p><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/api"}}" >DocBlock</a></p>
+<p><a href="{{"https://scrutinizer-ci.com/"}}" >Scrutinzer</a></p>
+<p><a href="{{"https://github.com/sogumet/MVC/tree/main"}}" >GitHub repo</a></p>
+
 <link rel="icon" href="{{ asset("favicon.ico") }}">
+</div>
 </main>
 
  {% endblock %}
