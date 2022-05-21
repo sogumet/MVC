@@ -9,7 +9,6 @@ use App\Entity\Score;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-
 class ScoreController extends AbstractController
 {
     #[Route('/score', name: 'app_score')]
@@ -42,8 +41,4 @@ class ScoreController extends AbstractController
 
         return $this->redirectToRoute('pokerplay');
     }
-
 }
-
-
-

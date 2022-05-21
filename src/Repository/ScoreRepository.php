@@ -10,7 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Score>
- *
+ * @SuppressWarnings(PHPMD)
  * @method Score|null find($id, $lockMode = null, $lockVersion = null)
  * @method Score|null findOneBy(array $criteria, array $orderBy = null)
  * @method Score[]    findAll()
@@ -58,7 +58,6 @@ class ScoreRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         $res = $resultSet->fetchAllAssociative();
         return $res[0]['MAX(score)'];
-        
     }
 
     /**
@@ -71,12 +70,10 @@ class ScoreRepository extends ServiceEntityRepository
         $handle = fopen("../public/sql/resetScore.sql", "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-            $sql = $line;
-            $stmt = $conn->prepare($sql);
-            $stmt->executeQuery();
+                $sql = $line;
+                $stmt = $conn->prepare($sql);
+                $stmt->executeQuery();
             }
         }
     }
-
-   
 }

@@ -15,11 +15,15 @@ use App\Deck\Deck;
 use App\Deck\PokerHand;
 use App\Repository\ScoreRepository;
 use Doctrine\Persistence\ManagerRegistry;
+
 class PokerGame
 {
-
     private object $deck;
-    public object $hand;
+    private object $hand1;
+    private object $hand2;
+    private object $hand3;
+    private object $hand4;
+    private object $hand5;
     public object $session;
     private object $card;
     private array $fullHands = [];
@@ -53,7 +57,6 @@ class PokerGame
         $this->session->set("deck", $this->deck);
         $this->session->set("fullHands", $this->fullHands);
         $this->deck->shuffleDeck();
-        
     }
 
     /**
@@ -62,7 +65,7 @@ class PokerGame
     */
     public function dealCard(): object
     {
-        
+
         $this->deck = $this->session->get("deck");
         $this->card = $this->deck->drawCard();
         $this->session->set("card", $this->card);
@@ -70,7 +73,7 @@ class PokerGame
     }
 
     /**
-    * Getting a card object from the session 
+    * Getting a card object from the session
     * and saves it in a hand object.
     *@param object
     */
@@ -78,34 +81,35 @@ class PokerGame
     {
         {
             $this->card = $this->session->get("card");
-            switch($hand) {
-                case 1;
-                    $this->hand1 = $this->session->get("hand1");
-                    $this->hand1->addCard($this->card);
-                    return $this->checkIfFullHand($this->hand1);
-                    break;
-                case 2;
-                    $this->hand2 = $this->session->get("hand2");
-                    $this->hand2->addCard($this->card);
-                    return $this->checkIfFullHand($this->hand2);
-                    break;
-                case 3;
-                    $this->hand3 = $this->session->get("hand3");
-                    $this->hand3->addCard($this->card);
-                    return $this->checkIfFullHand($this->hand3);
-                    break;
-                case 4;
-                    $this->hand4 = $this->session->get("hand4");
-                    $this->hand4->addCard($this->card);
-                    return $this->checkIfFullHand($this->hand4);
-                    break;
-                case 5;
-                    $this->hand5 = $this->session->get("hand5");
-                    $this->hand5->addCard($this->card);
-                    return $this->checkIfFullHand($this->hand5);
-                    break;
-            }
+        switch ($hand) {
+            case 1:
+                $this->hand1 = $this->session->get("hand1");
+                $this->hand1->addCard($this->card);
+                return $this->checkIfFullHand($this->hand1);
+                break;
+            case 2:
+                $this->hand2 = $this->session->get("hand2");
+                $this->hand2->addCard($this->card);
+                return $this->checkIfFullHand($this->hand2);
+                break;
+            case 3:
+                $this->hand3 = $this->session->get("hand3");
+                $this->hand3->addCard($this->card);
+                return $this->checkIfFullHand($this->hand3);
+                break;
+            case 4:
+                $this->hand4 = $this->session->get("hand4");
+                $this->hand4->addCard($this->card);
+                return $this->checkIfFullHand($this->hand4);
+                break;
+            case 5:
+                $this->hand5 = $this->session->get("hand5");
+                $this->hand5->addCard($this->card);
+                return $this->checkIfFullHand($this->hand5);
+                break;
         }
+        }
+        return false;
     }
 
     /**
@@ -113,66 +117,64 @@ class PokerGame
     */
     public function test(): void
     {
-        for($i = 0; $i < 5; $i++)
-        {
-            for($k = 1; $k < 6; $k++) {
-                $card = $this->dealCard();
+        for ($i = 0; $i < 5; $i++) {
+            for ($k = 1; $k < 6; $k++) {
+                $this->dealCard();
                 $this->saveCard($k);
                 $this->checkIfAllFullHand("hand");
-             }
+            }
         }
     }
 
     /**
-    * Sets full hand flag in session, sets hands score 
+    * Sets full hand flag in session, sets hands score
     * in session and checks if all hands are full.
     *@param int
     */
     public function fullHandProcess($hand): void
     {
-        switch($hand) {
-            case 1;
+        switch ($hand) {
+            case 1:
                 $this->session->set("flag1", true);
                 $hand = $this->session->get("hand1");
                 $points = $this->getPoints($hand);
                 $this->session->set("point1", $points);
                 $this->checkIfAllFullHand("full");
                 break;
-            case 2;
+            case 2:
                 $this->session->set("flag2", true);
                 $hand = $this->session->get("hand2");
                 $points = $this->getPoints($hand);
                 $this->session->set("point2", $points);
                 $this->checkIfAllFullHand("full");
                 break;
-            case 3;
+            case 3:
                 $this->session->set("flag3", true);
                 $hand = $this->session->get("hand3");
                 $points = $this->getPoints($hand);
                 $this->session->set("point3", $points);
                 $this->checkIfAllFullHand("full");
                 break;
-            case 4;
+            case 4:
                 $this->session->set("flag4", true);
                 $hand = $this->session->get("hand4");
                 $points = $this->getPoints($hand);
                 $this->session->set("point4", $points);
                 $this->checkIfAllFullHand("full");
                 break;
-            case 5;
+            case 5:
                 $this->session->set("flag5", true);
                 $hand = $this->session->get("hand5");
                 $points = $this->getPoints($hand);
                 $this->session->set("point5", $points);
                 $this->checkIfAllFullHand("full");
                 break;
-        
         }
     }
     /**
     * Counting remaining card objects in the deck object
     */
-    public function getCardIndeck(): int 
+    public function getCardIndeck(): int
     {
         $this->deck = $this->session->get("deck");
             $cardLeft = $this->deck->cardCount();
@@ -198,12 +200,12 @@ class PokerGame
         $this->fullHands = $this->session->get("fullHands");
         $this->fullHands[] = $hand;
         $this->session->set("fullHands", $this->fullHands);
-        if(count($this->fullHands) == 5) {
+        if (count($this->fullHands) == 5) {
             $this->getTotalScore();
             $this->session->set("allFull", true);
         }
     }
-    
+
     /**
     * Checking if the hand object is a flush or straight.
     * @param object
@@ -211,22 +213,17 @@ class PokerGame
     public function checkFlushOrStraight($hand): int
     {
         if ($hand->getModulus() ==  5) {
-            if($hand->checkStraight() and $hand->checkIfFlush())
-            {
+            if ($hand->checkStraight() and $hand->checkIfFlush()) {
                 return 15;
-            }
-            elseif($hand->checkStraight()) 
-            {
-                return 4;    
-            }
-            elseif($hand->checkIfFlush()) 
-            {
-                return 5;    
+            } elseif ($hand->checkStraight()) {
+                return 4;
+            } elseif ($hand->checkIfFlush()) {
+                return 5;
             }
         }
         return 0;
     }
-    
+
     /**
     * Getting the points for the hand object.
     * @param object
@@ -234,29 +231,29 @@ class PokerGame
     public function getPoints($hand): int
     {
         $res = $this->checkFlushOrStraight($hand);
-        if($res != 0) {
+        if ($res != 0) {
             return $res;
         }
 
         $res = $hand->getModulus();
         {
-            switch($res) {
-                case 1;
-                    return 10;
-                    break;
-                case 6;
-                    return 1;
-                    break;
-                case 7;
-                    return 2;
-                    break;
-                case 9;
-                    return 3;
-                    break;
-                case 10;
-                    return 8;
-                    break;
-            }
+        switch ($res) {
+            case 1:
+                return 10;
+                break;
+            case 6:
+                return 1;
+                break;
+            case 7:
+                return 2;
+                break;
+            case 9:
+                return 3;
+                break;
+            case 10:
+                return 8;
+                break;
+        }
         }
         return 0;
     }
@@ -270,7 +267,6 @@ class PokerGame
         + $this->session->get('point3') + $this->session->get('point4') +
         $this->session->get('point5');
         $this->session->set('score', $score);
-    
     }
 
     /**
@@ -279,9 +275,10 @@ class PokerGame
     */
     public function saveScore(
         ManagerRegistry $doctrine
+        /** @phpstan-ignore-next-line */
     ): Response {
         $entityManager = $doctrine->getManager();
-
+        /** @phpstan-ignore-next-line */
         $score = new Score();
         $value = $this->session->get('score');
         $score->setScore($value);
@@ -293,6 +290,7 @@ class PokerGame
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
 
+        /** @phpstan-ignore-next-line */
         return $this->redirectToRoute('pokerplay');
     }
 }

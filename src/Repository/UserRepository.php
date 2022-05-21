@@ -13,6 +13,7 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
  * @extends ServiceEntityRepository<User>
+ * @SuppressWarnings(PHPMD)
  *
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
  * @method User|null findOneBy(array $criteria, array $orderBy = null)
@@ -77,7 +78,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $stmt->executeQuery();
         $string = file_get_contents("../public/sql/resetUser.sql");
         $res = explode(";", $string);
-        foreach($res as $value) {
+        foreach ($res as $value) {
             $sql = $value . ";";
             $stmt = $conn->prepare($sql);
             $stmt->executeQuery();

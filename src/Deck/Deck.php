@@ -83,10 +83,12 @@ class Deck
     */
     public function getCard(int $value, string $suit): object
     {
-        $card = array_filter($this->deck,
-        function ($e) use (&$value, &$suit){
-            return ($e->getValue() == $value and $e->getSuit() == $suit);
-        });
+        $card = array_filter(
+            $this->deck,
+            function ($e) use (&$value, &$suit) {
+                return ($e->getValue() == $value and $e->getSuit() == $suit);
+            }
+        );
 
         return array_pop($card);
     }

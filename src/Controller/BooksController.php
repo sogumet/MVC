@@ -191,7 +191,7 @@ class BooksController extends AbstractController
         return $this->redirectToRoute('books_show_all');
     }
 
-    
+
 /**
      * @Route(
      *      "/library/reset",
@@ -200,9 +200,9 @@ class BooksController extends AbstractController
      * )
      */
     public function reset(
-        BooksRepository $booksRepository){
+        BooksRepository $booksRepository
+    ) {
         $booksRepository->resetBooks();
         return $this->redirectToRoute('books_show_all');
     }
-    
 }

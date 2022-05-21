@@ -27,8 +27,8 @@ class LoginController extends AbstractController
     /**
      * @Route("/login/direct", name="login_direct")
      */
-    public function direct(
-    ): Response {
+    public function direct(): Response
+    {
         $user = $this->getUser();
         /** @scrutinizer ignore-call */
         $email = $user->getEmail();

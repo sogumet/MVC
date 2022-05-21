@@ -44,7 +44,7 @@ class PokerHand
     public function checkIfFlush(): bool
     {
         $tmp = array();
-        foreach($this->hand as $card) {
+        foreach ($this->hand as $card) {
             $tmp[] = $card->getSuit();
         }
         $flush = (count(array_unique($tmp)) === 1);
@@ -58,27 +58,25 @@ class PokerHand
      */
     public function valueArray(): array
     {
-        $value;
         $tmp = array();
         $arr1 = array();
         $arr2 = array();    // If pair
         $arr3 = array();    // If three of a kind
         $arr4 = array();    // If four of a kind
-        $result = array();   
-        foreach($this->hand as $card) {
+        $result = array();
+        foreach ($this->hand as $card) {
             $tmp[] = $card->getValue();
         }
-            for($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $value = array_shift($tmp);
             if (in_array($value, $arr1) == false) {
-                $arr1[] = $value; 
-            } elseif (in_array($value, $arr2) == false){
-                $arr2[] = $value; 
-            } elseif (in_array($value, $arr3) == false){
-                $arr3[] = $value; 
-            } else {
-                $arr4[] = $value;
+                $arr1[] = $value;
+            } elseif (in_array($value, $arr2) == false) {
+                $arr2[] = $value;
+            } elseif (in_array($value, $arr3) == false) {
+                $arr3[] = $value;
             }
+                $arr4[] = $value;
         }
         $result = [$arr1, $arr2, $arr3, $arr4];
         return $result;
@@ -93,19 +91,19 @@ class PokerHand
     {
         $resultArr = [];
         $arr = $this->valueArray();
-        for($i = 0; $i < 4; $i++){
-            foreach($arr[$i] as $value) {
+        for ($i = 0; $i < 4; $i++) {
+            foreach ($arr[$i] as $value) {
                     $value = $value * 4 + $i ;
                     $resultArr[] = $value;
-                }  
             }
+        }
         return $resultArr;
     }
 
     /**
      * All values in arr bit shifted
      * and Or Operated. All hand vill
-     * be returned as one number. 
+     * be returned as one number.
      */
     public function shifting(): int
     {
@@ -122,7 +120,7 @@ class PokerHand
         $bit4 = $bit4 << $arr[3];
         $bit5 = $bit5 << $arr[4];
         $res = $bit1 | $bit2 | $bit3 | $bit4 | $bit5;
-        
+
         return $res;
     }
 
@@ -135,7 +133,7 @@ class PokerHand
         $numb = $this->shifting();
         $res = $numb % 15;
         return $res;
-    } 
+    }
 
     /**
      * Checking if the hand object is a straight
@@ -168,5 +166,4 @@ class PokerHand
         $res = ($numb == 11111);
         return $res;
     } */
-
 }

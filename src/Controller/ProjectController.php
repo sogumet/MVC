@@ -32,10 +32,10 @@ class ProjectController extends AbstractController
      */
     public function reset(
         BooksRepository $booksRepository,
-        ScoreRepository $scoreRepository){
+        ScoreRepository $scoreRepository
+    ) {
         $booksRepository->resetBooks();
         $scoreRepository->resetScore();
         return $this->render('project/reset.html.twig');
     }
-
 }

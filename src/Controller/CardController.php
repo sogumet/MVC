@@ -123,7 +123,7 @@ class CardController extends AbstractController
     /**
     * @Route("/card/deck/deal/{players}/{numCard}", name="deal-cards")
     * Deal x number of card to x numbers of players.
-    * @param int 
+    * @param int
     * @param int
     */
     public function dealHands(

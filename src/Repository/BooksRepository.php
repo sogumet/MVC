@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Books>
+ * @SuppressWarnings(PHPMD)
  *
  * @method Books|null find($id, $lockMode = null, $lockVersion = null)
  * @method Books|null findOneBy(array $criteria, array $orderBy = null)
@@ -60,9 +61,9 @@ class BooksRepository extends ServiceEntityRepository
         $handle = fopen("../public/sql/resetBooks.sql", "r");
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
-            $sql = $line;
-            $stmt = $conn->prepare($sql);
-            $stmt->executeQuery();
+                $sql = $line;
+                $stmt = $conn->prepare($sql);
+                $stmt->executeQuery();
             }
         }
     }
