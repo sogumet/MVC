@@ -76,8 +76,9 @@ class PokerGame
     * Getting a card object from the session
     * and saves it in a hand object.
     *@param object
+    *@SuppressWarnings(PHPMD.CyclomaticComplexity)
     */
-    public function saveCard($hand): bool
+    public function saveCard($hand): void
     {
         {
             $this->card = $this->session->get("card");
@@ -85,31 +86,40 @@ class PokerGame
             case 1:
                 $this->hand1 = $this->session->get("hand1");
                 $this->hand1->addCard($this->card);
-                return $this->checkIfFullHand($this->hand1);
+                if ($this->checkIfFullHand($this->hand1)) {
+                    $this->fullHandProcess(1);
+                }
                 break;
             case 2:
                 $this->hand2 = $this->session->get("hand2");
                 $this->hand2->addCard($this->card);
-                return $this->checkIfFullHand($this->hand2);
+                if ($this->checkIfFullHand($this->hand2)) {
+                    $this->fullHandProcess(2);
+                }
                 break;
             case 3:
                 $this->hand3 = $this->session->get("hand3");
                 $this->hand3->addCard($this->card);
-                return $this->checkIfFullHand($this->hand3);
+                if ($this->checkIfFullHand($this->hand3)) {
+                    $this->fullHandProcess(3);
+                }
                 break;
             case 4:
                 $this->hand4 = $this->session->get("hand4");
                 $this->hand4->addCard($this->card);
-                return $this->checkIfFullHand($this->hand4);
+                if ($this->checkIfFullHand($this->hand4)) {
+                    $this->fullHandProcess(4);
+                }
                 break;
             case 5:
                 $this->hand5 = $this->session->get("hand5");
                 $this->hand5->addCard($this->card);
-                return $this->checkIfFullHand($this->hand5);
+                if ($this->checkIfFullHand($this->hand5)) {
+                    $this->fullHandProcess(5);
+                }
                 break;
         }
         }
-        return false;
     }
 
     /**
@@ -289,8 +299,6 @@ class PokerGame
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
-
-        /** @phpstan-ignore-next-line */
-        return $this->redirectToRoute('pokerplay');
+        return null;
     }
 }

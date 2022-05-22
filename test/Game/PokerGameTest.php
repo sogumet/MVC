@@ -99,12 +99,13 @@ class PokerGameTest extends TestCase
         $pokerGame = new PokerGame($session);
         $this->assertInstanceOf("\App\Deck\PokerGame", $pokerGame);
         $pokerGame->startGame();
-        $pokerGame->dealCard();
-        $res = $pokerGame->saveCard(1);
-        $res = $pokerGame->saveCard(1);
-        $res = $pokerGame->saveCard(1);
-        $res = $pokerGame->saveCard(1);
-        $res = $pokerGame->saveCard(1);
+        
+        for($i = 0; $i < 5; $i++) {
+            $pokerGame->dealCard();
+            $pokerGame->saveCard(1);
+        }
+        $hand = $session->get('hand1');
+        $res = $pokerGame->checkIfFullHand($hand);
         $exp = true;
         $this->assertEquals($exp, $res);
     }

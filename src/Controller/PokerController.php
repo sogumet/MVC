@@ -113,29 +113,19 @@ class PokerController extends AbstractController
             return $this->redirectToRoute('pokerplay');
         }
         if ($hand1) {
-            if ($game->saveCard(1)) {
-                $game->fullHandProcess(1);
-            }
+            $game->saveCard(1);
         }
         if ($hand2) {
-            if ($game->saveCard(2)) {
-                $game->fullHandProcess(2);
-            }
+            $game->saveCard(2);
         }
         if ($hand3) {
-            if ($game->saveCard(3)) {
-                $game->fullHandProcess(3);
-            }
+            $game->saveCard(3);
         }
         if ($hand4) {
-            if ($game->saveCard(4)) {
-                $game->fullHandProcess(4);
-            }
+            $game->saveCard(4);
         }
         if ($hand5) {
-            if ($game->saveCard(5)) {
-                $game->fullHandProcess(5);
-            }
+            $game->saveCard(5);
         }
         if ($session->get('allFull')) {
             $entityManager = $doctrine->getManager();

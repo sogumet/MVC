@@ -6,12 +6,29 @@
 <main>
     
 <div class="containerleft">
-    <h1>About</h1>
-<p>Detta är about sidan</p>
-<p><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/metrics/"}}" >Metrics</a></p>
-<p><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/api"}}" >DocBlock</a></p>
-<p><a href="{{"https://scrutinizer-ci.com/"}}" >Scrutinzer</a></p>
-<p><a href="{{"https://github.com/sogumet/MVC/tree/main"}}" >GitHub repo</a></p>
+    <h1>Projektet</h1>
+    <p> </p>
+    <h2>Beskrivning</h2>
+<p>Mitt projekt är ett pokerpatiens spel. Spelet använder sig av kortleken som konstruerades i
+    en övning i ett tidigare kursmoment. Spelet är en enkel patiens som går ut på att man skapar fem stycken så bra
+    pokerhänder som det är möjligt. Till spelet används kontrollern PokerController. Spellogiken ligger i filerna PokerGame och PokerHand.
+    Templaten som ingår i spelet ligger i katalogen templates/poker.  Highscoren sparas i en databas som är möjlig att nollställa med en länk i navbaren. 
+    Till databasen används "Repositoriet"  ScoreRepository och "Entity" Score.php. Scoren räknas ut med hjälp av bitwise operationer. <br>
+    För att poängberäkningen skall fungera till fullo måste spelet använda sig av en 64 bitars arkitektur. Med 32 bitar fungerar bara poängberäkningen
+    för kortvalörer inte större än 7. </p>
+
+<h2>Dokumentation</h2>
+<h3>Länkar</h3>
+
+    <ul>
+        <li><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/metrics/"}}" >Metrics</a></li>
+        <li><a href="{{"http://www.student.bth.se/~kesj20/dbwebb-kurser/mvc/me/report/docs/api/"}}" >DocBlock</a></li>
+        <li><a href="{{"https://scrutinizer-ci.com/"}}" >Scrutinzer</a></li>
+        <li><a href="{{"https://github.com/sogumet/MVC/tree/main"}}" >GitHub repo</a></li>
+    </ul>
+<h2>Summering</h2>
+
+    
 
 <link rel="icon" href="{{ asset("favicon.ico") }}">
 </div>
