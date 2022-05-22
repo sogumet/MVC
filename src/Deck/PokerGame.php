@@ -15,6 +15,7 @@ use App\Deck\Deck;
 use App\Deck\PokerHand;
 use App\Repository\ScoreRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 class PokerGame
 {
@@ -285,7 +286,6 @@ class PokerGame
     */
     public function saveScore(
         ManagerRegistry $doctrine
-        /** @phpstan-ignore-next-line */
     ): Response {
         $entityManager = $doctrine->getManager();
         /** @phpstan-ignore-next-line */
@@ -299,6 +299,6 @@ class PokerGame
 
         // actually executes the queries (i.e. the INSERT query)
         $entityManager->flush();
-        return null;
+        return new Response('success');
     }
 }

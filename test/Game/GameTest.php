@@ -133,6 +133,27 @@ class GameTest extends TestCase
     }
 
     /**
+     * Verifying bankhand cardsum > 21 with 3 aces.
+     */
+    public function testCountSumBank4()
+    {
+        $session = new Session(new MockFileSessionStorage());
+        $game = new Game($session);
+        $this->assertInstanceOf("\App\Deck\Game", $game);
+        $tempCard = $game->deck->deck[3]; //cardvalue 5
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $tempCard = $game->deck->deck[12]; //cardvalue 14
+        $game->bank->addCard($tempCard);
+        $res = $game->countSumBank($game->bank);
+        $exp = 21;
+        $this->assertEquals($exp, $res);
+    }
+
+    /**
     * Verifying the string.
     */
     public function testSumBankAsString()

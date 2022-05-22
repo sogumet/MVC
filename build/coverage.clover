@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1653196732">
-  <project timestamp="1653196732">
+<coverage generated="1653202233">
+  <project timestamp="1653202233">
     <file name="C:\Users\HP\dbwebb-kurser\mvc\me\report\src\Deck\Card.php">
       <class name="App\Deck\Card" namespace="global">
         <metrics complexity="6" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="12" coveredelements="12"/>
       </class>
-      <line num="22" type="method" name="setSuit" visibility="public" complexity="1" crap="1" count="41"/>
-      <line num="24" type="stmt" count="41"/>
-      <line num="31" type="method" name="setValue" visibility="public" complexity="1" crap="1" count="41"/>
-      <line num="33" type="stmt" count="41"/>
-      <line num="40" type="method" name="setImage" visibility="public" complexity="1" crap="1" count="41"/>
-      <line num="42" type="stmt" count="41"/>
-      <line num="49" type="method" name="getValue" visibility="public" complexity="1" crap="1" count="21"/>
-      <line num="51" type="stmt" count="21"/>
+      <line num="22" type="method" name="setSuit" visibility="public" complexity="1" crap="1" count="42"/>
+      <line num="24" type="stmt" count="42"/>
+      <line num="31" type="method" name="setValue" visibility="public" complexity="1" crap="1" count="42"/>
+      <line num="33" type="stmt" count="42"/>
+      <line num="40" type="method" name="setImage" visibility="public" complexity="1" crap="1" count="42"/>
+      <line num="42" type="stmt" count="42"/>
+      <line num="49" type="method" name="getValue" visibility="public" complexity="1" crap="1" count="22"/>
+      <line num="51" type="stmt" count="22"/>
       <line num="58" type="method" name="getimage" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="60" type="stmt" count="1"/>
       <line num="67" type="method" name="getSuit" visibility="public" complexity="1" crap="1" count="14"/>
@@ -23,18 +23,18 @@
       <class name="App\Deck\Deck" namespace="global">
         <metrics complexity="10" methods="6" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="25" coveredstatements="25" elements="31" coveredelements="31"/>
       </class>
-      <line num="21" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="41"/>
-      <line num="23" type="stmt" count="41"/>
-      <line num="24" type="stmt" count="41"/>
-      <line num="25" type="stmt" count="41"/>
-      <line num="26" type="stmt" count="41"/>
-      <line num="27" type="stmt" count="41"/>
-      <line num="28" type="stmt" count="41"/>
-      <line num="29" type="stmt" count="41"/>
-      <line num="30" type="stmt" count="41"/>
-      <line num="31" type="stmt" count="41"/>
-      <line num="32" type="stmt" count="41"/>
-      <line num="33" type="stmt" count="41"/>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="3" crap="3" count="42"/>
+      <line num="23" type="stmt" count="42"/>
+      <line num="24" type="stmt" count="42"/>
+      <line num="25" type="stmt" count="42"/>
+      <line num="26" type="stmt" count="42"/>
+      <line num="27" type="stmt" count="42"/>
+      <line num="28" type="stmt" count="42"/>
+      <line num="29" type="stmt" count="42"/>
+      <line num="30" type="stmt" count="42"/>
+      <line num="31" type="stmt" count="42"/>
+      <line num="32" type="stmt" count="42"/>
+      <line num="33" type="stmt" count="42"/>
       <line num="41" type="method" name="shuffleDeck" visibility="public" complexity="1" crap="1" count="23"/>
       <line num="43" type="stmt" count="23"/>
       <line num="49" type="method" name="drawCard" visibility="public" complexity="1" crap="1" count="8"/>
@@ -78,11 +78,11 @@
       <class name="App\Deck\Game" namespace="global">
         <metrics complexity="17" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="54" coveredstatements="53" elements="61" coveredelements="59"/>
       </class>
-      <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="9"/>
-      <line num="34" type="stmt" count="9"/>
-      <line num="35" type="stmt" count="9"/>
-      <line num="36" type="stmt" count="9"/>
-      <line num="37" type="stmt" count="9"/>
+      <line num="32" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="10"/>
+      <line num="34" type="stmt" count="10"/>
+      <line num="35" type="stmt" count="10"/>
+      <line num="36" type="stmt" count="10"/>
+      <line num="37" type="stmt" count="10"/>
       <line num="43" type="method" name="startGame" visibility="public" complexity="1" crap="1" count="2"/>
       <line num="45" type="stmt" count="2"/>
       <line num="46" type="stmt" count="2"/>
@@ -116,24 +116,24 @@
       <line num="88" type="stmt" count="1"/>
       <line num="89" type="stmt" count="1"/>
       <line num="90" type="stmt" count="1"/>
-      <line num="98" type="method" name="countSumBank" visibility="public" complexity="10" crap="10.02" count="5"/>
-      <line num="100" type="stmt" count="5"/>
-      <line num="101" type="stmt" count="5"/>
-      <line num="102" type="stmt" count="5"/>
-      <line num="103" type="stmt" count="5"/>
-      <line num="104" type="stmt" count="5"/>
-      <line num="105" type="stmt" count="5"/>
-      <line num="106" type="stmt" count="2"/>
-      <line num="108" type="stmt" count="5"/>
-      <line num="109" type="stmt" count="5"/>
+      <line num="98" type="method" name="countSumBank" visibility="public" complexity="10" crap="10.02" count="6"/>
+      <line num="100" type="stmt" count="6"/>
+      <line num="101" type="stmt" count="6"/>
+      <line num="102" type="stmt" count="6"/>
+      <line num="103" type="stmt" count="6"/>
+      <line num="104" type="stmt" count="6"/>
+      <line num="105" type="stmt" count="6"/>
+      <line num="106" type="stmt" count="3"/>
+      <line num="108" type="stmt" count="6"/>
+      <line num="109" type="stmt" count="6"/>
       <line num="110" type="stmt" count="1"/>
-      <line num="112" type="stmt" count="5"/>
+      <line num="112" type="stmt" count="6"/>
       <line num="113" type="stmt" count="1"/>
       <line num="114" type="stmt" count="1"/>
-      <line num="115" type="stmt" count="5"/>
-      <line num="116" type="stmt" count="1"/>
-      <line num="117" type="stmt" count="1"/>
-      <line num="120" type="stmt" count="4"/>
+      <line num="115" type="stmt" count="6"/>
+      <line num="116" type="stmt" count="2"/>
+      <line num="117" type="stmt" count="2"/>
+      <line num="120" type="stmt" count="5"/>
       <line num="122" type="stmt" count="0"/>
       <line num="129" type="method" name="sumBankAsString" visibility="public" complexity="1" crap="1" count="1"/>
       <line num="131" type="stmt" count="1"/>
@@ -150,8 +150,8 @@
       <line num="23" type="stmt" count="2"/>
       <line num="31" type="method" name="cardCount" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="33" type="stmt" count="3"/>
-      <line num="40" type="method" name="addCard" visibility="public" complexity="1" crap="1" count="6"/>
-      <line num="42" type="stmt" count="6"/>
+      <line num="40" type="method" name="addCard" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="42" type="stmt" count="7"/>
       <metrics loc="45" ncloc="26" classes="1" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="7" coveredelements="7"/>
     </file>
     <file name="C:\Users\HP\dbwebb-kurser\mvc\me\report\src\Deck\PokerGame.php">
@@ -291,7 +291,7 @@
       <line num="254" type="stmt" count="8"/>
       <line num="255" type="stmt" count="3"/>
       <line num="257" type="stmt" count="6"/>
-      <line num="258" type="stmt" count="2"/>
+      <line num="258" type="stmt" count="1"/>
       <line num="260" type="stmt" count="5"/>
       <line num="261" type="stmt" count="1"/>
       <line num="263" type="stmt" count="4"/>
