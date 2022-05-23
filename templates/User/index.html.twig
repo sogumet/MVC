@@ -1,9 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'base1.html.twig' %}
 
-{% block title %}Hello BooksController!{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block content %}
-<div class="container-left">
+<main>
+    <div class="container-left">
 <h1>User page</h1>
     <p>Name: {{ user.name }}</p>
     <p>Email: {{ user.email }}</p>
@@ -11,8 +12,10 @@
     <p>Akronym: {{ user.akronym }}</p>
 
     <ul>
-        <a href="{{ path('update_user', {email: user.email})}}">Update user</a>
-        
+       <p><u><a href="{{ path('update_user', {email: user.email})}}">Update user</a></u> 
+        </p>
     </ul>
 </div>
+</main>
+
 {% endblock %}

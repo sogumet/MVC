@@ -31,7 +31,11 @@
     För att säkerställa projektets funktion har alla klasserna enhetstestats med PHPUnit. Total teckning för testen uppgår till 98%.
     Alla funktioner och metoder (med ett undantag) ingår med ett flertal testfall. I klassen PokerGame utförs inga tester på funktionen
     saveScore(), denna funktion används för kommunikation med databasen vid hanterandet av scorer. <br>
-    Till hjälp att upprätthålla en god kodstandard har koden fortlöpande testats med linterna phpcpd, phpmd, phpstan och phpcs. 
+    Till hjälp att upprätthålla en god kodstandard har koden fortlöpande testats med linterna phpcpd, phpmd, phpstan och phpcs.
+    Scrutinizer har varit behjälplig för att hitta kod där det har funnits förbättringspotensial och ratingen på koden enligt deras mått är 9.81. <br>
+    Enligt PhpMetrics ligger "Average cyclomatic complexity by class" på 4.47 och "Average relative System complexity" på 76.44. "Violations" uppges till
+    9 varav 0 kritiska.
+
 </p>
 
 

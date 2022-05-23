@@ -1,33 +1,35 @@
-{% extends 'base.html.twig' %}
+{% extends 'base1.html.twig' %}
 
-{% block title %}Hello BooksController!{% endblock %}
+{% block title %}Admin{% endblock %}
 
 {% block content %}
+
+<main>
 <div class="container-left">
-<h1>Admin</h1>
-    
-<div class="container-left">
-<h3>Users</h3>
+<h1>Users</h1>
+
   <table class="styled-table">
 <thead>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Akronym</th>
-        <th>Role</th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>AKRONYM</th>
+        <th>ROLE</th>
     </tr>
 </thead>
 <tbody>
     {% for user in users %}   
         <tr>
             <td>{{user.name}}</td>
-            <td><a href="{{ path('admin_edit', {email: user.email})}}">{{user.email}}</a></td>
+            <td><u><a href="{{ path('admin_edit', {email: user.email})}}">{{user.email}}</a></u></td>
             <td>{{user.akronym}}</td>
             <td>{{user.roles[0]}}</td>
         </tr>
         {% endfor %}
 </tbody>
 </table>
+</main>
+
 {{ include('block/flash-message.html.twig') }}
 </div>
 {% endblock %}

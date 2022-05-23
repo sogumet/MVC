@@ -1,27 +1,24 @@
-{% extends "base.html.twig" %}
+{% extends "base1.html.twig" %}
 
 {% block title %}Role | change {% endblock %}
 
 {% block content %}
-<div class="container-left">
+<main>
+    <div class="container-left">
+    <h1>Edit user</h1>
 <form method="post">
-    <fieldset>
-    <legend>Change role</legend>
-    <p>
-        <label for="name">Name</label>
+        <p class="p-form"> <label for="name">Name</label></p>
         <input type="text" name="name" value={{user.name}}>
-        <label for="akronym">Akronym</label>
+        <p class="p-form"><label for="akronym">Akronym</label></p>
         <input type="text" name="akronym" value={{user.akronym}}>
-        <label for="email">Email</label>
-        <input type="text" name="email" value={{user.email}}>
-        <input type="submit" name="update" value="Change">
+        <p class="p-form"><label for="email">Email</label></p>
+        <input type="text" name="email" value={{user.email}}> <br>
+        <input class="input-field" type="submit" name="update" value="Change">
     </p>
-    </fieldset>
 </form>
 
 {{ include('block/flash-message.html.twig') }}
 
-<li><a href="{{ url("library")}}">Library</a></li>
-<li><a href="{{ url("books_show_all")}}">Show all books</a></li>
 </div>
+</main>
 {% endblock %}

@@ -5,12 +5,30 @@
 {% block content %}
 <main>
     <div class="containerleft">
-<h1>Spela poker</h1>
+<h1>Pokerpatiens</h1>
 <form method="post">
-    <p>Här startar pokerpatiens</p>
+    <p>Spara draget kort med knapp för respektive hand. Det behöver inte vara jämna rader, man kan fylla en hel hand först om man så önskar. 
+        Resultaten sparas automatiskt och gällande bästa resultat visas. Sparade resultat kan nollställas med länken reset i Navbaren.
+    För att spela igen eller för att avbryta pågående spel och börja om används knappen reset.</p>
+
+    <p>Poäng</p>
+<ul>
+        <li>Straight flush: 15</li>
+        <li>Fyrtal: 10</li>
+        <li>Kåk: 8</li>
+        <li>Färg: 5</li>
+        <li>Stege: 4</li>
+        <li>Triss: 3</li>
+        <li>2 Par: 2</li>
+        <li>Par: 4</li>
+        
+    </ul>
+
     <p>
         <input type="submit" name="start" value="Start">
     </p>
+
+    
 
  
 

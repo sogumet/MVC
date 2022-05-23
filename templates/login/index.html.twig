@@ -1,18 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'base1.html.twig' %}
 
 {% block title %}Hello LoginController!{% endblock %}
 
 {% block content %}
-{% if error %}
+
+<main>
+    {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     <form action="{{ path('login') }}" method="post">
-        <label for="username">Email:</label>
+        
+
+        <p class="p-form"><label for="username">Email:</label></p>
         <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+        <p class="p-form"><label for="password">Password:</label></p>
+        <input type="password" id="password" name="_password"/><br>
 
         {# If you want to control the URL the user is redirected to on success #}
         {# <input type="hidden" name="_target_path" value="/user/{{app.user.email}}"/> #}
@@ -20,5 +24,7 @@
 
         <button type="submit">login</button>
     </form>
+</main>
+
 
 {% endblock %}
