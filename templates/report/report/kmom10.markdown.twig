@@ -1,0 +1,63 @@
+
+kmom10
+------
+Som projekt har jag valt att göra en pokerpatiens av endimensionell typ, d.v.s. fem händer läggs ut vågrätt och varje hand får poäng. 
+De fem poängen summeras och en totalpoäng erhålles. Routrarna för spelet ligger i klassen PokerController och startar i routen /poker.
+ Spellogiken ligger i klasserna PokerGame och PokerHand, klasserna Deck och Card från tidigare kursmoment används också.  
+   
+
+’PokerGameobjektet, dom olika handobjekten och deckobjektet initieras när man går till routen /poker, då renderas också sidan med själva
+ startknappen. När startknappen trycks in anropas startGame() sätter behövliga parametrar i sessionen och blandar leken (shuffleDeck) och man
+  hamnar i routen /poker/play. Sidan med själva spelet renderas och funktionen sessionProcess() i routen ligger och väntar på dom olika
+   knapprequesten.  
+     
+
+“If draw” anropas dealCard() som lägger kortet i sessionen, getCardInDeck kollar hur många kort som finns kvar i leken och lägger det också
+ som en parameter i sessionen. Spelsida aktuellt kort skickas till spelsidan som renderas.
+“if save” anropas saveCard() med handnumret som argument. Argumentet skickas sen till en switch i funktionen som ser till att kortet sparas
+ i rätt handobjekt. I saveCard kollas sen om handen innehåller 5 kort, om så är fallet anropas fullHandProcess med handnumret som argument.
+  I fullHandProceess sätts handens flagga(flaggan används i templaten till bland annat att disabla knappar) till true. Handen skickas sen
+   till getPoints() för poängberäkning. Sedan kollas detta om det var den sista handen som blev full, det vill säga om alla händer är fulla
+    med funktionen checkIfAllFullHand(). I så fall anropas getTotalScore() och  allFull sätts i sessionen.  
+      
+
+“if (session->get(‘allFull’)) är true så anropas databasen och scoren sparas samtidigt som det görs ett request på highscore. I speltemplaten
+ finns också en ifsats som frågar kollar ‘allFull’, om det är sant så visas totalscore, gällande higscoore och alla knappar förutom resetknappen
+  blir “disablade”.  
+    
+
+Poängberäkningen görs genom att alla kortvalörer i en hand placeras in i ett binärt talsystem där varje kort har sin plats. 2:orna har bitarna
+ nummer 9-12, 3:orna 13-16 och så vidare. Det innebär att varje hand har ett eget tal. Om gör om detta till ett tal med bas 10 och beräknar
+  modulus 15 så får man ett specifikt tal för varje kombination. Ett par ger modulus 6 oavsett valörer och en triss ger modulus 9.
+   Undantaget är stegen och därför måste man om alla valörer är olika lägga in dom i ett eget system och kolla om man får 5 ettor på rad,
+    samt checka för undantaget 1, 2, 3 ,4 , 5.  Sen har man ju också färgen men där behövs ingen binär operation.  
+      
+
+Ett problem som jag stötte på var att när jag publicerade på servern så fungerade inte poängberäkningen och jag kunde inte förstå varför.
+ Till saken hör att jag har gjort en speciell funktion som kan plocka ihop händer med alla poängkombinationer för att kunna göra ordentliga
+  tester. När jag gjorde min tester så hittade jag inga problem. Men i alla fall när jag hade provat med lite olika bit operationer mot servern
+   så visade sig att om man inte använde sig av någon bit högre än 31 så fungerade det fint. Slutsats servern opererar med 32 bitar och mitt
+    spel behöver 64 bitar annars fungerar inga beräkningar med valörer högre än 7. Fyrtal i sjuor fungerar för övrigt inte heller för då hamnar
+     sist sjuan på plats 32 och då blir talet negativt.  
+       
+
+För övrigt så har det väl varit strul både här och där i projektet men inget som man inte har tagit sig förbi. Ibland är det svårt att förstå
+ sig på både twig och Symfoni. Jag hade till exempel för avsikt att åtminstone göra  inloggningskravet för det hade jag ju i princip redan gjort
+  klart i tidigare kursmoment men jag kunde inte få till stylen i det av Symfoni genererade registreringsformuläret. Hade nog behövt en hel kurs
+   i bara Symfoni för att reda ut det, jag tappade i alla fall sugen att fortsätta med det kravet även fast det är nästan klart. Hade nog också
+    behövt  att rodda med användarna i databasen också och den tiden finns inte. Brukar kunna hinna med alla krav men denna gången får det vara
+     för tillgänglig tid har tyvärr tagit slut.  
+       
+
+På tal om tid så skulle jag nog vilja påstå att både vissa av kursmomenten och projektet var lite väl tidskrävande. Har en känsla av att det
+ smyger på en hel del tidsoptimism hos kursansvariga när dom beräknar hur lång tid som krävs för vissa moment. Innehållet i kursen och projektet
+  är bra men bara lite för mycket. Många moment små är mycket jobbigare än färre stora för varje litet delmoment är ett potentiellt problem som
+   det kan ta oväntad tid att lösa. Och ju fler moment där är desto större är sannolikheten att det inträffar.  
+
+I projektet hade jag nog hellre sett att man fick göra något nytt från grunden, ny installation av allt som behövs till ett kanske inte så
+ omfattande projekt. Nu blev det rörigt att ha allt gammalt skräp kvar från tidigare övningar, controllers, klasser och allt möjligt som visades både här och där.
+  
+
+Jag skulle absolut rekommendera kursen till någon om jag vet att han/hon har gott om tid.  
+
+Betyg: innehåll 8, tidsåtgång 5. 
