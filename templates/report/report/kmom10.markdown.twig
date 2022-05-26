@@ -30,8 +30,14 @@ Poängberäkningen görs genom att alla kortvalörer i en hand placeras in i ett
  nummer 9-12, 3:orna 13-16 och så vidare. Det innebär att varje hand har ett eget tal. Om gör om detta till ett tal med bas 10 och beräknar
   modulus 15 så får man ett specifikt tal för varje kombination. Ett par ger modulus 6 oavsett valörer och en triss ger modulus 9.
    Undantaget är stegen och därför måste man om alla valörer är olika lägga in dom i ett eget system och kolla om man får 5 ettor på rad,
-    samt checka för undantaget 1, 2, 3 ,4 , 5.  Sen har man ju också färgen men där behövs ingen binär operation.  
+    samt checka för undantaget 1, 2, 3 ,4 , 5, där esset med valör 14 har sin etta längst upp i systemet och inte brevid 2:an. Utöver det måste 
+    handen kollas för kombinationen färg men där behövs ingen binär operation, det räcker med att se om korten tillhör sammma svit.  
       
+Databasen återställs genom att gå till routen proj/reset, där anropas två resetfunktioner i books- och scoorrepositorierna. I dessa funktioner
+läses raderna med sqlkomandon in med fget(). Sqlkomandona i sig droppar tabellerna "books" och "score" i databasen, återskapar dessa och lägger 
+in ny data. Det finns ytterligare en tabell i databasen "user" men den har jag valt att inte återställa för då blir det krångel med de hashade
+lösenorden.  
+  
 
 Ett problem som jag stötte på var att när jag publicerade på servern så fungerade inte poängberäkningen och jag kunde inte förstå varför.
  Till saken hör att jag har gjort en speciell funktion som kan plocka ihop händer med alla poängkombinationer för att kunna göra ordentliga
@@ -60,4 +66,7 @@ I projektet hade jag nog hellre sett att man fick göra något nytt från grunde
 
 Jag skulle absolut rekommendera kursen till någon om jag vet att han/hon har gott om tid.  
 
-Betyg: innehåll 8, tidsåtgång 5. 
+Betyg: innehåll 8, tidsåtgång 5.  
+  
+
+PS. Jag har gjort några mindre förändringar i menyn sen jag spelade in redovisningsvideon.

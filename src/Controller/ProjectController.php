@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     /**
-     * @Route("/project", name="project")
+     * @Route("/proj", name="project")
      */
     public function home(): Response
     {
@@ -19,7 +19,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/about", name="project_about")
+     * @Route("/proj/about", name="project_about")
      */
     public function about(): Response
     {
@@ -28,7 +28,7 @@ class ProjectController extends AbstractController
 
     /**
      * @Route(
-     *      "/project/reset", name="reset")
+     *      "/proj/reset", name="reset")
      */
     public function reset(
         BooksRepository $booksRepository,
